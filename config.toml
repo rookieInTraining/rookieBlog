@@ -102,3 +102,22 @@ disqusShortname = "ishabbi"
             name = "Contact me"
             weight = 5
             url = "contactme/"
+
+[params.csp]
+  scriptsrc = ["'self'",
+    "'unsafe-inline'",
+    "https://platform.twitter.com",
+    "https://cdn.syndication.twimg.com",
+    "*.amazon-adsystem.com",
+    "https://www.google-analytics.com",
+    "cse.google.com",
+    "https://www.google.com",
+    "https://pagead2.googlesyndication.com",
+    "https://adservice.google.com",
+    "https://www.googletagservices.com",
+    "jsfiddle.net",
+    "www.instagram.com",
+    "disqus.com",
+    "disquscdn.com",
+    "*.disqus.com",
+    "*.disquscdn.com"]
