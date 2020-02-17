@@ -1,4 +1,4 @@
-baseurl = "http://www.example.com"
+baseurl = "https://rookieintraining.github.io"
 title = "Home"
 
 theme = "hugo-coder"
@@ -51,10 +51,10 @@ disqusShortname = "ishabbi"
     custom_js = []
 
 # If you want to use fathom(https://usefathom.com) for analytics, add this section
-[params.fathomAnalytics]
-    siteID = "ABCDE"
+# [params.fathomAnalytics]
+    # siteID = "ABCDE"
     # Default value is cdn.usefathom.com, overwrite this if you are self-hosting
-    serverURL = "analytics.example.com"
+    # serverURL = "analytics.example.com"
 
 [taxonomies]
   category = "categories"
