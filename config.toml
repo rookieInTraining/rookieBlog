@@ -1,5 +1,5 @@
 baseurl = "http://www.example.com"
-title = "Ish's Blog"
+title = "Home"
 
 theme = "hugo-coder"
 
@@ -13,7 +13,7 @@ pygmentsstyle = "b2"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-disqusShortname = "yourdiscussshortname"
+disqusShortname = "ishabbi"
 
 [params]
     author = "Ish Abbi"
@@ -88,10 +88,10 @@ disqusShortname = "yourdiscussshortname"
 
         [languages.en.menu]
 
-            [[languages.en.menu.main]]
-            name = "About"
-            weight = 1
-            url = "about/"
+            # [[languages.en.menu.main]]
+            # name = "About"
+            # weight = 3
+            # url = "aboutme/"
 
             [[languages.en.menu.main]]
             name = "Blog"
@@ -101,4 +101,4 @@ disqusShortname = "yourdiscussshortname"
             [[languages.en.menu.main]]
             name = "Contact me"
             weight = 5
-            url = "contact/"
+            url = "contactme/"
