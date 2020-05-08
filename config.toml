@@ -15,7 +15,8 @@ pygmentsstyle = "monokai"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
-disqusShortname = "ishabbi"
+[markup.goldmark.renderer]
+unsafe= true
 
 [params]
     author = "Ish Abbi"
