@@ -1,7 +1,7 @@
-baseurl = "https://rookieintraining.github.io"
+# baseurl = "https://rookieintraining.github.io"
 title = "Home"
 
-theme = "hugo-coder"
+theme = "DoIt"
 
 languagecode = "en"
 defaultcontentlanguage = "en"
