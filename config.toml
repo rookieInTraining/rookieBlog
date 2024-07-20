@@ -1,8 +1,6 @@
-# baseurl = "https://rookieintraining.github.io"
+baseurl = "https://rookieintraining.github.io"
 title = "Home"
-
-theme = "DoIt"
-
+theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"
 
@@ -11,11 +9,10 @@ canonifyurls = true
 
 enableRobotsTXT = true
 
-pygmentsstyle = "monokai"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
-
 googleAnalytics = "G-NLSP1WW1RZ"
+
+[markup.highlight]
+style = "monokai"
 
 [markup.goldmark.renderer]
 unsafe= true
@@ -23,7 +20,7 @@ unsafe= true
 [params]
     author = "Ish Abbi"
     description = "Ish's personal website"
-    keywords = "blog,developer,personal,testing"
+    keywords = "blog,developer,personal,testing,automation"
     info = "Full Stack Tester, Blogger and Musician"
     avatarurl = "images/avatar.jpg"
     footercontent = "The scariest paths often lead to the most exciting places"
@@ -33,6 +30,7 @@ unsafe= true
     hideCredits = true
     hideCopyright = false
     since = 2019
+    enableEmoji = true
 
     # Git Commit in Footer, uncomment the line below to enable it.
     # commit = "https://github.com/luizdepra/hugo-coder/tree/"
@@ -65,25 +63,26 @@ unsafe= true
   category = "categories"
   series = "series"
   tag = "tags"
+  author = "authors"
 
 [[params.social]]
     name = "Github"
-    icon = "fab fa-github"
+    icon = "fa-brands fa-github fa-2x"
     weight = 1
     url = "https://github.com/rookieInTraining/"
 [[params.social]]
     name = "Twitter"
-    icon = "fab fa-twitter"
+    icon = "fa-brands fa-x-twitter fa-2x"
     weight = 3
     url = "https://twitter.com/ish_abbi/"
 [[params.social]]
     name = "LinkedIn"
-    icon = "fab fa-linkedin"
+    icon = "fa-brands fa-linkedin fa-2x"
     weight = 4
     url = "https://www.linkedin.com/in/ish-abbi/"
 [[params.social]]
     name = "Medium"
-    icon = "fab fa-medium"
+    icon = "fa-brands fa-medium fa-2x"
     weight = 5
     url = "https://medium.com/@ishabbi"
 
@@ -93,10 +92,10 @@ unsafe= true
 
         [languages.en.menu]
 
-            # [[languages.en.menu.main]]
-            # name = "About"
-            # weight = 3
-            # url = "aboutme/"
+            [[languages.en.menu.main]]
+            name = "About"
+            weight = 3
+            url = "aboutme/"
 
             [[languages.en.menu.main]]
             name = "Blog"
@@ -109,20 +108,13 @@ unsafe= true
             url = "contactme/"
 
 [params.csp]
-  scriptsrc = ["'self'",
-    "'unsafe-inline'",
-    "https://platform.twitter.com",
-    "https://cdn.syndication.twimg.com",
-    "*.amazon-adsystem.com",
-    "https://www.google-analytics.com",
-    "cse.google.com",
-    "https://www.google.com",
-    "https://pagead2.googlesyndication.com",
-    "https://adservice.google.com",
-    "https://www.googletagservices.com",
-    "jsfiddle.net",
-    "www.instagram.com",
-    "disqus.com",
-    "disquscdn.com",
-    "*.disqus.com",
-    "*.disquscdn.com"]
+    childsrc = ["'self'"]
+    fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
+    formaction = ["'self'"]
+    framesrc = ["'self'"]
+    imgsrc = ["'self'"]
+    objectsrc = ["'none'"]
+    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/"]
+    scriptsrc = ["'self'", "'unsafe-inline'", "https://www.google-analytics.com"]
+    prefetchsrc = ["'self'"]
+    connectsrc = ["'self'", "https://www.google-analytics.com"]
