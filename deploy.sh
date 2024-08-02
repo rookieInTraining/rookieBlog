@@ -2,18 +2,8 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-if [ -n "$GITHUB_AUTH_SECRET" ]
-then
-    echo $GITHUB_AUTH_SECRET > ~/.git-credentials && chmod 0600 ~/.git-credentials
-
-    git config --global credential.helper store
-    git config --global user.email "rookie-in-training-bot@users.noreply.github.com"
-    git config --global user.name "rookie-in-training-bot"
-    git config --global push.default simple
-fi
-
 rm -rf deployment
-git clone -b master https://github.com/rookieInTraining/rookieintraining.github.io.git deployment
+git clone -b master git@github.com:rookieInTraining/rookieintraining.github.io.git deployment
 rsync -av --delete --exclude ".git" public/ deployment
 cd deployment
 

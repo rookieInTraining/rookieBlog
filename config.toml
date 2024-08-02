@@ -22,7 +22,7 @@ unsafe= true
     description = "Ish's personal website"
     keywords = "blog,developer,personal,testing,automation"
     info = "Full Stack Tester, Blogger and Musician"
-    avatarurl = "images/avatar.jpg"
+    avatarurl = "images/820535.png"
     footercontent = "The scariest paths often lead to the most exciting places"
 
     dateformat = "January 2, 2006"
@@ -85,6 +85,11 @@ unsafe= true
     icon = "fa-brands fa-medium fa-2x"
     weight = 5
     url = "https://medium.com/@ishabbi"
+[[params.social]]
+    name = "Stackoverflow"
+    icon = "fa-brands fa-stack-overflow fa-2x"
+    weight = 5
+    url = "https://stackoverflow.com/users/3762268/techrookie89"
 
 [languages]
     [languages.en]

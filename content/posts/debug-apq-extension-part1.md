@@ -6,11 +6,6 @@ tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql
 categories: ["test automation"]
 series: ["graphl-automation"]
 ---
-<div style="text-align: justify">
-
-**TL;DR** - install a chrome plugin which allows you to intercept network requests from the [Chrome Extension Store](https://chromewebstore.google.com/detail/gbanmonipiommdljkadhhiomhkgjchee/)
-
----
 
 **APIs (Application Programming Interfaces)** for web applications have evolved significantly since the early days of the internet. Initially, APIs were simple and used primarily for data exchange between server and client, often through protocols like SOAP (Simple Object Access Protocol). These early APIs were cumbersome and required extensive documentation and strict adherence to protocols.
 
@@ -18,8 +13,8 @@ The rise of **REST (Representational State Transfer)** in the early 2000s marked
 
 ---
 
-# Intro to Graphql 
-For the sake of this article, I'll highlight some of the key concepts used in GraphQL in the table below:
+# Graphql 101 
+For those who are new to GraphQL, I'll highlight some of the key concepts used below:
 
 | **Key Concept**          | **Description**                                                                                                                                                              |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -53,7 +48,7 @@ Apollo provides the developer platform and tools to unify your data and services
 Apollo makes GraphQL work for you at any stage and any scale, whether you're just getting started, building your first API, querying an API, or migrating your platform onto the supergraph.
 </blockquote>
 
-Apollo GraphQL Client provides several features that help overcome the limitations of GraphQL, enhancing the development experience and performance of GraphQL-based applications. The discussion for which is limited to **Automatic persisted queries" or APQ**
+Apollo GraphQL Client provides several features that help overcome the limitations of GraphQL, enhancing the development experience and performance of GraphQL-based applications. The discussion for which is limited to **Automatic persisted queries or APQ**
 
 <blockquote>
 A persisted query is a query string that's cached on the server side, along with its unique identifier (always its SHA-256 hash). Clients can send this identifier instead of the corresponding query string, thus reducing request sizes dramatically (response sizes are unaffected).
@@ -74,7 +69,7 @@ Now, this works wonders in boosting the performance of the application. But, doe
         "extensions": {
             "persistedQuery": {
                 "version": 1,
-                "sha256Hash": "9cdde867ce2fa5b290eb5b8d4e7e5b1f6a09feee0fb0c486afc12463b4f66f94"
+                "sha256Hash": "<a really long hash which you would not want on blog sites!>"
             }
         }
     }
