@@ -87,12 +87,12 @@ unsafe= true
     fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
     formaction = ["'self'"]
     framesrc = ["'self'", "https://comments.app"]
-    imgsrc = ["'self'"]
+    imgsrc = ["'self'", "https://*.googletagmanager.com"]
     objectsrc = ["'none'"]
     stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/"]
-    scriptsrc = ["'self'", "'unsafe-inline'", "https://www.google-analytics.com", "https://www.google-analytics.com", "https://comments.app"]
+    scriptsrc = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app"]
     prefetchsrc = ["'self'"]
-    connectsrc = ["'self'", "https://www.google-analytics.com", "https://www.google-analytics.com"]
+    connectsrc = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com"]
 
 [params.telegram] # https://comments.app/
   siteID = "hqa9PHKb"
