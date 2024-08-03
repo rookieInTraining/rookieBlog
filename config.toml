@@ -5,6 +5,7 @@ languagecode = "en"
 defaultcontentlanguage = "en"
 
 paginate = 20
+enableEmoji = true
 canonifyurls = true
 
 enableRobotsTXT = true
@@ -17,9 +18,15 @@ style = "monokai"
 [markup.goldmark.renderer]
 unsafe= true
 
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
+
 [params]
     author = "Ish Abbi"
-    description = "Ish's personal website"
+    description = "Ish's tech blog"
     keywords = "blog,developer,personal,testing,automation"
     info = "Full Stack Tester, Blogger and Musician"
     avatarurl = "images/820535.png"
@@ -30,10 +37,6 @@ unsafe= true
     hideCredits = true
     hideCopyright = false
     since = 2019
-    enableEmoji = true
-
-    # Git Commit in Footer, uncomment the line below to enable it.
-    # commit = "https://github.com/luizdepra/hugo-coder/tree/"
 
     rtl = false
 
@@ -52,18 +55,6 @@ unsafe= true
 
     # Custom JS
     custom_js = []
-
-# If you want to use fathom(https://usefathom.com) for analytics, add this section
-# [params.fathomAnalytics]
-    # siteID = "ABCDE"
-    # Default value is cdn.usefathom.com, overwrite this if you are self-hosting
-    # serverURL = "analytics.example.com"
-
-[taxonomies]
-  category = "categories"
-  series = "series"
-  tag = "tags"
-  author = "authors"
 
 [[params.social]]
     name = "Github"
@@ -91,6 +82,28 @@ unsafe= true
     weight = 5
     url = "https://stackoverflow.com/users/3762268/techrookie89"
 
+[params.csp]
+    childsrc = ["'self'"]
+    fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
+    formaction = ["'self'"]
+    framesrc = ["'self'"]
+    imgsrc = ["'self'"]
+    objectsrc = ["'none'"]
+    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/"]
+    scriptsrc = ["'self'", "'unsafe-inline'", "https://www.google-analytics.com"]
+    prefetchsrc = ["'self'"]
+    connectsrc = ["'self'", "https://www.google-analytics.com"]
+
+[params.telegram] # https://comments.app/
+  siteID = "hqa9PHKb"
+  limit = "10"
+  height = "auto"
+  color = ""
+  dislikes = ""
+  outlined = ""
+  colorful = ""
+  dark = ""
+
 [languages]
     [languages.en]
         languagename = "English"
@@ -111,15 +124,3 @@ unsafe= true
             name = "Contact me"
             weight = 5
             url = "contactme/"
-
-[params.csp]
-    childsrc = ["'self'"]
-    fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
-    formaction = ["'self'"]
-    framesrc = ["'self'"]
-    imgsrc = ["'self'"]
-    objectsrc = ["'none'"]
-    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/"]
-    scriptsrc = ["'self'", "'unsafe-inline'", "https://www.google-analytics.com"]
-    prefetchsrc = ["'self'"]
-    connectsrc = ["'self'", "https://www.google-analytics.com"]
