@@ -1,7 +1,7 @@
 ---
 title: "Fetch GraphQL query from an Apollo client using APQ - Part 2"
-date: 2024-07-21T00:55:00+05:30
-draft: true
+date: 2024-08-10T00:55:00+05:30
+draft: false
 tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
 categories: ["test automation"]
 series: ["graphl-automation"]
@@ -14,13 +14,13 @@ series: ["graphl-automation"]
 
 <div style="text-align: justify">
 
-As discussed in [part-1](/posts/debug-apq-extension-part1) of this blog, when using apollo client one can boost the performance of the graphql queries by using __"Automatic persisted queries" or APQ__. By using APQ, the server caches each requests initated from the browser against a hash which if not found, forces the web browser to re-send the request with the complete graphql query.
+As discussed in [part-1](/posts/debug-apq-extension-part1) of this blog, when using apollo client one can boost the performance of the graphql queries by using __"Automatic persisted queries" or APQ__. By using APQ, the server caches each requests initiated from the browser against a hash which if not found, forces the web browser to re-send the request with the complete graphql query.
 
 This however, adds an additional overhead in terms of automation (for fast moving development teams). Automation testers are required to:
 
   * Run the server without APQ
   * Navigate the frontend source code to find the queries (_praying🙏 secretly that it contains minimal fragments!_)
-  * Colaborate with the development teams to share the payload
+  * Collaborate with the development teams to share the payload
 
 The aforementioned reasons were enough for me to figure out a solution that acts as an enabler for teams and shorten the time to figure out the query.
 
@@ -82,5 +82,13 @@ The plugin is available in the chrome web store as well as the microsoft edge we
 
   * [Chrome Web Store](https://chromewebstore.google.com/detail/gbanmonipiommdljkadhhiomhkgjchee/)
   * [Edge Web Store](https://microsoftedge.microsoft.com/addons/detail/jifjbphbccecgcdagnjkefhjdcpljjic)
+
+# Plugin in action
+<div style="text-align: center" class="video-shadow">
+  <video width="860" height="609" controls>
+    <source src="/videos/debug-apq-2/GraphQL-Debugger-Tutorial.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 </div>
