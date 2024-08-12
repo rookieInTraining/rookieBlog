@@ -1,4 +1,4 @@
-baseurl = "https://ishabbi.tech"
+baseurl = "https://rookieintraining.github.io"
 title = "Home"
 theme = "hugo-coder"
 languagecode = "en"
