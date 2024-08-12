@@ -84,15 +84,15 @@ unsafe= true
 
 [params.csp]
     childsrc = ["'self'"]
-    fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/"]
+    fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/"]
     formaction = ["'self'"]
-    framesrc = ["'self'", "https://comments.app"]
-    imgsrc = ["'self'", "https://*.googletagmanager.com"]
+    framesrc = ["'self'", "https://comments.app", "https://rookieintraining.github.io/"]
+    imgsrc = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
     objectsrc = ["'none'"]
-    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/"]
-    scriptsrc = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app"]
+    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/"]
+    scriptsrc = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/"]
     prefetchsrc = ["'self'"]
-    connectsrc = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com"]
+    connectsrc = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
 
 [params.telegram] # https://comments.app/
   siteID = "hqa9PHKb"
