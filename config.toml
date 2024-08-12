@@ -95,7 +95,7 @@ unsafe= true
     connectsrc = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
 
 [params.telegram] # https://comments.app/
-  siteID = "hqa9PHKb"
+  siteID = "SctzjgQq"
   limit = "10"
   height = "auto"
   color = ""
