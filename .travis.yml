@@ -4,7 +4,7 @@ install:
   - sudo dpkg -i hugo_extended_0.129.0_linux-amd64.deb
 
 script:
-  - hugo
+  - hugo --gc --minify --baseURL https://ishabbi.tech
 
 deploy:
   - provider: script
