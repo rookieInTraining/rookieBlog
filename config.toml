@@ -1,4 +1,4 @@
-baseurl = "https://ishabbi.tech"
+baseurl = "https://www.ishabbi.tech"
 title = "Home"
 theme = "hugo-coder"
 languagecode = "en"
