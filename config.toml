@@ -1,4 +1,4 @@
-baseurl = "https://rookieintraining.github.io"
+baseurl = "https://ishabbi.tech"
 title = "Home"
 theme = "hugo-coder"
 languagecode = "en"
@@ -6,7 +6,7 @@ defaultcontentlanguage = "en"
 
 paginate = 20
 enableEmoji = true
-canonifyurls = true
+relativeurls = true
 
 enableRobotsTXT = true
 
