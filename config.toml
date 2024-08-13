@@ -51,15 +51,10 @@ unsafe= true
     maxSeeAlsoItems = 5
 
     # Custom CSS
-    custom_css = [
-        "css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css",
-        "css/coder.min.38c4552ac40f9ae3408bad40358f654ebd8804412fe74ed56f2d6c8a7af82dd3.css"
-    ]
+    custom_css = []
 
     # Custom JS
-    custom_js = [
-        "js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js"
-    ]
+    custom_js = []
 
 [[params.social]]
     name = "Github"
