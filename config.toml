@@ -1,4 +1,4 @@
-baseurl = "https://www.ishabbi.tech"
+baseurl = "https://ishabbi.tech/"
 title = "Home"
 theme = "hugo-coder"
 languagecode = "en"
@@ -6,7 +6,7 @@ defaultcontentlanguage = "en"
 
 paginate = 20
 enableEmoji = true
-relativeurls = true
+canonifyurls = true
 
 enableRobotsTXT = true
 
