@@ -11,8 +11,6 @@ git clone -b master https://rookie-in-training-bot:${GITHUB_TOKEN}@github.com/ro
 rsync -av --delete --exclude ".git" public/ deployment
 cd deployment
 
-echo ishabbi.tech >> CNAME
-
 git add -A
 
 # we need the || true, as sometimes you do not have any content changes
