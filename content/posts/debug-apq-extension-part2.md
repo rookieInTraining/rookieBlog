@@ -3,7 +3,7 @@ title: "Fetch GraphQL query from an Apollo client using APQ - Part 2"
 date: 2024-08-10T00:55:00+05:30
 draft: false
 tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
-categories: ["test automation"]
+categories: ["tools for automation"]
 series: ["graphl-automation"]
 ---
 <style>
