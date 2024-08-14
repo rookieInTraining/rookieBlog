@@ -40,6 +40,8 @@ unsafe= true
 
     rtl = false
 
+    hideColorSchemeToggle = true
+
     # Specify light/dark colorscheme
     # Supported values:
     # "auto" (use preference set by browser)
@@ -86,11 +88,11 @@ unsafe= true
     childsrc = ["'self'"]
     fontsrc = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/"]
     formaction = ["'self'"]
-    framesrc = ["'self'", "https://comments.app", "https://rookieintraining.github.io/"]
+    framesrc = ["'self'", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io"]
     imgsrc = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
     objectsrc = ["'none'"]
-    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/"]
-    scriptsrc = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/"]
+    stylesrc = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
+    scriptsrc = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
     prefetchsrc = ["'self'"]
     connectsrc = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
 
