@@ -11,8 +11,8 @@ I'm always excited to connect with fellow tech enthusiasts, whether you're a sea
         btn-style='{"backgroundColor":"#000","color":"#fff","border":"1px solid #000"}'
         embed-version="v1"
         button-text="Let's Connect"
-        position-right="43.25%"
-        position-bottom="100px"
+        position-right="30px"
+        position-bottom="30px"
         custom-padding="0px"
         custom-font-size="16px"
         custom-font-weight="500"

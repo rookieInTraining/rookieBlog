@@ -9,7 +9,7 @@ Hey there! Welcome to my little corner of the internet. My name is Ish. 👋. I'
 By day, I'm the Director of Quality Assurance and Automation, where I lead an amazing team of software engineers and testers. We're the folks behind the scenes making sure that when you use some of the B2B and B2C platform, everything works smoothly and securely. It's like being a digital detective – we hunt down bugs, optimize performance, and ensure that every feature is working just as it should.
 
 ## My Journey
-My love affair with software quality started over 12 years ago, and it's been quite a ride! I've had the privilege of working across various domains – from ensuring gamers have seamless experiences in virtual worlds to helping travelers book their dream vacations. Each project has been a new adventure, teaching me something valuable about creating software that not only works but delights users.
+My tryst with software quality started over 12 years ago, and it's been quite a ride! I've had the privilege of working across various domains – from ensuring gamers have seamless experiences in virtual worlds to helping travelers book their dream vacations. Each project has been a new adventure, teaching me something valuable about creating software that not only works but delights users.
 
 ## Tech Toolbox
 If you're curious about the nitty-gritty, I'm all about automating the boring stuff so we can focus on the challenging and fun parts of software testing. I wield an arsenal of tools including Jira, Appium, Selenium, and TestNG. We speak multiple languages too – Java, Python, JavaScript, you name it! And don't get me started on APIs; I find RESTful interfaces particularly intriguing.
