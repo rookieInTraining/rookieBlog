@@ -5,6 +5,7 @@ draft: false
 tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
 categories: ["tools for automation"]
 series: ["graphl-automation"]
+featuredImage: "/images/debug-apq-1/apqd-banner-resized.png"
 ---
 
 **APIs (Application Programming Interfaces)** for web applications have evolved significantly since the early days of the internet. Initially, APIs were simple and used primarily for data exchange between server and client, often through protocols like SOAP (Simple Object Access Protocol). These early APIs were cumbersome and required extensive documentation and strict adherence to protocols.

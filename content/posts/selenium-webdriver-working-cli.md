@@ -7,6 +7,7 @@ slug: "understanding-selenium-webdriver"
 tags: ["selenium","webdriver","testautomation","webdriver protocol"]
 categories: ["test automation"]
 series: ["Selenium"]
+featuredImage: "/images/selenium-webdriver/Selenium-Banner.png"
 ---
 <div style="text-align: justify">
 Over the course of time, my pursuit for understanding the internals of Selenium compelled me to crawl the corners of the internet

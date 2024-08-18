@@ -4,6 +4,7 @@ date: 2020-02-17T18:45:18+05:30
 draft: false
 tags: ["gradle","reports","frameworks","html","css","xml"]
 categories: ["test automation"]
+featuredImage: "/images/gradle-reporting/gradle-banner.png"
 ---
 <div style="text-align: justify">
 In the test automation world, visualizing the results of your tests have an equal priority in conjunction with the tests being executed. How will you be able to make the most out of the tests being executed? Would a simple report having Pass/Fail ratio along with the screenshots suffice? or the reports need to be more comprehensive? maybe the report needs to keep a trend of the tests being executed over time? or needs to have a documented step for each action?
