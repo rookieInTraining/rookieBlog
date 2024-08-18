@@ -1,5 +1,5 @@
 baseurl = "https://ishabbi.tech/"
-title = "Home"
+title = "Ish's Blog"
 theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"

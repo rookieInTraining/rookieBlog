@@ -2,7 +2,7 @@
 draft: false
 date: 2020-02-19T21:47:38+05:30
 title: "Understanding the Selenium Webdriver"
-description: "Using CLI to automate browser actions"
+description: "Discover how Selenium works behind the scenes. While many test automation pros use it, few grasp its inner workings. Gain insider knowledge here."
 slug: "understanding-selenium-webdriver"
 tags: ["selenium","webdriver","testautomation","webdriver protocol"]
 categories: ["test automation"]

@@ -1,5 +1,6 @@
 ---
 title: "Generating HTML reports for your tests via Gradle"
+description: "Learn to create custom reports in Gradle using MarkupBuilder. This guide offers a starting method for crafting personalized project reports."
 date: 2020-02-17T18:45:18+05:30
 draft: false
 tags: ["gradle","reports","frameworks","html","css","xml"]

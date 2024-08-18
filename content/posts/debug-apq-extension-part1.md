@@ -1,5 +1,6 @@
 ---
 title: "Fetch GraphQL query from an Apollo client using APQ - Part 1"
+description: "Struggling to automate GraphQL APIs or fetch queries? Learn about APQ and how to intercept these requests in this guide to GraphQL automation."
 date: 2024-07-20T23:55:00+05:30
 draft: false
 tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
