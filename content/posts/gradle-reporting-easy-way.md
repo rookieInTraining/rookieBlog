@@ -16,7 +16,7 @@ In case your project is on gradle and you want to customize the reports or your 
 
 <hr>
 
-# What is Gradle?
+## What is Gradle?
 Gradle is an open-source build automation tool like Maven and Ant. It is build upon the same concepts as its predecessors with the only difference being that it is better in terms of performance and provides a Groovy-based DSL allowing you; the programmer to be more flexible. It supports languages like Java, Scala and Groovy with support for more languages planned for the future.
 
 In case, your project is not part of the above system of supported languages you can create a project with the basic gradle settings too. Due to the DSL and task based structure of gradle, it provides you a lot of flexibility. As long as you can code the logic as a task, there are many things you can do in your project.
@@ -24,7 +24,7 @@ You can read further about gradle tasks and build lifecycle [here](https://docs.
 
 <hr>
 
-# The Groovy MarkupBuilder
+## The Groovy MarkupBuilder
 `groovy.xml.MarkupBuilder` is the Groovy helper class which will help us in generating the html file for our reports.
 
 To create a tag using the markup builder you need to add a method call with the name of the tag that you want to create. Assuming the `xmlMarkup` as the object initialized, the below code :
@@ -79,7 +79,7 @@ You can read more about MarkupBuilder [here](https://groovy-lang.org/processing-
 
 <hr>
 
-# Usage :
+## Usage :
 A typical gradle flow contains of tasks which are executed in a respective phase of the build's cycle. A task in gradle's terminology can be work such as executing tests for a build, copying a particular file to a different destination, executing a CLI command, archiving a folder, etc.
 The example shown below is of a test output in the JUnit's XML format. For our use case, we'll be creating a task called htmlReport which will read the data from a XML and write it down to the report as an HTML file.
 

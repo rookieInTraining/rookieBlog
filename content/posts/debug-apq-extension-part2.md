@@ -27,7 +27,7 @@ This however, adds an additional overhead in terms of automation (for fast movin
 
 The aforementioned reasons were enough for me to figure out a solution that acts as an enabler for teams and shorten the time to figure out the query.
 
-# Introducing APQ-Debugger
+## Introducing APQ-Debugger
 Though still in beta, the sole purpose of APQ-Debugger is to intercept the graphql network requests and force the client to re-send the intercepted network request; this time including the actual query string. So, when used with the chrome extension. The example shared in [part-1](/posts/debug-apq-extension-part1/#apollo-client-and-apq) above becomes:
 
 ```json
@@ -47,7 +47,7 @@ Though still in beta, the sole purpose of APQ-Debugger is to intercept the graph
   }
 ```
 
-# Using the chrome extension
+## Using the chrome extension
 Once you have installed the extension, you'll notice a new tab when you open developer tools in chrome based browsers.
 
 <div style="text-align: center" class="img-shadow">
@@ -80,13 +80,13 @@ And another will be the re-tried which will have the graphql query you need :
 
 Notice, that the highlighted section is the same request re-tried but with the actual graphql query in place as well.
 
-# Installing the plugin
+## Installing the plugin
 The plugin is available in the chrome web store as well as the microsoft edge webstore. The links of which are:
 
   * [Chrome Web Store](https://chromewebstore.google.com/detail/gbanmonipiommdljkadhhiomhkgjchee/)
   * [Edge Web Store](https://microsoftedge.microsoft.com/addons/detail/jifjbphbccecgcdagnjkefhjdcpljjic)
 
-# Plugin in action
+## Plugin in action
 <div style="text-align: center" class="video-shadow">
   <video width="860" height="609" controls>
     <source src="/videos/debug-apq-2/GraphQL-Debugger-Tutorial.webm" type="video/webm">

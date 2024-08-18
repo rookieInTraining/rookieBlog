@@ -15,7 +15,7 @@ The rise of **REST (Representational State Transfer)** in the early 2000s marked
 
 ---
 
-# Graphql 101 
+## Graphql 101 
 For those who are new to GraphQL, I'll highlight some of the key concepts used below:
 
 | **Key Concept**          | **Description**                                                                                                                                                              |
@@ -42,7 +42,7 @@ And this is where we are introduced to the **_Apollo Client_**.
 
 ---
 
-# Apollo Client and APQ
+## Apollo Client and APQ
 As per their current documentation: 
 
 <blockquote>
