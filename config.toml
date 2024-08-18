@@ -30,9 +30,16 @@ unsafe= true
     keywords = "blog,developer,personal,testing,automation"
     info = "Full Stack Tester, Blogger and Musician"
     avatarurl = "images/820535.png"
+
+    faviconSVG = "/icons/favicon.ico"
+    favicon_32 = "/icons/favicon-32x32.png"
+    favicon_16 = "/icons/favicon-16x16.png"
+
     footercontent = "The scariest paths often lead to the most exciting places"
 
     dateformat = "January 2, 2006"
+
+    
 
     hideCredits = true
     hideCopyright = false
