@@ -1,5 +1,6 @@
 ---
 title: "Hey there! Random stranger!"
+description: "Hey there! Random stranger! Welcome to my little corner of the internet. My name is Ish. 👋. I've been navigating this world since 1989."
 date: 2020-02-17T18:41:49+05:30
 draft: false
 --- 
