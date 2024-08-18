@@ -26,7 +26,7 @@ unsafe= true
 
 [params]
     author = "Ish Abbi"
-    description = "Ish's tech blog"
+    description = "Welcome to Ish's blog. Find interesting articles and snippets about testing, software engineering and many more."
     keywords = "blog,developer,personal,testing,automation"
     info = "Full Stack Tester, Blogger and Musician"
     avatarurl = "images/820535.png"
