@@ -20,5 +20,8 @@ jobs:
         curl -LO https://github.com/gohugoio/hugo/releases/download/v0.129.0/hugo_extended_0.129.0_linux-amd64.deb && \
         sudo dpkg -i hugo_extended_0.129.0_linux-amd64.deb
 
+    - name: Create static pages
+      run: hugo --gc --minify
+
     - name: Execute Deployment Script
       run: bash ./deploy.sh
