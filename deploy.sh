@@ -7,7 +7,7 @@ git config --global user.name "rookie-in-training-bot"
 git config --global push.default simple
 
 rm -rf deployment
-git clone -b master https://rookie-in-training-bot:${ACTIONS_DEPLOY_KEY}@github.com/rookieInTraining/rookieintraining.github.io.git deployment
+git clone -b master git@github.com:rookieInTraining/rookieintraining.github.io.git deployment
 rsync -av --delete --exclude ".git" public/ deployment
 cd deployment
 
@@ -17,7 +17,7 @@ git add -A
 
 # we need the || true, as sometimes you do not have any content changes
 # and git woundn't commit and you don't want to break the CI because of that
-git commit -m "rebuilding site on `date`, commit ${{ github.event.head_commit.message }} and job ${{github.job}}" || true
+git commit -m "rebuilding site on `date`, commit ${{ GITHUB_COMMIT_MESSAGE }} and job ${{GITHUB_JOB_NAME}}" || true
 
 git push --force origin HEAD:master
 
