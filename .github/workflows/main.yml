@@ -11,6 +11,7 @@ jobs:
     - name: Checkout blog repository
       uses: actions/checkout@v4.1.7
       with:
+        submodules: recursive
         # Repository name with owner. For example, actions/checkout
         repository: '' # optional, default is ${{ github.repository }}
         # The branch, tag or SHA to checkout. When checking out the repository that triggered a workflow, this defaults to the reference or SHA for that event.  Otherwise, uses the default branch.
@@ -22,7 +23,7 @@ jobs:
 
     - name: Create static pages
       run: |
-        find ./themes
+        git submodule status
         hugo --gc --minify
 
     - name: Execute Deployment Script
