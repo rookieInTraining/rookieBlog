@@ -1,6 +1,18 @@
 #!/bin/bash
 
+set -euo pipefail
+
+mkdir -p ~/.ssh
+printf "%s" "$DEPLOY_KEY" > ~/.ssh/deploy_key   # Save the private key to a file
+chmod 600 ~/.ssh/deploy_key 
+
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
+
+printf "%s\n" \
+  "Host github.com" \
+  "  IdentityFile ~/.ssh/deploy_key" \
+  "  StrictHostKeyChecking no" > ~/.ssh/config
+chmod 600 ~/.ssh/config
 
 git config --global user.email "rookie-in-training-bot@users.noreply.github.com"
 git config --global user.name "rookie-in-training-bot"
@@ -17,7 +29,7 @@ git add -A
 
 # we need the || true, as sometimes you do not have any content changes
 # and git woundn't commit and you don't want to break the CI because of that
-git commit -m "rebuilding site on `date`, commit ${{ GITHUB_COMMIT_MESSAGE }} and job ${{GITHUB_JOB_NAME}}" || true
+git commit -m "rebuilding site on `date`, commit $GITHUB_COMMIT_MESSAGE and job $GITHUB_JOB_NAME" || true
 
 git push --force origin HEAD:master
 
