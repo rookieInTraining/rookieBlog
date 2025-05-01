@@ -16,7 +16,7 @@ While WCAG 1.0, released in 1999, laid the foundation for web accessibility. Its
 
 If you work with SaaS platforms, government portals, or internal tools, chances are you’ve encountered accessibility compliance testing. With evolving guidelines — such as the European Accessibility Act, ADA, and Section 508 — there’s a renewed emphasis on aligning digital products with these standards.
 
-<img src="/images/a11y/why-was-a11y-needed.png" />
+<!-- <img src="/images/a11y/why-was-a11y-needed.png" /> -->
 
 In line with the standard, organizations can conduct internal accessibility assessments or engage external vendors to perform the testing on their behalf. The findings from these evaluations should then be documented in a Voluntary Product Accessibility Template (VPAT), which helps customers assess how well the system conforms to accessibility requirements.
 
