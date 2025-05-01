@@ -21,7 +21,9 @@ jobs:
         sudo dpkg -i hugo_extended_0.147.1_linux-amd64.deb
 
     - name: Create static pages
-      run: hugo --gc --minify
+      run: |
+        ls -alh
+        hugo --gc --minify
 
     - name: Execute Deployment Script
       env:
