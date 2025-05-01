@@ -14,7 +14,7 @@ git config --global push.default simple
 GIT_SSH_COMMAND='ssh -i ~/.ssh/deploy-key -o IdentitiesOnly=yes'
 
 rm -rf deployment
-git clone -b master git@github.com:rookieInTraining/rookieintraining.github.io.git deployment
+git clone -b master https://rookie-in-training-bot:$DEPLOY_KEY@github.com/rookieintraining/rookieintraining.github.io.git deployment
 rsync -av --delete --exclude ".git" public/ deployment
 cd deployment
 
