@@ -1,22 +1,17 @@
 #!/bin/bash
 
-set -euo pipefail
-
 mkdir -p ~/.ssh
-printf "%s" "$DEPLOY_KEY" > ~/.ssh/deploy_key   # Save the private key to a file
-chmod 600 ~/.ssh/deploy_key 
+echo $DEPLOY_KEY > ~/.ssh/deploy-key   # Save the private key to a file
+chmod 600 ~/.ssh/deploy-key 
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
-
-printf "%s\n" \
-  "Host github.com" \
-  "  IdentityFile ~/.ssh/deploy_key" \
-  "  StrictHostKeyChecking no" > ~/.ssh/config
-chmod 600 ~/.ssh/config
 
 git config --global user.email "rookie-in-training-bot@users.noreply.github.com"
 git config --global user.name "rookie-in-training-bot"
 git config --global push.default simple
+
+GIT_SSH_COMMAND='ssh -i ~/.ssh/deploy-key -o IdentitiesOnly=yes'
 
 rm -rf deployment
 git clone -b master git@github.com:rookieInTraining/rookieintraining.github.io.git deployment
