@@ -4,13 +4,15 @@ theme                                           = "hugo-coder"
 languagecode                                    = "en"
 defaultcontentlanguage                          = "en"
 
-paginate                                        = 20
 enableEmoji                                     = true
 canonifyurls                                    = true
 
 enableRobotsTXT                                 = true
 
 googleAnalytics                                 = "G-NLSP1WW1RZ"
+
+[pagination]
+pagerSize                                       = 20
 
 [markup.highlight]
 style                                           = "monokai"
