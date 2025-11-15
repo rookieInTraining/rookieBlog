@@ -1,0 +1,11 @@
+<div class="author-section">
+  <h1 class="author-name">{{ .Site.Params.author }}</h1>
+  {{ if reflect.IsSlice .Site.Params.info }}
+  <h2 class="author-info">
+    {{ range .Site.Params.info }}{{ . | markdownify }}<br>{{ end}}
+  </h2>
+  {{ else }}
+  <h2 class="author-info">{{ .Site.Params.info | markdownify }}</h2>
+  {{ end }}
+</div>
+

@@ -1,0 +1,78 @@
+<section class="container mx-auto px-4 md:px-8 py-12 md:py-20">
+  <div class="max-w-4xl mx-auto">
+    <!-- Avatar Section -->
+    <div class="flex justify-center mb-8 animate-fade-in-up">
+      {{ partialCached "home/avatar.html" . }}
+    </div>
+
+    <!-- Author Info -->
+    <div class="text-center mb-12 space-y-6 animate-fade-in-up delay-200">
+      {{ partialCached "home/author.html" . }}
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex justify-center mb-16 animate-fade-in-up delay-400">
+      {{ partialCached "home/social.html" . }}
+    </div>
+
+    <!-- Featured Posts Section -->
+    {{ $featuredPosts := where .Site.RegularPages "Params.featured" true | first 3 }}
+    {{ if $featuredPosts }}
+    <div class="mt-16 space-y-6">
+      <h2 class="text-3xl md:text-4xl font-black text-black mb-8 text-center">🔥 Featured Posts</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {{ range $featuredPosts }}
+        <a href="{{ .RelPermalink }}" class="post-card block group">
+          <div class="bg-white border-4 border-black shadow-brutal p-6 h-full hover:shadow-brutal-lg hover:-translate-y-2 transition-all duration-300">
+            {{ if .Params.featuredImage }}
+            <img src="{{ .Params.featuredImage | relURL }}" alt="{{ .Title }}" class="w-full h-48 object-cover mb-4 border-2 border-black">
+            {{ end }}
+            <h3 class="text-xl font-black text-black mb-2 group-hover:text-neon-pink transition-colors">{{ .Title }}</h3>
+            <p class="text-gray-700 text-sm">{{ .Description | default (truncate 100 .Summary) }}</p>
+            <span class="inline-block mt-4 text-xs font-bold text-black bg-neon-yellow px-3 py-1 border-2 border-black">{{ .Date | time.Format "Jan 2, 2006" }}</span>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+    <!-- Recent Posts Preview -->
+    {{ $recentPosts := .Site.RegularPages | first 5 }}
+    {{ if $recentPosts }}
+    <div class="mt-16">
+      <h2 class="text-3xl md:text-4xl font-black text-black mb-8 text-center">📚 Latest Posts</h2>
+      <div class="space-y-4">
+        {{ range $recentPosts }}
+        <a href="{{ .RelPermalink }}" class="block group">
+          <div class="bg-white border-4 border-black shadow-brutal-sm p-6 hover:bg-neon-yellow hover:shadow-brutal transition-all duration-300 transform hover:-translate-x-2">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div class="flex-1">
+                <h3 class="text-xl md:text-2xl font-black text-black group-hover:text-neon-pink transition-colors">{{ .Title }}</h3>
+                {{ if .Description }}
+                <p class="text-gray-700 mt-2">{{ .Description }}</p>
+                {{ end }}
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-sm font-bold text-black bg-white px-4 py-2 border-2 border-black whitespace-nowrap">
+                  {{ .Date | time.Format "Jan 2, 2006" }}
+                </span>
+                <i class="fa-solid fa-arrow-right text-2xl text-black group-hover:text-neon-pink group-hover:translate-x-2 transition-all"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+      <div class="text-center mt-8">
+        <a href="{{ "posts/" | relURL }}" class="inline-block bg-neon-pink text-black font-black text-xl px-8 py-4 border-4 border-black shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all duration-300">
+          View All Posts →
+        </a>
+      </div>
+    </div>
+    {{ end }}
+
+    {{ partialCached "home/extensions.html" . }}
+  </div>
+</section>
+

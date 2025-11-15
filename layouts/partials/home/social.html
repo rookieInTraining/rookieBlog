@@ -1,0 +1,33 @@
+{{ with .Site.Params.social }}
+<div class="social-links">
+  <ul class="flex flex-wrap justify-center gap-4">
+    {{ range sort . "weight" }}
+      {{ if .icon }}
+        <li>
+          <a href="{{ .url | safeURL }}" 
+             aria-label="{{ .name }}" 
+             {{ if .rel }}rel="{{ .rel }}"{{ end }} 
+             {{ if .target }}target="{{ .target }}"{{ end }} 
+             {{ if .type }}type="{{ .type }}"{{ end }}
+             class="social-link group">
+            <div class="social-icon-wrapper">
+              <i class="{{ .icon }}" aria-hidden="true"></i>
+            </div>
+          </a>
+        </li>
+      {{ else }}
+        <li>
+          <a href="{{ .url | safeURL }}" 
+             aria-label="{{ .name }}" 
+             {{ if .rel }}rel="{{ .rel }}"{{ end }} 
+             {{ if .target }}target="{{ .target }}"{{ end }}
+             class="social-link-text">
+            {{ .name }}
+          </a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+

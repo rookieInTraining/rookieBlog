@@ -18,19 +18,65 @@ The rise of **REST (Representational State Transfer)** in the early 2000s marked
 ## Graphql 101 
 For those who are new to GraphQL, I'll highlight some of the key concepts used below:
 
-| **Key Concept**          | **Description**                                                                                                                                                              |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Schema**               | The schema defines the structure of the API, specifying types, queries, mutations, and subscriptions. It serves as a contract between the client and server.                 |
-| **Types**                | GraphQL uses various types such as `Scalar`, `Object`, `Enum`, `Union`, and `Interface` to define the shape of the data and the relationships between different data fields. |
-| **Queries**              | Queries are used to fetch data from the server. They specify what data is needed and can include nested fields to retrieve related data in a single request.                  |
-| **Mutations**            | Mutations are used to modify data on the server. They allow clients to perform actions like creating, updating, or deleting data.                                            |
-| **Subscriptions**        | Subscriptions enable real-time updates by allowing clients to listen for specific events and receive updates when those events occur.                                         |
-| **Resolvers**            | Resolvers are functions that handle the logic for fetching the data specified in queries, mutations, and subscriptions. They map schema fields to data sources.              |
-| **Fields**               | Fields are the individual pieces of data that can be queried within a type. Each field can have arguments, making the queries flexible and dynamic.                          |
-| **Arguments**            | Arguments allow clients to pass parameters to fields, enabling the customization of the data fetched by queries and mutations.                                               |
-| **Directives**           | Directives provide a way to modify the behavior of queries, such as including or skipping fields based on conditions (`@include` and `@skip`).                                |
-| **Fragments**            | Fragments allow the reuse of parts of queries and mutations. They help in structuring queries and reducing redundancy by defining reusable units of selection sets.           |
-| **Introspection**        | Introspection is a feature that allows clients to query the schema itself to understand the types, fields, and operations available, aiding in API exploration and documentation. |
+<div class="graphql-concepts">
+
+<div class="concepts-grid">
+<div class="concept">
+    <h3 class="concept-title">Schema</h3>
+    <p class="concept-description">The schema defines the structure of the API, specifying types, queries, mutations, and subscriptions. It serves as a contract between the client and server.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Types</h3>
+    <p class="concept-description">GraphQL uses various types such as <span class="concept-tag">Scalar</span>, <span class="concept-tag">Object</span>, <span class="concept-tag">Enum</span>, <span class="concept-tag">Union</span>, and <span class="concept-tag">Interface</span> to define the shape of the data and the relationships between different data fields.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Queries</h3>
+    <p class="concept-description">Queries are used to fetch data from the server. They specify what data is needed and can include nested fields to retrieve related data in a single request.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Mutations</h3>
+    <p class="concept-description">Mutations are used to modify data on the server. They allow clients to perform actions like creating, updating, or deleting data.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Subscriptions</h3>
+    <p class="concept-description">Subscriptions enable real-time updates by allowing clients to listen for specific events and receive updates when those events occur.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Resolvers</h3>
+    <p class="concept-description">Resolvers are functions that handle the logic for fetching the data specified in queries, mutations, and subscriptions. They map schema fields to data sources.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Fields</h3>
+    <p class="concept-description">Fields are the individual pieces of data that can be queried within a type. Each field can have arguments, making the queries flexible and dynamic.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Arguments</h3>
+    <p class="concept-description">Arguments allow clients to pass parameters to fields, enabling the customization of the data fetched by queries and mutations.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Directives</h3>
+    <p class="concept-description">Directives provide a way to modify the behavior of queries, such as including or skipping fields based on conditions (<span class="concept-tag">@include</span> and <span class="concept-tag">@skip</span>).</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Fragments</h3>
+    <p class="concept-description">Fragments allow the reuse of parts of queries and mutations. They help in structuring queries and reducing redundancy by defining reusable units of selection sets.</p>
+</div>
+
+<div class="concept">
+    <h3 class="concept-title">Introspection</h3>
+    <p class="concept-description">Introspection is a feature that allows clients to query the schema itself to understand the types, fields, and operations available, aiding in API exploration and documentation.</p>
+</div>
+</div>
+</div>
 
 For further reading, you can go through the getting started present [here](https://graphql.org/learn/)
 
@@ -85,3 +131,142 @@ This can become a bottleneck for fast moving teams who are pushing features day 
 The solution for which I'll post in the [part-2](/posts/debug-apq-extension-part2) of this article.
 
 ---
+
+<style>
+    .graphql-concepts {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .concepts-title {
+        font-size: 1.75rem;
+        font-weight: 300;
+        color: #111;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.5px;
+    }
+    
+    .concepts-subtitle {
+        font-size: 0.95rem;
+        color: #666;
+        margin: 0;
+        font-weight: 400;
+    }
+    
+    .concepts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .concept {
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 1.5rem;
+        transition: all 0.2s ease;
+        background: #fff;
+    }
+    
+    .concept:hover {
+        border-color: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .concept-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 0 0.75rem 0;
+        color: #000;
+        letter-spacing: -0.2px;
+    }
+    
+    .concept-description {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        color: #444;
+        margin: 0;
+    }
+    
+    .concept-tag {
+        display: inline-block;
+        background: #f5f5f5;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        font-size: 0.85rem;
+        color: #555;
+    }
+    
+    /* Ultra minimal variant - uncomment to use */
+    /*
+    .concept {
+        border: none;
+        border-left: 2px solid #e5e5e5;
+        border-radius: 0;
+        padding: 1rem 0 1rem 1.5rem;
+    }
+    
+    .concept:hover {
+        border-left-color: #000;
+        transform: none;
+        box-shadow: none;
+    }
+    */
+    
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .graphql-concepts {
+            background: #1a1a1a;
+        }
+        
+        .concepts-title {
+            color: #f5f5f5;
+        }
+        
+        .concepts-subtitle {
+            color: #999;
+        }
+        
+        .concept {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        .concept:hover {
+            border-color: #666;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .concept-title {
+            color: #f5f5f5;
+        }
+        
+        .concept-description {
+            color: #b3b3b3;
+        }
+        
+        .concept-tag {
+            background: #2a2a2a;
+            color: #999;
+        }
+    }
+    
+    /* Mobile optimization */
+    @media (max-width: 640px) {
+        .graphql-concepts {
+            padding: 15px;
+        }
+        
+        .concepts-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .concept {
+            padding: 1.25rem;
+        }
+    }
+</style>

@@ -1,0 +1,16 @@
+<div class="tags-taxonomy flex flex-wrap items-center gap-2">
+  <i class="fa-solid fa-tag text-neon-green"></i>
+  {{- range $index, $el := . -}}
+    {{- if gt $index 0 }}
+      <span class="separator text-black font-black">•</span>
+    {{- end }}
+    <span class="tag-item">
+      <a href="{{ .RelPermalink }}" class="tag-link">
+        <span class="bg-neon-green text-black px-3 py-1 border-2 border-black font-bold text-xs hover:bg-neon-yellow transition-colors">
+          #{{ .LinkTitle }}
+        </span>
+      </a>
+    </span>
+  {{- end -}}
+</div>
+

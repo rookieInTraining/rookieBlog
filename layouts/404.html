@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found · {{ .Site.Title }}</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+  <!-- Custom Neobrutalist Styles -->
+  <link rel="stylesheet" href="{{ "/css/neobrutal.css" | relURL }}">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'neon-pink': '#FF10F0',
+            'neon-blue': '#00F5FF',
+            'neon-green': '#39FF14',
+            'neon-yellow': '#FFFF00',
+            'brutal-black': '#000000',
+            'brutal-white': '#FFFFFF',
+          },
+          boxShadow: {
+            'brutal': '8px 8px 0px 0px #000000',
+            'brutal-sm': '4px 4px 0px 0px #000000',
+            'brutal-lg': '12px 12px 0px 0px #000000',
+          },
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gradient-to-br from-yellow-100 via-pink-100 to-blue-100 min-h-screen font-sans antialiased flex items-center justify-center">
+  <div class="container mx-auto px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <!-- 404 Number -->
+      <div class="mb-8">
+        <h1 class="text-9xl md:text-[12rem] font-black text-black leading-none" style="text-shadow: 8px 8px 0px #FF10F0;">
+          404
+        </h1>
+      </div>
+      
+      <!-- Error Message -->
+      <div class="bg-white border-4 border-black shadow-brutal p-8 md:p-12 mb-8">
+        <h2 class="text-3xl md:text-4xl font-black text-black mb-4">
+          Oops! Page Not Found
+        </h2>
+        <p class="text-xl text-gray-700 mb-6">
+          The page you're looking for seems to have vanished into the digital void.
+        </p>
+        <p class="text-lg text-gray-600">
+          But don't worry! Let's get you back on track.
+        </p>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="{{ "/" | relURL }}" class="inline-block bg-neon-pink text-black font-black text-xl px-8 py-4 border-4 border-black shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all duration-300">
+          <i class="fa-solid fa-home mr-2"></i> Go Home
+        </a>
+        <a href="{{ "posts/" | relURL }}" class="inline-block bg-neon-blue text-black font-black text-xl px-8 py-4 border-4 border-black shadow-brutal hover:shadow-brutal-lg hover:-translate-y-1 transition-all duration-300">
+          <i class="fa-solid fa-book mr-2"></i> Browse Posts
+        </a>
+      </div>
+      
+      <!-- Fun Element -->
+      <div class="mt-12">
+        <div class="inline-block bg-neon-yellow text-black px-6 py-3 border-2 border-black font-black text-sm transform rotate-2">
+          💥 404 ERROR 💥
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Animated Background Elements -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute top-20 left-10 w-32 h-32 bg-neon-pink rounded-lg rotate-12 opacity-20 animate-pulse"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-neon-blue rounded-lg -rotate-12 opacity-20 animate-pulse delay-300"></div>
+    <div class="absolute bottom-20 left-1/4 w-40 h-40 bg-neon-green rounded-lg rotate-45 opacity-20 animate-pulse delay-700"></div>
+  </div>
+</body>
+</html>
+

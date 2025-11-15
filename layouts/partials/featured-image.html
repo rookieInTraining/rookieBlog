@@ -1,0 +1,8 @@
+{{ if .Params.featuredImage }}
+<div class="featured-image-banner mb-8">
+  <img src="{{ .Params.featuredImage | relURL }}" 
+       alt="Featured image" 
+       class="w-full h-64 md:h-96 object-cover border-4 border-black shadow-brutal">
+</div>
+{{ end }}
+

@@ -1,0 +1,82 @@
+{{ define "title" }}
+  {{ .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+<section class="container mx-auto px-4 md:px-8 py-12">
+  <article class="max-w-4xl mx-auto">
+    <!-- Post Header -->
+    <header class="mb-12 animate-fade-in-up">
+      <div class="bg-white border-4 border-black shadow-brutal p-8 md:p-12 mb-8">
+        <h1 class="text-4xl md:text-6xl font-black text-black mb-6 leading-tight">
+          {{ .Title }}
+        </h1>
+        
+        <div class="post-meta flex flex-wrap items-center gap-4 md:gap-6">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-calendar text-neon-pink"></i>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="font-bold text-black">
+              {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+            </time>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-clock text-neon-blue"></i>
+            <span class="font-bold text-black">{{ i18n "reading_time" .ReadingTime }}</span>
+          </div>
+        </div>
+        
+        <!-- Categories and Tags -->
+        <div class="flex flex-wrap gap-3 mt-6">
+          {{ with .GetTerms "categories" }}
+            {{ range . }}
+            <a href="{{ .RelPermalink }}" class="category-tag">
+              <span class="bg-neon-blue text-black px-4 py-2 border-2 border-black font-black text-sm hover:bg-neon-yellow transition-colors">
+                {{ .LinkTitle }}
+              </span>
+            </a>
+            {{ end }}
+          {{ end }}
+          {{ with .GetTerms "tags" }}
+            {{ range . }}
+            <a href="{{ .RelPermalink }}" class="tag-link">
+              <span class="bg-neon-green text-black px-3 py-1 border-2 border-black font-bold text-xs hover:bg-neon-yellow transition-colors">
+                #{{ .LinkTitle }}
+              </span>
+            </a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- Featured Image -->
+      {{ if .Params.featuredImage }}
+      <div class="featured-image-wrapper mb-8 animate-fade-in-up delay-200">
+        <img src="{{ .Params.featuredImage | relURL }}" alt="{{ .Title }}" class="w-full border-4 border-black shadow-brutal">
+      </div>
+      {{ end }}
+    </header>
+
+    <!-- Post Content -->
+    <div class="post-content bg-white border-4 border-black shadow-brutal p-8 md:p-12 mb-12 animate-fade-in-up delay-400">
+      <div class="prose prose-lg md:prose-xl max-w-none">
+        {{ .Content }}
+      </div>
+    </div>
+
+    <!-- Post Footer -->
+    <footer class="space-y-8">
+      {{ partial "posts/series.html" . }}
+      {{ partial "posts/disqus.html" . }}
+      {{ partial "posts/commento.html" . }}
+      {{ partial "posts/utterances.html" . }}
+      {{ partial "posts/giscus.html" . }}
+      {{ partial "posts/mastodon.html" . }}
+      {{ partial "posts/telegram.html" . }}
+      {{ partial "posts/cusdis.html" . }}
+    </footer>
+
+    {{ partial "posts/math.html" . }}
+  </article>
+</section>
+{{ end }}
+

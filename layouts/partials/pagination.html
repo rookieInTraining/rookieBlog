@@ -1,0 +1,26 @@
+{{ if gt .Paginator.TotalPages 1 }}
+<nav class="pagination-wrapper mt-12 flex justify-center">
+  <div class="flex gap-4 items-center">
+    {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}" class="pagination-link pagination-prev">
+      <div class="bg-neon-pink text-black px-6 py-3 border-4 border-black shadow-brutal-sm hover:shadow-brutal hover:-translate-y-1 transition-all duration-300 font-black">
+        <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+      </div>
+    </a>
+    {{ end }}
+    
+    <div class="pagination-info bg-white text-black px-6 py-3 border-4 border-black shadow-brutal-sm font-black">
+      Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+    </div>
+    
+    {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}" class="pagination-link pagination-next">
+      <div class="bg-neon-blue text-black px-6 py-3 border-4 border-black shadow-brutal-sm hover:shadow-brutal hover:-translate-y-1 transition-all duration-300 font-black">
+        Next <i class="fa-solid fa-arrow-right ml-2"></i>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}
+

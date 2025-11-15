@@ -93,13 +93,13 @@ unsafe                                          = true
 
 [params.csp]
     childsrc                                    = ["'self'"]
-    fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/"]
+    fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
     formaction                                  = ["'self'"]
     framesrc                                    = ["'self'", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io"]
     imgsrc                                      = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
     objectsrc                                   = ["'none'"]
-    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
-    scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net"]
+    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://cdn.tailwindcss.com", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
+    scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com"]
     prefetchsrc                                     = ["'self'"]
     connectsrc                                  = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
 

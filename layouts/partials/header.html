@@ -1,0 +1,53 @@
+<header class="sticky top-0 z-50 mb-8">
+  <nav class="bg-white border-4 border-black shadow-brutal mx-4 md:mx-8 mt-4 md:mt-8">
+    <div class="container mx-auto px-4 md:px-8 py-4">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <!-- Logo/Title -->
+        <a href="{{ absLangURL "" }}" class="text-2xl md:text-3xl font-black text-black hover:text-neon-pink transition-all duration-300 transform hover:scale-105 block">
+          {{ .Site.Title }}
+        </a>
+        
+        <!-- Mobile Menu Toggle -->
+        {{ if or .Site.Menus.main hugo.IsMultilingual }}
+        <input type="checkbox" id="menu-toggle" class="hidden peer" />
+        <label for="menu-toggle" class="md:hidden bg-black text-white px-4 py-2 border-4 border-black shadow-brutal-sm cursor-pointer hover:bg-neon-pink hover:text-black transition-all duration-200">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        
+        <!-- Navigation Menu -->
+        <ul class="hidden md:flex peer-checked:flex flex-col md:flex-row gap-4 md:gap-6 w-full md:w-auto items-center mt-4 md:mt-0">
+          {{ with .Site.Menus.main}}
+            {{ range sort . }}
+              <li>
+                <a href="{{ index (apply (slice .URL) (.Params.urlFunc | default "relLangURL") ".") 0 }}" 
+                   class="nav-link text-lg md:text-xl font-black text-black px-4 py-2 border-4 border-black bg-white hover:bg-neon-yellow hover:shadow-brutal-sm transition-all duration-200 inline-block transform hover:-translate-y-1">
+                  {{ .Name }}
+                </a>
+              </li>
+            {{ end }}
+          {{ end }}
+          
+          {{ if hugo.IsMultilingual }}
+            {{ $node := . }}
+            {{ .Scratch.Set "separator" true }}
+            {{ range (default .Site.Home.AllTranslations .Translations) }}
+              {{ if ne $.Site.Language .Language }}
+                {{ if $node.Scratch.Get "separator" }}
+                  <li class="text-2xl font-black text-black">|</li>
+                  {{ $node.Scratch.Set "separator" false }}
+                {{ end }}
+                <li>
+                  <a href="{{ .RelPermalink }}" class="text-lg font-black text-black hover:text-neon-blue transition-colors">
+                    {{ .Language.LanguageName | emojify }}
+                  </a>
+                </li>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </div>
+  </nav>
+</header>
+

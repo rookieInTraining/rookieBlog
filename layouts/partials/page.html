@@ -1,0 +1,18 @@
+<section class="container mx-auto px-4 md:px-8 py-12">
+  <article class="max-w-4xl mx-auto">
+    <header class="mb-12 animate-fade-in-up">
+      <div class="bg-white border-4 border-black shadow-brutal p-8 md:p-12">
+        <h1 class="text-4xl md:text-6xl font-black text-black mb-6">
+          {{ .Title }}
+        </h1>
+      </div>
+    </header>
+
+    <div class="post-content bg-white border-4 border-black shadow-brutal p-8 md:p-12 animate-fade-in-up delay-200">
+      <div class="prose prose-lg md:prose-xl max-w-none">
+        {{ .Content }}
+      </div>
+    </div>
+  </article>
+</section>
+
