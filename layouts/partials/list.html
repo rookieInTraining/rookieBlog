@@ -12,14 +12,14 @@
   </header>
   
   {{ if .Content }}
-  <div class="max-w-3xl mx-auto mb-12 prose prose-lg">
+  <div class="max-w-6xl mx-auto mb-12 prose prose-xl">
     <div class="bg-white border-4 border-black shadow-brutal p-8 animate-fade-in-up delay-200">
       {{ .Content }}
     </div>
   </div>
   {{ end }}
   
-  <ul class="space-y-6 max-w-4xl mx-auto">
+  <ul class="space-y-6 max-w-6xl mx-auto">
     {{ range $index, $page := .Paginator.Pages }}
     <li class="animate-fade-in-up" style="animation-delay: {{ mul $index 100 }}ms">
       <a href="{{ $page.Params.externalLink | default $page.RelPermalink }}" class="post-list-item block group">

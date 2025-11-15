@@ -10,14 +10,14 @@
   </header>
   
   {{ if .Content }}
-  <div class="max-w-3xl mx-auto mb-12 prose prose-lg">
+  <div class="max-w-6xl mx-auto mb-12 prose prose-xl">
     <div class="bg-white border-4 border-black shadow-brutal p-8 animate-fade-in-up delay-200">
       {{ .Content }}
     </div>
   </div>
   {{ end }}
   
-  <ul class="space-y-4 max-w-4xl mx-auto">
+  <ul class="space-y-4 max-w-6xl mx-auto">
     {{ $type := .Type }}
     {{ range $index, $value := .Data.Terms.Alphabetical }}
       {{ $name := .Name }}

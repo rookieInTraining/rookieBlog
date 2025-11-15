@@ -10,6 +10,7 @@ series: ["Selenium"]
 featuredImage: "/images/selenium-webdriver/Selenium-Banner.png"
 ---
 <div style="text-align: justify">
+
 Over the course of time, my pursuit for understanding the internals of Selenium compelled me to crawl the corners of the internet
 in search for answers. I was searching for something that can help me connect the dots between the the browser and selenium.
 
@@ -18,9 +19,11 @@ With countless blogs and documentation fuelling my experiments, here is what I'v
 ## What is a WebDriver?
 
 <div style="text-align: justify">
+
 According to the selenium documentation :
 
 <blockquote>
+
 WebDriver drives a browser natively, as a user would, either locally or on a remote machine using the Selenium server, marks a leap forward in terms of browser automation.
 <br/>
 <br/>
@@ -33,6 +36,7 @@ Selenium WebDriver is a W3C Recommendation
 To further simplify the understanding, I define the WebDriver as  :
 
 <blockquote>
+
 WebDriver is a server sitting between the test code and the browser imitating user actions.
 
 It implements a set of REST-ish like APIs mentioned as part of the W3C WebDriver Protocol which perform the relevant actions such as clicks, sending text to input, etc as per the specifications.

@@ -4,12 +4,12 @@
     <h1 class="text-4xl md:text-6xl font-black text-black mb-4">
       {{- i18n .Data.Plural | title -}}
     </h1>
-    <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+    <p class="text-xl text-gray-700 max-w-6xl mx-auto">
       Browse all {{ .Data.Plural }} on the blog
     </p>
   </header>
   
-  <div class="max-w-4xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {{ range .Data.Terms.Alphabetical }}
       <a href="{{ .Page.RelPermalink }}" class="term-card block group">
