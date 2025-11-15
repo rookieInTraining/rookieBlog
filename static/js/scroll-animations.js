@@ -3,6 +3,38 @@
 (function() {
   'use strict';
 
+  // Extract language from code blocks and set as data-lang attribute
+  function extractCodeLanguage() {
+    const codeBlocks = document.querySelectorAll('.prose pre code[class*="language-"], .prose pre code[class*="lang-"]');
+    
+    codeBlocks.forEach(codeEl => {
+      const preEl = codeEl.closest('pre');
+      if (!preEl || preEl.hasAttribute('data-lang')) return;
+      
+      // Extract language from class (e.g., "language-javascript" -> "javascript")
+      const classList = Array.from(codeEl.classList);
+      let lang = '';
+      
+      for (const className of classList) {
+        if (className.startsWith('language-')) {
+          lang = className.replace('language-', '');
+          break;
+        } else if (className.startsWith('lang-')) {
+          lang = className.replace('lang-', '');
+          break;
+        }
+      }
+      
+      // Format language name (e.g., "javascript" -> "JAVASCRIPT", "c-sharp" -> "C-SHARP")
+      if (lang) {
+        lang = lang.toUpperCase().replace(/-/g, '-');
+        preEl.setAttribute('data-lang', lang);
+      } else {
+        preEl.setAttribute('data-lang', 'CODE');
+      }
+    });
+  }
+
   // Intersection Observer for fade-in animations
   const observerOptions = {
     threshold: 0.1,
@@ -21,6 +53,9 @@
 
   // Observe all elements with animation classes
   document.addEventListener('DOMContentLoaded', () => {
+    // Extract and set language labels for code blocks
+    extractCodeLanguage();
+    
     // Animate elements on scroll
     const animatedElements = document.querySelectorAll('.animate-fade-in-up, .post-list-item, .post-card');
     

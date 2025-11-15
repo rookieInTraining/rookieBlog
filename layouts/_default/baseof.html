@@ -14,6 +14,14 @@
   <!-- Custom Neobrutalist Styles -->
   <link rel="stylesheet" href="{{ "/css/neobrutal.css" | relURL }}">
   
+  <!-- KaTeX for Math Rendering -->
+  {{ if or .Params.math .Site.Params.math }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  {{ end }}
+  
   <!-- Meta Tags -->
   {{ partial "head.html" . }}
   
@@ -63,7 +71,7 @@
   <div class="relative z-10">
     {{ partial "header.html" . }}
     
-    {{ partial "featured-image.html" .}}
+    <!-- {{ partial "featured-image.html" .}} -->
     
     <main class="content-wrapper">
       {{ block "content" . }}{{ end }}
@@ -123,7 +131,20 @@
   {{ end }}
   {{ end }}
 
+  <!-- Google Analytics -->
+  {{ if .Site.Config.Services.GoogleAnalytics.ID }}
   {{ template "_internal/google_analytics.html" . }}
+  {{ else if .Site.Params.googleAnalytics }}
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ .Site.Params.googleAnalytics }}');
+  </script>
+  {{ end }}
+  
   {{- partial "body/extensions" . -}}
 </body>
 </html>
