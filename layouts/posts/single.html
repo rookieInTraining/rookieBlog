@@ -3,71 +3,94 @@
 {{ end }}
 
 {{ define "content" }}
-<section class="container mx-auto px-4 md:px-8 py-12">
-  <article class="max-w-6xl mx-auto">
+<section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
+  <article data-ga-type="post" data-ga-category="{{ with (.GetTerms "categories") }}{{ (index . 0).LinkTitle }}{{ end }}" data-ga-reading-time="{{ .ReadingTime }}">
     <!-- Post Header -->
-    <header class="mb-12 animate-fade-in-up">
-      
-      <!-- Featured Image -->
-      {{ if .Params.featuredImage }}
-      <div class="featured-image-wrapper mb-8 animate-fade-in-up delay-200">
-        <img src="{{ .Params.featuredImage | relURL }}" alt="{{ .Title }}" class="w-full border-4 border-black shadow-brutal">
+    <header class="mb-10 animate-fade-in-up">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
+        {{ .Title }}
+      </h1>
+
+      <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-zinc-500">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+          {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+        </time>
+        <span aria-hidden="true">·</span>
+        <span>{{ i18n "reading_time" .ReadingTime }}</span>
+      </div>
+
+      {{ if or (.GetTerms "categories") (.GetTerms "tags") }}
+      <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+        {{ range .GetTerms "categories" }}
+        <a href="{{ .RelPermalink }}" class="text-zinc-600 hover:text-zinc-900 transition-colors">{{ .LinkTitle }}</a>
+        {{ end }}
+        {{ range .GetTerms "tags" }}
+        <a href="{{ .RelPermalink }}" class="text-zinc-400 hover:text-zinc-900 transition-colors">#{{ .LinkTitle }}</a>
+        {{ end }}
       </div>
       {{ end }}
-
-      
-      <div class="bg-white border-4 border-black shadow-brutal p-8 md:p-12 mb-8">
-        <h1 class="text-4xl md:text-6xl font-black text-black mb-6 leading-tight">
-          {{ .Title }}
-        </h1>
-        
-        <div class="post-meta flex flex-wrap items-center gap-4 md:gap-6">
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-calendar text-neon-pink"></i>
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="font-bold text-black">
-              {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
-            </time>
-          </div>
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-clock text-neon-blue"></i>
-            <span class="font-bold text-black">{{ i18n "reading_time" .ReadingTime }}</span>
-          </div>
-        </div>
-        
-        <!-- Categories and Tags -->
-        <div class="flex flex-wrap gap-3 mt-6">
-          {{ with .GetTerms "categories" }}
-            {{ range . }}
-            <a href="{{ .RelPermalink }}" class="category-tag">
-              <span class="bg-neon-blue text-black px-4 py-2 border-2 border-black font-black text-sm hover:bg-neon-yellow transition-colors">
-                {{ .LinkTitle }}
-              </span>
-            </a>
-            {{ end }}
-          {{ end }}
-          {{ with .GetTerms "tags" }}
-            {{ range . }}
-            <a href="{{ .RelPermalink }}" class="tag-link">
-              <span class="bg-neon-green text-black px-3 py-1 border-2 border-black font-bold text-xs hover:bg-neon-yellow transition-colors">
-                #{{ .LinkTitle }}
-              </span>
-            </a>
-            {{ end }}
-          {{ end }}
-        </div>
-      </div>
     </header>
 
+    <!-- Featured Image (above the fold → eager + high priority for a fast LCP) -->
+    {{ if .Params.featuredImage }}
+    <figure class="mb-10 animate-fade-in-up">
+      <img src="{{ .Params.featuredImage | relURL }}" alt="{{ .Title }}" class="w-full rounded-xl border border-zinc-200" loading="eager" fetchpriority="high" decoding="async">
+    </figure>
+    {{ end }}
+
+    <!-- Table of Contents (long posts only) -->
+    {{ $toc := .TableOfContents }}
+    {{ if and (gt .WordCount 600) (gt (len ($toc | string)) 60) }}
+    <nav class="mb-12 rounded-lg border border-zinc-200 bg-zinc-50/60 p-5" aria-label="{{ i18n "table_of_contents" | default "Table of contents" }}">
+      <div class="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">{{ i18n "table_of_contents" | default "Contents" }}</div>
+      {{ $toc }}
+    </nav>
+    {{ end }}
+
     <!-- Post Content -->
-    <div class="post-content bg-white border-4 border-black shadow-brutal p-8 md:p-12 mb-12 animate-fade-in-up delay-400">
-      <div class="prose prose-xl md:prose-2xl max-w-none">
-        {{ .Content }}
-      </div>
+    <div class="prose">
+      {{ .Content }}
     </div>
+    <!-- read_complete sentinel (end of article body) -->
+    <div data-ga-article-end aria-hidden="true"></div>
 
     <!-- Post Footer -->
-    <footer class="space-y-8">
+    <footer class="mt-16 space-y-12">
       {{ partial "posts/series.html" . }}
+      {{ partial "posts/related.html" . }}
+
+      <!-- Previous / Next in this section -->
+      {{ if or .NextInSection .PrevInSection }}
+      <nav class="grid sm:grid-cols-2 gap-6 border-t border-zinc-200 pt-8" aria-label="{{ i18n "post_navigation" | default "Post navigation" }}" data-ga-loc="post-nav">
+        <div>
+          {{ with .NextInSection }}
+          <a href="{{ .RelPermalink }}" class="group block">
+            <div class="text-xs uppercase tracking-widest text-zinc-400">{{ i18n "previous" | default "Previous" }}</div>
+            <div class="mt-1 font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</div>
+          </a>
+          {{ end }}
+        </div>
+        <div class="sm:text-right">
+          {{ with .PrevInSection }}
+          <a href="{{ .RelPermalink }}" class="group block">
+            <div class="text-xs uppercase tracking-widest text-zinc-400">{{ i18n "next" | default "Next" }}</div>
+            <div class="mt-1 font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</div>
+          </a>
+          {{ end }}
+        </div>
+      </nav>
+      {{ end }}
+
+      <!-- Connect CTA -->
+      {{ with .Site.Params.social }}
+      <aside class="border-t border-zinc-200 pt-8" data-ga-loc="cta">
+        <p class="text-zinc-600">
+          Enjoyed this? Find me on
+          {{ range $i, $s := sort . "weight" }}{{ if $i }} · {{ end }}<a href="{{ $s.url | safeURL }}" {{ if $s.rel }}rel="{{ $s.rel }}"{{ end }} class="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-zinc-900 transition-colors">{{ $s.name }}</a>{{ end }}.
+        </p>
+      </aside>
+      {{ end }}
+
       {{ partial "posts/disqus.html" . }}
       {{ partial "posts/commento.html" . }}
       {{ partial "posts/utterances.html" . }}
@@ -81,4 +104,3 @@
   </article>
 </section>
 {{ end }}
-

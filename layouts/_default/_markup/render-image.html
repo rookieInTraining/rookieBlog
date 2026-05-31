@@ -1,0 +1,4 @@
+{{- /* Lazy-load and async-decode all in-content images to cut bandwidth and main-thread work. */ -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"
+  {{- with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- /* Trailing newline kept intentionally for Goldmark block handling. */ -}}
