@@ -27,6 +27,12 @@ unsafe                                          = true
 
 [params]
     author                                      = "Ish Abbi"
+
+    # Microsoft Clarity project ID (heatmaps + session recordings).
+    # Create a free project at https://clarity.microsoft.com and paste the ID here.
+    # Leave empty to disable. Only loads in production builds (never on `hugo server`).
+    clarityID                                   = "wzrefr0fo2"
+
     description                                 = "Welcome to Ish's blog. Find interesting articles and snippets about testing, software engineering and many more."
     keywords                                    = "blog,developer,personal,testing,automation"
     info                                        = "Full Stack Tester, Blogger and Musician"
@@ -57,6 +63,13 @@ unsafe                                          = true
 
     # Series see also post count
     maxSeeAlsoItems                             = 5
+
+    # Related posts (tag overlap + category / recent fallback)
+    maxRelatedPosts                             = 5
+    relatedPostsByTag                           = true
+    relatedPostsMinTagOverlap                   = 1
+    relatedPostsLowOverlapThreshold             = 2
+    relatedPostsFallbackRecent                  = 8
 
     # Custom CSS
     custom_css                                  = []
@@ -95,12 +108,12 @@ unsafe                                          = true
     fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
     formaction                                  = ["'self'"]
     framesrc                                    = ["'self'", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io"]
-    imgsrc                                      = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
+    imgsrc                                      = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms"]
     objectsrc                                   = ["'none'"]
-    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://cdn.tailwindcss.com", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
-    scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net", "https://cdn.tailwindcss.com", "https://cdnjs.cloudflare.com"]
+    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
+    scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net", "https://www.clarity.ms"]
     prefetchsrc                                     = ["'self'"]
-    connectsrc                                  = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/"]
+    connectsrc                                  = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms", "https://*.bing.com"]
 
 [params.telegram]
   siteID                                        = "SctzjgQq"

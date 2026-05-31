@@ -21,6 +21,14 @@ jobs:
         curl -LO https://github.com/gohugoio/hugo/releases/download/v0.147.1/hugo_extended_0.147.1_linux-amd64.deb && \
         sudo dpkg -i hugo_extended_0.147.1_linux-amd64.deb
 
+    - name: Setup Node
+      uses: actions/setup-node@v4.0.3
+      with:
+        node-version: '20'
+
+    - name: Install Node dependencies (Tailwind + PostCSS for Hugo Pipes)
+      run: npm ci
+
     - name: Create static pages
       run: |
         git submodule status

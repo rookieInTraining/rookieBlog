@@ -1,24 +1,12 @@
-<footer class="footer-section mt-20 mb-8">
-  <div class="container mx-auto px-4 md:px-8">
-    <div class="bg-black text-white border-4 border-black shadow-brutal p-8 md:p-12">
-      {{ with .Site.Params.footercontent }}
-      <p class="text-xl md:text-2xl font-black mb-6 text-center">{{ . }}</p>
-      {{ end }}
-      <div class="text-center text-lg font-bold">
-        ©
-        {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }}
-          {{ .Site.Params.since }} -
-        {{ end }}
-        {{ now.Year }}
-        ·
-        {{ with .Site.Params.author }} {{ . }} {{ end }}
-      </div>
-      <div class="mt-6 text-center">
-        <div class="inline-block bg-neon-yellow text-black px-6 py-2 border-2 border-black font-black text-sm">
-          Made with 💜 & Brutal Force
-        </div>
-      </div>
-    </div>
+<footer class="border-t border-zinc-200 mt-24">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 py-10 text-sm text-zinc-500">
+    {{ with .Site.Params.footercontent }}
+    <p class="mb-3 text-zinc-600">{{ . }}</p>
+    {{ end }}
+    <p>
+      ©
+      {{ if (and .Site.Params.since (lt .Site.Params.since now.Year)) }}{{ .Site.Params.since }}–{{ end }}{{ now.Year }}
+      {{ with .Site.Params.author }}· {{ . }}{{ end }}
+    </p>
   </div>
 </footer>
-

@@ -1,0 +1,16 @@
+{{/*
+  Microsoft Clarity (heatmaps + session recordings). Renders only in production
+  builds AND when params.clarityID is set, so local `hugo server` sessions are
+  never recorded. Create a free project at https://clarity.microsoft.com and put
+  its ID in config.toml as `clarityID`.
+*/}}
+{{ if and hugo.IsProduction .Site.Params.clarityID }}
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "{{ .Site.Params.clarityID }}");
+</script>
+{{ end }}

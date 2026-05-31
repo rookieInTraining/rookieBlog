@@ -3,3 +3,4 @@ public/
 hugo_0.64.1_Linux-64bit.deb
 *.lock
 resources/
+node_modules/
