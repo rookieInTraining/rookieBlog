@@ -3,6 +3,7 @@ title: "About Me"
 description: "Hey there! Welcome to my little corner of the internet. My name is Ish. 👋. I've been navigating this world since 1989."
 date: 2020-02-17T18:37:30+05:30
 draft: false
+featuredImage: "/images/blog-image-of-universe.jpg"
 ---
 Hey there! Welcome to my little corner of the internet. My name is Ish. 👋. I've been navigating this world since October, 1989. 
 

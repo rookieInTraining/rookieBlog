@@ -1,8 +1,8 @@
 {{ if .Params.featuredImage }}
-<div class="featured-image-banner mb-8">
+<figure class="featured-image-banner mb-10 animate-fade-in-up">
   <img src="{{ .Params.featuredImage | relURL }}"
-       alt="Featured image"
-       class="w-full h-64 md:h-96 object-cover rounded-xl border border-zinc-200"
-       loading="lazy" decoding="async">
-</div>
+       alt="{{ .Title }}"
+       class="w-full h-48 sm:h-64 md:h-80 object-cover rounded-xl border border-zinc-200"
+       loading="eager" fetchpriority="high" decoding="async">
+</figure>
 {{ end }}
