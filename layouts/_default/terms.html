@@ -1,18 +1,18 @@
 {{ define "content" }}
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
   <header class="mb-10 animate-fade-in-up">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900">
-      {{- i18n .Data.Plural | title -}}
+    <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">
+      {{- i18n .Data.Plural | default .Title | title -}}
     </h1>
-    <p class="mt-2 text-zinc-500">Browse all {{ .Data.Plural }}.</p>
+    <p class="mt-2 text-ink-subdued">Browse all {{ .Data.Plural }}.</p>
   </header>
 
   <ul class="flex flex-wrap gap-3">
     {{ range .Data.Terms.Alphabetical }}
     <li>
-      <a href="{{ .Page.RelPermalink }}" class="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-1.5 text-sm text-zinc-700 hover:border-zinc-400 hover:text-zinc-900 transition-colors">
+      <a href="{{ .Page.RelPermalink }}" class="inline-flex items-center gap-2 chalk-pill border border-ink-faint px-4 py-1.5 font-note text-base text-ink-strong hover:border-ink-subdued hover:text-ink-full transition-colors">
         <span>{{ .Page.Title }}</span>
-        <span class="text-zinc-400">{{ .Count }}</span>
+        <span class="text-ink-faint">{{ .Count }}</span>
       </a>
     </li>
     {{ end }}

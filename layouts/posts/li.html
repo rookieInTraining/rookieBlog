@@ -1,13 +1,13 @@
 <li class="group">
   <a href="{{ .Params.externalLink | default .RelPermalink }}" class="block">
     <div class="flex items-baseline justify-between gap-4">
-      <h2 class="text-lg font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</h2>
-      <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 text-sm text-zinc-400 tabular-nums">{{ .Date | time.Format "Jan 2006" }}</time>
+      <h2 class="text-xl text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h2>
+      <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-faint">{{ .Date | time.Format "Jan 2006" }}</time>
     </div>
     {{ with .Description }}
-    <p class="mt-1 text-zinc-500 leading-relaxed">{{ . }}</p>
+    <p class="mt-1 text-ink-subdued leading-relaxed">{{ . }}</p>
     {{ else }}{{ with .Summary }}
-    <p class="mt-1 text-zinc-500 leading-relaxed">{{ . | truncate 160 }}</p>
+    <p class="mt-1 text-ink-subdued leading-relaxed">{{ . | truncate 160 }}</p>
     {{ end }}{{ end }}
   </a>
 </li>

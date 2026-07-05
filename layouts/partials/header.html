@@ -1,25 +1,25 @@
-<header class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-zinc-200">
+<header class="sticky top-0 z-50 bg-white border-b border-ink-ghost">
   <nav class="max-w-3xl mx-auto px-5 md:px-8">
     <div class="flex items-center justify-between h-16">
-      <!-- Logo / Title -->
-      <a href="{{ absLangURL "" }}" class="text-lg font-semibold tracking-tight text-zinc-900 hover:text-zinc-500 transition-colors">
+      <!-- Logo / Title: the wordmark is always the display hand -->
+      <a href="{{ absLangURL "" }}" class="font-display font-bold text-2xl text-ink-full hover:text-chalk-pink transition-colors sc-chalk sc-fuzz">
         {{ .Site.Title }}
       </a>
 
       {{ if or .Site.Menus.main hugo.IsMultilingual }}
       <!-- Mobile menu toggle -->
       <input type="checkbox" id="menu-toggle" class="hidden peer" />
-      <label for="menu-toggle" class="md:hidden text-zinc-700 hover:text-zinc-900 cursor-pointer p-2 -mr-2" aria-label="Toggle menu">
-        <i class="fa-solid fa-bars"></i>
+      <label for="menu-toggle" class="md:hidden text-ink-strong hover:text-ink-full cursor-pointer p-2 -mr-2" aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3.2 6.4 C 9 5.9, 16 6.8, 20.8 6.2"/><path d="M3 12.3 C 8 11.7, 15 12.6, 21 11.9"/><path d="M3.4 18 C 10 17.5, 16 18.4, 20.6 17.8"/></svg>
       </label>
 
       <!-- Navigation -->
-      <ul class="hidden peer-checked:flex md:flex absolute md:static top-16 left-0 right-0 flex-col md:flex-row items-start md:items-center gap-1 md:gap-8 bg-white md:bg-transparent border-b md:border-0 border-zinc-200 px-5 md:px-0 py-3 md:py-0">
+      <ul class="hidden peer-checked:flex md:flex absolute md:static top-16 left-0 right-0 flex-col md:flex-row items-start md:items-center gap-1 md:gap-8 bg-white md:bg-transparent border-b md:border-0 border-ink-ghost px-5 md:px-0 py-3 md:py-0">
         {{ with .Site.Menus.main }}
           {{ range sort . }}
           <li>
             <a href="{{ index (apply (slice .URL) (.Params.urlFunc | default "relLangURL") ".") 0 }}"
-               class="block py-2 md:py-0 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
+               class="nav-link block py-2 md:py-0 text-base text-ink-subdued hover:text-ink-full transition-colors">
               {{ .Name }}
             </a>
           </li>
@@ -30,7 +30,7 @@
           {{ range (default .Site.Home.AllTranslations .Translations) }}
             {{ if ne $.Site.Language .Language }}
             <li>
-              <a href="{{ .RelPermalink }}" class="block py-2 md:py-0 text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors">
+              <a href="{{ .RelPermalink }}" class="block py-2 md:py-0 text-base text-ink-subdued hover:text-ink-full transition-colors">
                 {{ .Language.LanguageName | emojify }}
               </a>
             </li>

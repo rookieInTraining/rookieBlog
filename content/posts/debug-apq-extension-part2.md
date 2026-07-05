@@ -51,31 +51,31 @@ Though still in beta, the sole purpose of APQ-Debugger is to intercept the graph
 Once you have installed the extension, you'll notice a new tab when you open developer tools in chrome based browsers.
 
 <div style="text-align: center" class="img-shadow">
-  <img src="/images/debug-apq-2/devtools-tab.png" alt="Dev tools tab image" />
+  <img src="/images/debug-apq-2/devtools-tab.png" alt="Dev tools tab image" width="651" height="43" loading="lazy" decoding="async" />
 </div>
 
 On accessing this tab, you'll be treated to a simple HTML form asking you, the user to add a regular expression which it will use for network interception.
 
 <div style="text-align: center" class="img-shadow">
-  <img src="/images/debug-apq-2/devtools-tab-window.png" alt="Dev tools window tab image" />
+  <img src="/images/debug-apq-2/devtools-tab-window.png" alt="Dev tools window tab image" width="873" height="386" loading="lazy" decoding="async" />
 </div>
 
 On this screen, you can use simple regular expressions, which on submission will start intercepting the requests based on the url path params of the requests.
 
 <div style="text-align: center" class="img-shadow">
-  <img src="/images/debug-apq-2/enabled-extension.png" alt="Screenshot when extension's debugger is enabled" />
+  <img src="/images/debug-apq-2/enabled-extension.png" alt="Screenshot when extension's debugger is enabled" width="1850" height="1094" loading="lazy" decoding="async" />
 </div>
 
 When this extension is activated, you'll get two requests for the same action. One, with the cached hash :
 
 <div style="text-align: center" class="img-shadow">
-  <img src="/images/debug-apq-2/basic-apq-query.png" alt="Example of apq query using cached hash" />
+  <img src="/images/debug-apq-2/basic-apq-query.png" alt="Example of apq query using cached hash" width="1849" height="1091" loading="lazy" decoding="async" />
 </div>
 
 And another will be the re-tried which will have the graphql query you need :
 
 <div style="text-align: center" class="img-shadow">
-  <img src="/images/debug-apq-2/apq-after-interception.png" alt="Example of apq query with the graphql query" />
+  <img src="/images/debug-apq-2/apq-after-interception.png" alt="Example of apq query with the graphql query" width="1860" height="1098" loading="lazy" decoding="async" />
 </div>
 
 Notice, that the highlighted section is the same request re-tried but with the actual graphql query in place as well.

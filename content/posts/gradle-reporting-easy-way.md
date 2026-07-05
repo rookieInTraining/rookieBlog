@@ -326,7 +326,7 @@ xmlMarkup.html() {
 All you need to do now is to place this report generation task after the task which executes your tests and you should be able to view your custom reports upon success/failure of the tests.
 
 <div style="text-align: center">
-  <img src="/images/gradle-reporting/sample-gradle-report.png" alt="Sample test report image" />
+  <img src="/images/gradle-reporting/sample-gradle-report.png" alt="Sample test report image" width="1250" height="673" loading="lazy" decoding="async" />
 </div>
 
 You can also refer to the example code hosted on [GitHub](https://github.com/rookieInTraining/gradleReportingExample).

@@ -2,7 +2,16 @@
   {{ with .Site.Params.avatarURL }}
     <div class="avatar-wrapper">
       <div class="avatar-container">
-        <img src="{{ . | relURL }}" alt="avatar" class="avatar-image">
+        {{/* Process through Hugo Pipes: 192px (2x the 96px display size) WebP.
+             Falls back to the raw static file if the asset isn't found. */}}
+        {{ $avatar := resources.Get . }}
+        {{ if $avatar }}
+          {{ $small := $avatar.Fill "192x192 webp q85" }}
+          <img src="{{ $small.RelPermalink }}" alt="{{ site.Params.author | default "avatar" }}"
+               width="192" height="192" fetchpriority="high" decoding="async" class="avatar-image">
+        {{ else }}
+          <img src="{{ . | relURL }}" alt="{{ site.Params.author | default "avatar" }}" class="avatar-image">
+        {{ end }}
       </div>
     </div>
   {{ end }}
@@ -14,4 +23,3 @@
     </div>
   </div>
 {{ end }}
-

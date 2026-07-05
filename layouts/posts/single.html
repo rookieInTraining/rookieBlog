@@ -1,17 +1,15 @@
-{{ define "title" }}
-  {{ .Title }} · {{ .Site.Title }}
-{{ end }}
+{{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
   <article data-ga-type="post" data-ga-category="{{ with (.GetTerms "categories") }}{{ (index . 0).LinkTitle }}{{ end }}" data-ga-reading-time="{{ .ReadingTime }}">
     <!-- Post Header -->
     <header class="mb-10 animate-fade-in-up">
-      <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
+      <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full leading-tight sc-chalk sc-fuzz">
         {{ .Title }}
       </h1>
 
-      <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-zinc-500">
+      <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-note text-base text-ink-subdued">
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
           {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
         </time>
@@ -22,10 +20,10 @@
       {{ if or (.GetTerms "categories") (.GetTerms "tags") }}
       <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
         {{ range .GetTerms "categories" }}
-        <a href="{{ .RelPermalink }}" class="text-zinc-600 hover:text-zinc-900 transition-colors">{{ .LinkTitle }}</a>
+        <a href="{{ .RelPermalink }}" class="text-ink-subdued hover:text-ink-full transition-colors">{{ .LinkTitle }}</a>
         {{ end }}
         {{ range .GetTerms "tags" }}
-        <a href="{{ .RelPermalink }}" class="text-zinc-400 hover:text-zinc-900 transition-colors">#{{ .LinkTitle }}</a>
+        <a href="{{ .RelPermalink }}" class="font-note text-ink-faint hover:text-chalk-pink transition-colors">#{{ .LinkTitle }}</a>
         {{ end }}
       </div>
       {{ end }}
@@ -34,15 +32,19 @@
     <!-- Featured Image (above the fold → eager + high priority for a fast LCP) -->
     {{ if .Params.featuredImage }}
     <figure class="mb-10 animate-fade-in-up">
-      <img src="{{ .Params.featuredImage | relURL }}" alt="{{ .Title }}" class="w-full rounded-xl border border-zinc-200" loading="eager" fetchpriority="high" decoding="async">
+      {{ $fi := .Params.featuredImage }}
+      {{ $hasFile := and (strings.HasPrefix $fi "/") (fileExists (printf "static%s" $fi)) }}
+      <img src="{{ $fi | relURL }}" alt="{{ .Title }}" class="w-full sc-wobble-2 border border-ink-faint"
+           {{ if $hasFile }}{{ $cfg := imageConfig (printf "static%s" $fi) }}width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"{{ end }}
+           loading="eager" fetchpriority="high" decoding="async">
     </figure>
     {{ end }}
 
     <!-- Table of Contents (long posts only) -->
     {{ $toc := .TableOfContents }}
     {{ if and (gt .WordCount 600) (gt (len ($toc | string)) 60) }}
-    <nav class="mb-12 rounded-lg border border-zinc-200 bg-zinc-50/60 p-5" aria-label="{{ i18n "table_of_contents" | default "Table of contents" }}">
-      <div class="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">{{ i18n "table_of_contents" | default "Contents" }}</div>
+    <nav class="mb-12 sc-wobble border border-ink-faint bg-ink-dust p-5" aria-label="{{ i18n "table_of_contents" | default "Table of contents" }}">
+      <div class="font-note text-sm uppercase tracking-widest text-ink-faint mb-3">{{ i18n "table_of_contents" | default "Contents" }}</div>
       {{ $toc }}
     </nav>
     {{ end }}
@@ -61,20 +63,20 @@
 
       <!-- Previous / Next in this section -->
       {{ if or .NextInSection .PrevInSection }}
-      <nav class="grid sm:grid-cols-2 gap-6 border-t border-zinc-200 pt-8" aria-label="{{ i18n "post_navigation" | default "Post navigation" }}" data-ga-loc="post-nav">
+      <nav class="grid sm:grid-cols-2 gap-6 border-t border-ink-ghost pt-8" aria-label="{{ i18n "post_navigation" | default "Post navigation" }}" data-ga-loc="post-nav">
         <div>
           {{ with .NextInSection }}
           <a href="{{ .RelPermalink }}" class="group block">
-            <div class="text-xs uppercase tracking-widest text-zinc-400">{{ i18n "previous" | default "Previous" }}</div>
-            <div class="mt-1 font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</div>
+            <div class="font-note text-sm uppercase tracking-widest text-ink-faint">{{ i18n "previous" | default "Previous" }}</div>
+            <div class="mt-1 text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</div>
           </a>
           {{ end }}
         </div>
         <div class="sm:text-right">
           {{ with .PrevInSection }}
           <a href="{{ .RelPermalink }}" class="group block">
-            <div class="text-xs uppercase tracking-widest text-zinc-400">{{ i18n "next" | default "Next" }}</div>
-            <div class="mt-1 font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</div>
+            <div class="font-note text-sm uppercase tracking-widest text-ink-faint">{{ i18n "next" | default "Next" }}</div>
+            <div class="mt-1 text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</div>
           </a>
           {{ end }}
         </div>
@@ -83,10 +85,10 @@
 
       <!-- Connect CTA -->
       {{ with .Site.Params.social }}
-      <aside class="border-t border-zinc-200 pt-8" data-ga-loc="cta">
-        <p class="text-zinc-600">
+      <aside class="border-t border-ink-ghost pt-8" data-ga-loc="cta">
+        <p class="text-ink-strong">
           Enjoyed this? Find me on
-          {{ range $i, $s := sort . "weight" }}{{ if $i }} · {{ end }}<a href="{{ $s.url | safeURL }}" {{ if $s.rel }}rel="{{ $s.rel }}"{{ end }} class="text-zinc-900 underline underline-offset-2 decoration-zinc-300 hover:decoration-zinc-900 transition-colors">{{ $s.name }}</a>{{ end }}.
+          {{ range $i, $s := sort . "weight" }}{{ if $i }} · {{ end }}<a href="{{ $s.url | safeURL }}" {{ if $s.rel }}rel="{{ $s.rel }}"{{ end }} class="sc-underline text-ink-full hover:text-chalk-pink transition-colors">{{ $s.name }}</a>{{ end }}.
         </p>
       </aside>
       {{ end }}

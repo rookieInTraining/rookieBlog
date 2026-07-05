@@ -2,12 +2,12 @@
 
 {{ define "content" }}
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-24 md:py-32 text-center">
-  <p class="text-sm font-semibold uppercase tracking-widest text-zinc-400">404</p>
-  <h1 class="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-zinc-900">Page not found</h1>
-  <p class="mt-4 text-zinc-500">The page you're looking for doesn't exist or has moved.</p>
+  <p class="font-note text-sm uppercase tracking-widest text-ink-faint">404</p>
+  <h1 class="mt-3 font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">Page not found</h1>
+  <p class="mt-4 text-ink-subdued">The page you're looking for doesn't exist or has moved.</p>
   <div class="mt-8 flex items-center justify-center gap-6 text-sm">
-    <a href="{{ "/" | relURL }}" class="font-medium text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-900 transition-colors">Home</a>
-    <a href="{{ "posts/" | relURL }}" class="font-medium text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-900 transition-colors">All posts</a>
+    <a href="{{ "/" | relURL }}" class="sc-underline text-ink-full hover:text-chalk-pink transition-colors">Home</a>
+    <a href="{{ "posts/" | relURL }}" class="sc-underline text-ink-full hover:text-chalk-pink transition-colors">All posts</a>
   </div>
 </section>
 {{ end }}

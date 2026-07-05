@@ -1,11 +1,9 @@
-{{ define "title" }}
-  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
-{{ end }}
+{{ define "title" }}{{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}{{ end }}
 
 {{ define "content" }}
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
   <header class="mb-10 animate-fade-in-up">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900">
+    <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">
       {{ title (i18n (lower .Title)) | default .Title }}
     </h1>
   </header>

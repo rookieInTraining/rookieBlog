@@ -18,5 +18,12 @@
 <meta property="twitter:image" content="{{ .Params.featuredImage | default .Site.Params.featuredImage | absURL }}">
 
 {{ template "_internal/opengraph.html" . }}
-<meta property="og:image" content="{{ .Params.featuredImage | default .Site.Params.featuredImage | absURL }}">
+{{ $ogimg := .Params.featuredImage | default .Site.Params.featuredImage }}
+<meta property="og:image" content="{{ $ogimg | absURL }}">
+{{ if and $ogimg (strings.HasPrefix $ogimg "/") (fileExists (printf "static%s" $ogimg)) }}
+{{ $cfg := imageConfig (printf "static%s" $ogimg) }}
+<meta property="og:image:width" content="{{ $cfg.Width }}">
+<meta property="og:image:height" content="{{ $cfg.Height }}">
+{{ end }}
+<meta property="og:image:alt" content="{{ .Params.Title | default .Title }}">
 

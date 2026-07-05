@@ -13,18 +13,18 @@
   <!-- Writing -->
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
   {{ if $posts }}
-  <div class="border-t border-zinc-200 pt-12 pb-20">
-    <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-8">Writing</h2>
+  <div class="border-t border-ink-ghost pt-12 pb-20">
+    <h2 class="font-note text-sm uppercase tracking-widest text-ink-faint mb-8">Writing</h2>
     <ul class="space-y-8" data-ga-loc="home-list">
       {{ range $posts | first 10 }}
       <li class="group">
         <a href="{{ .Params.externalLink | default .RelPermalink }}" class="block">
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="text-lg font-medium text-zinc-900 group-hover:text-zinc-500 transition-colors">{{ .Title }}</h3>
-            <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 text-sm text-zinc-400 tabular-nums">{{ .Date | time.Format "Jan 2006" }}</time>
+            <h3 class="text-xl text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h3>
+            <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-faint">{{ .Date | time.Format "Jan 2006" }}</time>
           </div>
           {{ with .Description }}
-          <p class="mt-1 text-zinc-500 leading-relaxed">{{ . }}</p>
+          <p class="mt-1 text-ink-subdued leading-relaxed">{{ . }}</p>
           {{ end }}
         </a>
       </li>
@@ -32,7 +32,7 @@
     </ul>
     {{ if gt (len $posts) 10 }}
     <div class="mt-10">
-      <a href="{{ "posts/" | relURL }}" class="text-sm font-medium text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-900 transition">
+      <a href="{{ "posts/" | relURL }}" class="sc-underline text-base text-ink-full hover:text-chalk-pink transition">
         View all posts →
       </a>
     </div>

@@ -1,8 +1,8 @@
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
   <header class="mb-10 animate-fade-in-up">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900">
+    <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">
       {{- if eq .Kind "term" -}}
-        <span class="text-zinc-400">{{ i18n .Data.Plural | title }}:</span>
+        <span class="text-ink-faint">{{ i18n .Data.Plural | title }}:</span>
       {{- end }}
       {{ i18n (lower .Title) | default .Title | title }}
     </h1>
@@ -14,9 +14,9 @@
       {{ $count := .Count }}
       {{ with $.Site.GetPage (printf "/%s/%s" $type .Name) }}
       <li>
-        <a href="{{ .Permalink }}" class="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-1.5 text-sm text-zinc-700 hover:border-zinc-400 hover:text-zinc-900 transition-colors">
+        <a href="{{ .Permalink }}" class="inline-flex items-center gap-2 chalk-pill border border-ink-faint px-4 py-1.5 font-note text-base text-ink-strong hover:border-ink-subdued hover:text-ink-full transition-colors">
           <span>{{ .Name }}</span>
-          <span class="text-zinc-400">{{ $count }}</span>
+          <span class="text-ink-faint">{{ $count }}</span>
         </a>
       </li>
       {{ end }}

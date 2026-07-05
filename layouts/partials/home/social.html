@@ -2,24 +2,26 @@
 <div class="social-links">
   <ul class="flex flex-wrap justify-center gap-4">
     {{ range sort . "weight" }}
-      {{ if .icon }}
+      {{ $icon := "" }}
+      {{ if .icon }}{{ $icon = partial "icons/social-icon.html" .name | chomp }}{{ end }}
+      {{ if $icon }}
         <li>
-          <a href="{{ .url | safeURL }}" 
-             aria-label="{{ .name }}" 
-             {{ if .rel }}rel="{{ .rel }}"{{ end }} 
-             {{ if .target }}target="{{ .target }}"{{ end }} 
+          <a href="{{ .url | safeURL }}"
+             aria-label="{{ .name }}"
+             {{ if .rel }}rel="{{ .rel }}"{{ end }}
+             {{ if .target }}target="{{ .target }}"{{ end }}
              {{ if .type }}type="{{ .type }}"{{ end }}
              class="social-link group">
             <div class="social-icon-wrapper">
-              <i class="{{ .icon }}" aria-hidden="true"></i>
+              {{ $icon }}
             </div>
           </a>
         </li>
       {{ else }}
         <li>
-          <a href="{{ .url | safeURL }}" 
-             aria-label="{{ .name }}" 
-             {{ if .rel }}rel="{{ .rel }}"{{ end }} 
+          <a href="{{ .url | safeURL }}"
+             aria-label="{{ .name }}"
+             {{ if .rel }}rel="{{ .rel }}"{{ end }}
              {{ if .target }}target="{{ .target }}"{{ end }}
              class="social-link-text">
             {{ .name }}
@@ -30,4 +32,3 @@
   </ul>
 </div>
 {{ end }}
-

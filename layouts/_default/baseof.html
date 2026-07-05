@@ -9,14 +9,15 @@
   {{ $tailwind := resources.Get "css/tailwind.css" | css.PostCSS | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $tailwind.RelPermalink }}" integrity="{{ $tailwind.Data.Integrity }}">
 
-  <!-- Site styles (design tokens + prose), loaded after Tailwind so they win the cascade -->
-  {{ $site := resources.Get "css/site.css" | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $site.RelPermalink }}" integrity="{{ $site.Data.Integrity }}">
+  <!-- SchoolChalk hands: Cabin Sketch (display, 700 only — nothing renders it at 400) /
+       Patrick Hand (body) / Schoolbell (notes) / Cutive Mono (code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&family=Cutive+Mono&display=swap">
 
-  <!-- Font Awesome: loaded async so it never blocks first paint (icons are decorative) -->
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"></noscript>
+  <!-- Site styles (chalk textures + design tokens + prose), loaded after Tailwind so they win the cascade -->
+  {{ $site := slice (resources.Get "css/chalk.css") (resources.Get "css/site.css") | resources.Concat "css/bundle.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $site.RelPermalink }}" integrity="{{ $site.Data.Integrity }}">
 
   <!-- KaTeX for Math Rendering -->
   {{ if or .Params.math .Site.Params.math }}
@@ -30,7 +31,7 @@
   {{ partial "head.html" . }}
 </head>
 
-<body class="min-h-screen font-sans antialiased text-zinc-800">
+<body class="min-h-screen font-sans antialiased text-ink-strong">
   <!-- Main Content -->
   <div class="relative z-10">
     {{ partial "header.html" . }}

@@ -1,4 +1,7 @@
-{{- /* Lazy-load and async-decode all in-content images to cut bandwidth and main-thread work. */ -}}
+{{- /* Lazy-load and async-decode all in-content images to cut bandwidth and main-thread work.
+       Local images also get intrinsic width/height so they reserve space (no layout shift). */ -}}
+{{- $local := and (strings.HasPrefix .Destination "/") (fileExists (printf "static%s" .Destination)) -}}
 <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"
-  {{- with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- if $local }}{{ $cfg := imageConfig (printf "static%s" .Destination) }} width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"{{ end }} loading="lazy" decoding="async">
 {{- /* Trailing newline kept intentionally for Goldmark block handling. */ -}}

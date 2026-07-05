@@ -1,0 +1,49 @@
+{{- /* JSON-LD structured data for rich results.
+     Homepage: WebSite + Person (author entity, sameAs = social profiles).
+     Posts: BlogPosting + BreadcrumbList. Built with dict/jsonify so escaping
+     is always valid JSON. */ -}}
+{{- $author := dict "@type" "Person" "name" .Site.Params.author "url" ("" | absURL) -}}
+{{- with .Site.Params.social -}}
+  {{- $same := slice -}}
+  {{- range . }}{{ $same = $same | append .url }}{{ end -}}
+  {{- $author = merge $author (dict "sameAs" $same) -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+{{- $site := dict
+      "@context" "https://schema.org"
+      "@type" "WebSite"
+      "name" .Site.Title
+      "url" ("" | absURL)
+      "description" .Site.Params.description
+      "author" $author
+      "publisher" $author
+-}}
+<script type="application/ld+json">{{ $site | jsonify | safeJS }}</script>
+{{- else if and .IsPage (eq .Section "posts") -}}
+{{- $img := .Params.featuredImage | default .Site.Params.featuredImage | absURL -}}
+{{- $post := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+      "headline" .Title
+      "description" (.Description | default .Summary | plainify | chomp)
+      "image" $img
+      "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "author" $author
+      "publisher" $author
+      "wordCount" .WordCount
+      "inLanguage" .Site.Language.Lang
+-}}
+{{- with .Params.tags }}{{ $post = merge $post (dict "keywords" (delimit . ", ")) }}{{ end -}}
+{{- with .GetTerms "categories" }}{{ $post = merge $post (dict "articleSection" (index . 0).LinkTitle) }}{{ end -}}
+<script type="application/ld+json">{{ $post | jsonify | safeJS }}</script>
+{{- $crumbs := slice
+      (dict "@type" "ListItem" "position" 1 "name" "Home" "item" ("" | absURL))
+      (dict "@type" "ListItem" "position" 2 "name" "Blog" "item" ("posts/" | absURL))
+      (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink)
+-}}
+{{- $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs -}}
+<script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>
+{{- end -}}

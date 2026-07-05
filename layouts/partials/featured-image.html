@@ -1,8 +1,11 @@
 {{ if .Params.featuredImage }}
 <figure class="featured-image-banner mb-10 animate-fade-in-up">
-  <img src="{{ .Params.featuredImage | relURL }}"
+  {{ $fi := .Params.featuredImage }}
+  {{ $hasFile := and (strings.HasPrefix $fi "/") (fileExists (printf "static%s" $fi)) }}
+  <img src="{{ $fi | relURL }}"
        alt="{{ .Title }}"
-       class="w-full h-48 sm:h-64 md:h-80 object-cover rounded-xl border border-zinc-200"
+       class="w-full h-48 sm:h-64 md:h-80 object-cover sc-wobble-2 border border-ink-faint"
+       {{ if $hasFile }}{{ $cfg := imageConfig (printf "static%s" $fi) }}width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"{{ end }}
        loading="eager" fetchpriority="high" decoding="async">
 </figure>
 {{ end }}

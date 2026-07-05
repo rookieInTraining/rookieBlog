@@ -1,25 +1,78 @@
 /* ============================================================================
-   ishabbi.tech — minimalist, monochrome, light-only design system.
+   ishabbi.tech — SchoolChalk design system, whiteboard (light) theme.
+   The page is the whiteboard: pure white per site requirement, charcoal
+   chalk "ink" at opacity pressure steps (never 100% opaque), deep pigment
+   chalk sticks for accents, hand-lettered type, wobble borders, no drop
+   shadows (depth = offset double-stroke "lift"). Code blocks are the one
+   dark surface: little slate blackboards on the whiteboard.
+   Texture utilities (.sc-chalk, .sc-fuzz, .sc-wobble, .sc-underline) live
+   in chalk.css, bundled before this file.
    Layout/components are done with Tailwind utilities in templates; this file
    owns design tokens, base typography, and the .prose article styles (rendered
    HTML from Markdown can't be styled with utility classes).
    ========================================================================== */
 
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
-    'Liberation Mono', monospace;
+  /* ---- Type: the four chalk hands ---- */
+  --font-display: 'Cabin Sketch', 'Comic Sans MS', cursive;   /* headings, wordmark */
+  --font-body: 'Patrick Hand', 'Comic Sans MS', cursive;      /* body & UI copy */
+  --font-note: 'Schoolbell', 'Patrick Hand', cursive;         /* labels, annotations */
+  --font-mono: 'Cutive Mono', 'Courier New', monospace;       /* code, values */
+  --font-sans: var(--font-body); /* legacy alias */
 
-  --bg: #ffffff;
-  --bg-subtle: #f7f7f8;
-  --text: #18181b;        /* headings / strong */
-  --text-body: #27272a;   /* body copy */
-  --text-muted: #71717a;  /* meta, captions */
-  --border: #e4e4e7;      /* hairlines */
-  --border-strong: #d4d4d8;
-  --code-bg: #f4f4f5;
-  --code-text: #18181b;
+  /* ---- Board ---- */
+  --bg: #ffffff;                    /* the whiteboard (site requirement: pure white) */
+  --board-slate: #1d211f;           /* slate blackboard — code blocks */
+  --board-deep: #141715;            /* board shadow / wells */
+
+  /* ---- Ink: charcoal chalk pressure steps (pick pressure, not grays) ---- */
+  --ink-full: rgba(42, 45, 43, 0.92);    /* pressed hard */
+  --ink-strong: rgba(42, 45, 43, 0.78);  /* normal stroke */
+  --ink-subdued: rgba(42, 45, 43, 0.55); /* light stroke */
+  --ink-faint: rgba(42, 45, 43, 0.32);   /* half-erased */
+  --ink-ghost: rgba(42, 45, 43, 0.14);   /* eraser smudge */
+  --ink-dust: rgba(42, 45, 43, 0.06);    /* chalk dust film */
+
+  /* ---- Chalk on slate (for the code blackboards) ---- */
+  --chalk-on-slate: rgba(242, 240, 233, 0.92);
+  --chalk-on-slate-subdued: rgba(242, 240, 233, 0.55);
+
+  /* ---- Chalk sticks: deep pigments for the light board ---- */
+  --chalk-yellow: #8f7420;
+  --chalk-blue: #3e6c9e;
+  --chalk-green: #3f7a50;
+  --chalk-pink: #b0566e;   /* accent */
+  --chalk-orange: #a8642a;
+  --chalk-red: #b04a42;
+  --chalk-purple: #6d5399;
+
+  /* ---- Legacy semantic aliases (templates + rules below) ---- */
+  --text: var(--ink-full);        /* headings / strong */
+  --text-body: var(--ink-strong); /* body copy */
+  --text-muted: var(--ink-subdued);
+  --bg-subtle: var(--ink-dust);
+  --border: var(--ink-ghost);            /* hairlines → ghost chalk lines */
+  --border-strong: rgba(42, 45, 43, 0.42);
+  --border-heavy: rgba(42, 45, 43, 0.7);
+  --code-bg: var(--board-slate);
+  --code-text: var(--chalk-on-slate);
+
+  /* ---- Chalk line weights & hand-drawn radii ---- */
+  --line-thin: 1.5px;   /* chalk reads thicker than ink */
+  --line-thick: 2.5px;
+  --sc-radius-wobble: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --sc-radius-wobble-2: 15px 255px 15px 225px / 225px 15px 255px 15px;
+  --sc-radius-pill: 48% 52% 50% 50% / 55% 48% 52% 45%;
+
+  /* ---- Elevation: offset double-stroke, never blurry shadows ---- */
+  --lift-s: 2px 2px 0 rgba(42, 45, 43, 0.16);
+  --lift-m: 3px 3px 0 rgba(42, 45, 43, 0.2);
+  --lift-l: 5px 5px 0 rgba(42, 45, 43, 0.24);
+
+  /* ---- Fuzz halo + focus ring ---- */
+  --sc-fuzz-tight: rgba(42, 45, 43, 0.3);
+  --sc-fuzz-wide: rgba(42, 45, 43, 0.1);
+  --focus-ring: rgba(42, 45, 43, 0.5);
 
   --measure: 44rem;       /* comfortable reading width */
 }
@@ -35,21 +88,33 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text-body);
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-family: var(--font-body);
+  font-size: 1.125rem;          /* chalk hands read small — one step up */
+  line-height: 1.55;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+/* Pink chalk dust, not an inverted block */
 ::selection {
-  background: var(--text);
-  color: var(--bg);
+  background: rgba(176, 86, 110, 0.22);
 }
 
 .content-wrapper {
   min-height: calc(100vh - 16rem);
+}
+
+/* Tag/category pills: a hand-chalked lozenge, never a perfect capsule */
+.chalk-pill { border-radius: var(--sc-radius-pill); }
+
+/* Nav links: hover draws the rough chalk stroke under the word */
+.nav-link:hover {
+  background-image: var(--sc-underline-img);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 5px;
 }
 
 /* Subtle, reusable entrance animation */
@@ -66,13 +131,15 @@ body {
 
 .avatar-wrapper { display: flex; justify-content: center; }
 
+/* A chalked circle: uneven pill radius, thick hand-drawn stroke */
 .avatar-container {
   width: 96px;
   height: 96px;
-  border-radius: 9999px;
+  border-radius: var(--sc-radius-pill);
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: var(--line-thick) solid var(--border-strong);
   background: var(--bg-subtle);
+  transform: rotate(-1deg);
 }
 
 .avatar-image {
@@ -87,15 +154,17 @@ body {
 .author-section { text-align: center; }
 
 .author-name {
-  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 6vw, 3rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
   color: var(--text);
   line-height: 1.1;
+  text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide);
 }
 
 .author-info {
-  font-size: 1.0625rem;
+  font-family: var(--font-note);
+  font-size: 1.125rem;
   font-weight: 400;
   color: var(--text-muted);
 }
@@ -114,11 +183,13 @@ body {
   color: var(--text-muted);
   transition: color 0.2s ease, transform 0.2s ease;
 }
-.social-link:hover .social-icon-wrapper { color: var(--text); transform: translateY(-2px); }
+.social-link:hover .social-icon-wrapper {
+  color: var(--text);
+  transform: translateY(-2px) rotate(-4deg);
+}
 
-/* Keep brand icons at a calm, uniform size regardless of fa-2x in config */
-.social-icon-wrapper .fa-2x,
-.social-icon-wrapper i { font-size: 1.25rem !important; line-height: 1; }
+/* Inline SVG brand icons: calm, uniform size */
+.social-icon-wrapper svg { width: 1.25rem; height: 1.25rem; }
 
 .social-link-text {
   color: var(--text-muted);
@@ -136,56 +207,75 @@ body {
 
 .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
   color: var(--text);
-  font-weight: 650;
+  font-weight: 700;
   line-height: 1.25;
-  letter-spacing: -0.02em;
 }
-.prose h1 { font-size: 2rem; margin: 0 0 0.5em; }
-.prose h2 { font-size: 1.5rem; margin: 2.25em 0 0.75em; }
-.prose h3 { font-size: 1.25rem; margin: 2em 0 0.5em; }
-.prose h4 { font-size: 1.0625rem; margin: 1.75em 0 0.5em; }
+
+/* Big headings: chalk display lettering with grain + dust halo */
+.prose h1, .prose h2 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide);
+  -webkit-mask-image: var(--sc-grain-img);
+  mask-image: var(--sc-grain-img);
+  -webkit-mask-size: 200px 200px;
+  mask-size: 200px 200px;
+}
+.prose h1 { font-size: 2.25rem; margin: 0 0 0.5em; }
+.prose h2 { font-size: 1.75rem; margin: 2.25em 0 0.75em; }
+/* Smaller headings: body hand pressed hard (display face muddies when small) */
+.prose h3 { font-size: 1.375rem; margin: 2em 0 0.5em; }
+.prose h4 { font-size: 1.125rem; margin: 1.75em 0 0.5em; }
 
 .prose p { margin: 1.25em 0; }
 .prose p:first-child { margin-top: 0; }
 
+/* Links wear a rough chalk underline — never a color change */
 .prose a {
   color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--border-strong);
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: text-decoration-color 0.2s ease;
+  text-decoration: none;
+  background-image: var(--sc-underline-img);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 6px;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
 }
-.prose a:hover { text-decoration-color: var(--text); }
+.prose a:hover { color: var(--chalk-pink); }
 
-.prose strong { font-weight: 650; color: var(--text); }
+.prose strong { font-weight: 700; color: var(--text); }
 .prose em { font-style: italic; }
 
-/* Inline code */
+/* Inline code: typewriter on a dust smudge */
 .prose code {
-  background: var(--code-bg);
-  color: var(--code-text);
+  background: var(--ink-dust);
+  color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.875em;
-  padding: 0.15em 0.4em;
-  border-radius: 4px;
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px;
   border: 1px solid var(--border);
 }
 
-/* Code blocks */
+/* Code blocks: a little slate blackboard hung on the whiteboard */
 .prose pre {
   position: relative;
-  background: var(--code-bg);
+  background: var(--board-slate);
   color: var(--code-text);
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.6;
-  padding: 1.1rem 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  padding: 1.25rem 1.4rem;
+  border: var(--line-thin) solid var(--board-deep);
+  border-radius: var(--sc-radius-wobble);
+  box-shadow: var(--lift-m);
   overflow-x: auto;
   margin: 1.75em 0;
 }
+/* Chroma emits inline monokai styles (near-slate bg) — pin it to the board */
+.prose .highlight pre { background-color: var(--board-slate) !important; }
+.prose .highlight { margin: 1.75em 0; }
+.prose .highlight pre { margin: 0; }
 .prose pre code {
   background: none;
   border: 0;
@@ -195,23 +285,26 @@ body {
   white-space: pre;
 }
 
-/* Subtle language label (data-lang set by scroll-animations.js) */
+/* Language label: chalk annotation in the board's corner
+   (data-lang set by scroll-animations.js) */
 .prose pre[data-lang]::before {
   content: attr(data-lang);
   position: absolute;
-  top: 0.6rem;
-  right: 0.85rem;
-  font-size: 0.625rem;
-  font-weight: 600;
+  top: 0.55rem;
+  right: 0.9rem;
+  font-family: var(--font-note);
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--chalk-on-slate-subdued);
 }
 
+/* Blockquote: a margin note in the annotation hand, pink chalk rule */
 .prose blockquote {
   margin: 1.75em 0;
   padding: 0.25em 0 0.25em 1.25rem;
-  border-left: 3px solid var(--border-strong);
+  border-left: var(--line-thick) solid rgba(176, 86, 110, 0.55);
+  font-family: var(--font-note);
   color: var(--text-muted);
 }
 .prose blockquote p { margin: 0.5em 0; }
@@ -225,11 +318,20 @@ body {
   max-width: 100%;
   height: auto;
   margin: 2em auto;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  border-radius: var(--sc-radius-wobble-2);
+  border: var(--line-thin) solid var(--border-strong);
 }
 
-.prose hr { border: 0; border-top: 1px solid var(--border); margin: 2.5em 0; }
+/* A wobbly chalk stroke instead of a ruled line */
+.prose hr {
+  border: 0;
+  height: 8px;
+  margin: 2.5em 0;
+  background-image: var(--sc-underline-img);
+  background-repeat: repeat-x;
+  background-size: 200px 8px;
+  opacity: 0.6;
+}
 
 .prose table {
   width: 100%;
@@ -242,22 +344,44 @@ body {
   padding: 0.6em 0.8em;
   border-bottom: 1px solid var(--border);
 }
-.prose th { color: var(--text); font-weight: 600; background: var(--bg-subtle); }
+/* Column labels ruled on the board: small uppercase annotations */
+.prose th {
+  font-family: var(--font-note);
+  font-size: 0.8em;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  background: var(--bg-subtle);
+  border-bottom: var(--line-thick) solid var(--border-strong);
+}
 
 .prose figure { margin: 2em 0; }
-.prose figcaption { color: var(--text-muted); font-size: 0.875em; text-align: center; margin-top: 0.5em; }
+.prose figcaption {
+  font-family: var(--font-note);
+  color: var(--text-muted);
+  font-size: 0.875em;
+  text-align: center;
+  margin-top: 0.5em;
+}
 
 /* In-content heading anchor links */
 .heading-link { color: var(--text-muted); text-decoration: none; }
 .heading-link:hover { color: var(--text); }
 
 /* Table of contents (rendered by {{ .TableOfContents }}) */
-#TableOfContents { font-size: 0.9375rem; }
+#TableOfContents { font-size: 1rem; }
 #TableOfContents ul { list-style: none; margin: 0; padding-left: 1rem; }
 #TableOfContents > ul { padding-left: 0; }
 #TableOfContents li { margin: 0.35em 0; }
 #TableOfContents a { color: var(--text-muted); text-decoration: none; }
-#TableOfContents a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+#TableOfContents a:hover {
+  color: var(--text);
+  background-image: var(--sc-underline-img);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 5px;
+}
 
 /* ------------------------------------------------------ Comments / math --- */
 
@@ -270,7 +394,7 @@ body {
 
 a:focus-visible, button:focus-visible, input:focus-visible,
 textarea:focus-visible, select:focus-visible {
-  outline: 2px solid var(--text);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -286,5 +410,5 @@ textarea:focus-visible, select:focus-visible {
 @media print {
   nav, footer, .social-links { display: none; }
   body { color: #000; }
-  .prose a { color: #000; text-decoration: underline; }
+  .prose a { color: #000; text-decoration: underline; background-image: none; }
 }

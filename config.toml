@@ -8,6 +8,10 @@ canonifyurls                                    = true
 
 enableRobotsTXT                                 = true
 
+# Real last-modified dates from git history (feeds sitemap <lastmod> and og:modified_time).
+# CI note: actions/checkout needs fetch-depth: 0 for this to see full history.
+enableGitInfo                                   = true
+
 googleAnalytics                                 = "G-NLSP1WW1RZ"
 
 [pagination]
@@ -48,10 +52,15 @@ unsafe                                          = true
 
     dateformat                                  = "January 2, 2006"
 
+    # Homepage <title> only (the header wordmark still uses site title).
+    HeadTitle                                   = "Ish's Blog · Software Testing, QA & Automation"
+
     hideCredits                                 = true
     hideCopyright                               = false
     since                                       = 2019
-    math                                        = true
+    # KaTeX is gated per-post: set `math: true` in front matter (site-wide loading
+    # shipped ~280KB of KaTeX CSS+JS on every page).
+    math                                        = false
     katex                                       = true
 
     rtl                                         = false
@@ -105,12 +114,12 @@ unsafe                                          = true
 
 [params.csp]
     childsrc                                    = ["'self'"]
-    fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
+    fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
     formaction                                  = ["'self'"]
     framesrc                                    = ["'self'", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io"]
-    imgsrc                                      = ["'self'", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms"]
+    imgsrc                                      = ["'self'", "data:", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms"]
     objectsrc                                   = ["'none'"]
-    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
+    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
     scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net", "https://*.clarity.ms"]
     prefetchsrc                                     = ["'self'"]
     connectsrc                                  = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms", "https://*.bing.com"]

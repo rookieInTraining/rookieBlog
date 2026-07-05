@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-// Minimalist, monochrome design system. Layout/components use Tailwind's default
-// neutral (zinc) palette directly in templates; only the font stacks are themed
-// here so `font-sans`/Preflight match assets/css/site.css.
+// SchoolChalk design system, whiteboard (light) theme. Templates use these
+// chalk "ink" pressure steps (charcoal at opacity, never 100% opaque) and the
+// deep pigment chalk sticks; font stacks mirror assets/css/site.css tokens.
 module.exports = {
   content: [
     './layouts/**/*.html',
@@ -10,14 +10,34 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          'Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto',
-          'Oxygen', 'Ubuntu', 'Cantarell', '"Helvetica Neue"', 'Arial', 'sans-serif',
-        ],
-        mono: [
-          'ui-monospace', 'SFMono-Regular', '"SF Mono"', 'Menlo', 'Consolas',
-          '"Liberation Mono"', 'monospace',
-        ],
+        sans: ['"Patrick Hand"', '"Comic Sans MS"', 'cursive'],
+        display: ['"Cabin Sketch"', '"Comic Sans MS"', 'cursive'],
+        note: ['Schoolbell', '"Patrick Hand"', 'cursive'],
+        mono: ['"Cutive Mono"', '"Courier New"', 'monospace'],
+      },
+      colors: {
+        ink: {
+          full: 'rgba(42, 45, 43, 0.92)',    // pressed hard
+          strong: 'rgba(42, 45, 43, 0.78)',  // normal stroke
+          subdued: 'rgba(42, 45, 43, 0.55)', // light stroke
+          faint: 'rgba(42, 45, 43, 0.32)',   // half-erased
+          ghost: 'rgba(42, 45, 43, 0.14)',   // eraser smudge
+          dust: 'rgba(42, 45, 43, 0.06)',    // chalk dust film
+        },
+        board: {
+          DEFAULT: '#1d211f', // slate blackboard
+          deep: '#141715',
+        },
+        chalk: {
+          white: '#f2f0e9',
+          yellow: '#8f7420',
+          blue: '#3e6c9e',
+          green: '#3f7a50',
+          pink: '#b0566e', // accent
+          orange: '#a8642a',
+          red: '#b04a42',
+          purple: '#6d5399',
+        },
       },
     },
   },
