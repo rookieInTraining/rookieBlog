@@ -1,0 +1,14 @@
+{{- /* Same order as llms.txt: posts and journal newest first, then the about pages. */ -}}
+{{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+{{- $pages := slice -}}
+{{- range slice "/aboutme" "/contactme" }}{{ with site.GetPage . }}{{ $pages = $pages | append . }}{{ end }}{{ end -}}
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+This file contains the full text of every page on {{ site.BaseURL }}, converted to Markdown. The index is at {{ "llms.txt" | absURL }}.
+{{ range $posts | append $pages }}
+---
+
+{{ partial "llms/page.md" . }}
+{{ end -}}

@@ -1,6 +1,6 @@
 baseurl                                         = "https://ishabbi.tech/"
 title                                           = "Ish's Blog"
-languagecode                                    = "en"
+locale                                          = "en"
 defaultcontentlanguage                          = "en"
 
 enableEmoji                                     = true
@@ -14,14 +14,62 @@ enableGitInfo                                   = true
 
 googleAnalytics                                 = "G-NLSP1WW1RZ"
 
+# Hugo >= 0.161 runs PostCSS/Tailwind under Node's permission model (needs Node >= 22).
+# On Windows, Tailwind 3 lowercases the drive letter of tailwind.config.js ("c:\") and
+# Node's case-sensitive allow-list rejects it. `hugo server` (development environment)
+# turns the sandbox off via config/development/security.toml; production builds and CI
+# (Linux) keep it on. A local *production* build on Windows still needs, for that run:
+#   $env:HUGO_SECURITY_NODE_PERMISSIONS_DISABLE = "true"; hugo
+
+# llms.txt (https://llmstxt.org): a Markdown index of the site for LLMs,
+# generated from layouts/index.llms.txt so it stays in sync with content.
+[outputFormats.llms]
+  mediaType                                     = "text/plain"
+  baseName                                      = "llms"
+  isPlainText                                   = true
+  notAlternative                                = true
+
+# llms-full.txt: every page's Markdown concatenated (community convention, not in the spec).
+[outputFormats.llmsfull]
+  mediaType                                     = "text/plain"
+  baseName                                      = "llms-full"
+  isPlainText                                   = true
+  notAlternative                                = true
+
+# Pages also get a Markdown copy at <url>/index.md (Hugo's built-in "markdown" format),
+# as llmstxt.org recommends; llms.txt links to these.
+[outputs]
+  home                                          = ["HTML", "RSS", "llms", "llmsfull"]
+  page                                          = ["HTML", "markdown"]
+
+# static/images doubles as an assets mount so banners can be resized to AVIF/WebP
+# (layouts/partials/banner-image.html) while og:image keeps the untouched originals.
+# Declaring any assets mount drops the default one, so assets/ is re-added first.
+[[module.mounts]]
+  source                                        = "assets"
+  target                                        = "assets"
+[[module.mounts]]
+  source                                        = "static/images"
+  target                                        = "assets/images"
+
 [pagination]
 pagerSize                                       = 20
 
 [markup.highlight]
 style                                           = "monokai"
+# Classes, not inline styles: colors come from css.ChromaStyles in baseof.html.
+noClasses                                       = false
 
 [markup.goldmark.renderer]
 unsafe                                          = true
+
+# Math is typeset at build time by layouts/_default/_markup/render-passthrough.html.
+# No single-$ inline delimiter: prose dollar amounts must stay text.
+[markup.goldmark.extensions.passthrough]
+enable                                          = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block                                           = [["$$", "$$"], ["\\[", "\\]"]]
+inline                                          = [["\\(", "\\)"]]
 
 [taxonomies]
   category                                      = "categories"
@@ -114,12 +162,12 @@ unsafe                                          = true
 
 [params.csp]
     childsrc                                    = ["'self'"]
-    fontsrc                                     = ["'self'", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
+    fontsrc                                     = ["'self'", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://r2cdn.perplexity.ai"]
     formaction                                  = ["'self'"]
     framesrc                                    = ["'self'", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io"]
     imgsrc                                      = ["'self'", "data:", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms"]
     objectsrc                                   = ["'none'"]
-    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
+    stylesrc                                    = ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net/", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com"]
     scriptsrc                                   = ["'self'", "'unsafe-inline'", "https://*.google-analytics.com", "https://*.googletagmanager.com", "https://comments.app", "https://rookieintraining.github.io/", "https://topmate.io", "https://*.amazonaws.com", "https://cdn.jsdelivr.net", "https://*.clarity.ms"]
     prefetchsrc                                     = ["'self'"]
     connectsrc                                  = ["'self'", "https://*.google-analytics.com", "https://*.analytics.google.com", "https://*.googletagmanager.com", "https://rookieintraining.github.io/", "https://*.clarity.ms", "https://*.bing.com"]
@@ -136,7 +184,7 @@ unsafe                                          = true
 
 [languages]
     [languages.en]
-        languagename                            = "English"
+        label                                   = "English"
 
         [languages.en.menu]
 

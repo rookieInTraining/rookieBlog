@@ -2,9 +2,9 @@
 
 {{ define "content" }}
 <section class="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-16">
-  <article data-ga-type="post" data-ga-category="{{ with (.GetTerms "categories") }}{{ (index . 0).LinkTitle }}{{ end }}" data-ga-reading-time="{{ .ReadingTime }}">
+  <article data-ga-type="post" data-ga-category="{{ with (.GetTerms "categories") }}{{ (index . 0).LinkTitle }}{{ end }}" data-ga-reading-time="{{ .ReadingTime }}" data-copy-label="{{ i18n "copy_code" }}" data-copied-label="{{ i18n "copied" }}" data-copy-failed-label="{{ i18n "copy_failed" }}">
     <!-- Post Header -->
-    <header class="mb-10 animate-fade-in-up">
+    <header class="mb-10">
       <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full leading-tight sc-chalk sc-fuzz">
         {{ .Title }}
       </h1>
@@ -18,46 +18,54 @@
       </div>
 
       {{ if or (.GetTerms "categories") (.GetTerms "tags") }}
-      <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+      <ul class="mt-4 flex flex-wrap items-center gap-2 text-sm" aria-label="Topics">
         {{ range .GetTerms "categories" }}
-        <a href="{{ .RelPermalink }}" class="text-ink-subdued hover:text-ink-full transition-colors">{{ .LinkTitle }}</a>
+        <li><a href="{{ .RelPermalink }}" class="chalk-pill chalk-pill--filled">{{ .LinkTitle }}</a></li>
         {{ end }}
         {{ range .GetTerms "tags" }}
-        <a href="{{ .RelPermalink }}" class="font-note text-ink-faint hover:text-chalk-pink transition-colors">#{{ .LinkTitle }}</a>
+        <li><a href="{{ .RelPermalink }}" class="chalk-pill">#{{ .LinkTitle }}</a></li>
         {{ end }}
-      </div>
+      </ul>
       {{ end }}
     </header>
 
     <!-- Featured Image (above the fold → eager + high priority for a fast LCP) -->
     {{ if .Params.featuredImage }}
-    <figure class="mb-10 animate-fade-in-up">
-      {{ $fi := .Params.featuredImage }}
-      {{ $hasFile := and (strings.HasPrefix $fi "/") (fileExists (printf "static%s" $fi)) }}
-      <img src="{{ $fi | relURL }}" alt="{{ .Title }}" class="w-full sc-wobble-2 border border-ink-faint"
-           {{ if $hasFile }}{{ $cfg := imageConfig (printf "static%s" $fi) }}width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"{{ end }}
-           loading="eager" fetchpriority="high" decoding="async">
+    <figure class="mb-10">
+      {{ partial "banner-image.html" (dict "page" . "class" "w-full sc-wobble-2 border border-ink-faint") }}
     </figure>
     {{ end }}
 
-    <!-- Table of Contents (long posts only) -->
+    <!-- Table of Contents (long posts only). Inline above the article; on wide screens it
+         moves into the right margin, stays in view, and marks the section being read (chalk.js). -->
     {{ $toc := .TableOfContents }}
-    {{ if and (gt .WordCount 600) (gt (len ($toc | string)) 60) }}
-    <nav class="mb-12 sc-wobble border border-ink-faint bg-ink-dust p-5" aria-label="{{ i18n "table_of_contents" | default "Table of contents" }}">
-      <div class="font-note text-sm uppercase tracking-widest text-ink-faint mb-3">{{ i18n "table_of_contents" | default "Contents" }}</div>
-      {{ $toc }}
-    </nav>
-    {{ end }}
+    <div class="relative">
+      {{ if and (gt .WordCount 600) (gt (len ($toc | string)) 60) }}
+      <div class="toc-rail">
+        <nav class="toc mb-12 sc-wobble border border-ink-faint p-5" aria-label="{{ i18n "table_of_contents" | default "Table of contents" }}">
+          <div class="font-note text-sm uppercase tracking-widest text-ink-subdued mb-3">{{ i18n "table_of_contents" | default "Contents" }}</div>
+          {{ $toc }}
+        </nav>
+      </div>
+      {{ end }}
 
-    <!-- Post Content -->
-    <div class="prose">
-      {{ .Content }}
+      <!-- Post Content -->
+      <div class="prose">
+        {{ .Content }}
+      </div>
     </div>
     <!-- read_complete sentinel (end of article body) -->
     <div data-ga-article-end aria-hidden="true"></div>
 
+    <!-- End of the lesson: a chalk tick drawn when the reader gets here (chalk.js), leading
+         into what to read next. Fully drawn by default, so it never depends on the script. -->
+    <p class="read-done mt-16 flex items-center gap-3 font-note text-lg text-ink-strong" data-read-done>
+      <svg class="read-done__tick" viewBox="0 0 32 28" width="32" height="28" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path pathLength="1" d="M3.5 15.2 C 6.4 17.4, 9.1 20.6, 11.2 24.1 C 15.3 15.6, 21.4 8.2, 28.6 3.4"/></svg>
+      {{ i18n "lesson_complete" | default "Lesson complete. Keep training." }}
+    </p>
+
     <!-- Post Footer -->
-    <footer class="mt-16 space-y-12">
+    <footer class="mt-8 space-y-12">
       {{ partial "posts/series.html" . }}
       {{ partial "posts/related.html" . }}
 
@@ -67,7 +75,7 @@
         <div>
           {{ with .NextInSection }}
           <a href="{{ .RelPermalink }}" class="group block">
-            <div class="font-note text-sm uppercase tracking-widest text-ink-faint">{{ i18n "previous" | default "Previous" }}</div>
+            <div class="font-note text-sm uppercase tracking-widest text-ink-subdued">{{ i18n "previous" | default "Previous" }}</div>
             <div class="mt-1 text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</div>
           </a>
           {{ end }}
@@ -75,7 +83,7 @@
         <div class="sm:text-right">
           {{ with .PrevInSection }}
           <a href="{{ .RelPermalink }}" class="group block">
-            <div class="font-note text-sm uppercase tracking-widest text-ink-faint">{{ i18n "next" | default "Next" }}</div>
+            <div class="font-note text-sm uppercase tracking-widest text-ink-subdued">{{ i18n "next" | default "Next" }}</div>
             <div class="mt-1 text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</div>
           </a>
           {{ end }}
@@ -92,17 +100,7 @@
         </p>
       </aside>
       {{ end }}
-
-      {{ partial "posts/disqus.html" . }}
-      {{ partial "posts/commento.html" . }}
-      {{ partial "posts/utterances.html" . }}
-      {{ partial "posts/giscus.html" . }}
-      {{ partial "posts/mastodon.html" . }}
-      {{ partial "posts/telegram.html" . }}
-      {{ partial "posts/cusdis.html" . }}
     </footer>
-
-    {{ partial "posts/math.html" . }}
   </article>
 </section>
 {{ end }}

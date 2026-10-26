@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['"Patrick Hand"', '"Comic Sans MS"', 'cursive'],
-        display: ['"Cabin Sketch"', '"Comic Sans MS"', 'cursive'],
+        display: ['"SC Display"', '"Comic Sans MS"', 'cursive'], // Cabin Sketch subset, see static/fonts
         note: ['Schoolbell', '"Patrick Hand"', 'cursive'],
         mono: ['"Cutive Mono"', '"Courier New"', 'monospace'],
       },
@@ -19,8 +19,8 @@ module.exports = {
         ink: {
           full: 'rgba(42, 45, 43, 0.92)',    // pressed hard
           strong: 'rgba(42, 45, 43, 0.78)',  // normal stroke
-          subdued: 'rgba(42, 45, 43, 0.55)', // light stroke
-          faint: 'rgba(42, 45, 43, 0.32)',   // half-erased
+          subdued: 'rgba(42, 45, 43, 0.66)', // light stroke: lightest text step (4.8:1)
+          faint: 'rgba(42, 45, 43, 0.32)',   // half-erased: lines/borders only, never text
           ghost: 'rgba(42, 45, 43, 0.14)',   // eraser smudge
           dust: 'rgba(42, 45, 43, 0.06)',    // chalk dust film
         },

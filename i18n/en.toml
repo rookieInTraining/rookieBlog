@@ -1,0 +1,54 @@
+# UI strings used by layouts via `i18n`. Without this file every lookup returned "", which
+# is why the post header showed "date ·" with no reading time.
+
+[reading_time]
+one = "{{ .Count }} min read"
+other = "{{ .Count }} min read"
+
+[table_of_contents]
+other = "Contents"
+
+[post_navigation]
+other = "Post navigation"
+
+[previous]
+other = "Previous"
+
+[next]
+other = "Next"
+
+[recommended_reading]
+other = "Recommended reading"
+
+[see_also]
+other = "See also in"
+
+# Taxonomy names: term pages print "{{ i18n .Data.Plural 1 }}:" before the term ("Tag: Testing").
+[tags]
+one = "Tag"
+other = "Tags"
+
+[categories]
+one = "Category"
+other = "Categories"
+
+[series]
+one = "Series"
+other = "Series"
+
+[authors]
+one = "Author"
+other = "Authors"
+
+# Post end and code boards (chalk.js reads the data-* copies of the last three)
+[lesson_complete]
+other = "Lesson complete. Keep training."
+
+[copy_code]
+other = "Copy"
+
+[copied]
+other = "Copied"
+
+[copy_failed]
+other = "Selected, press Ctrl+C"

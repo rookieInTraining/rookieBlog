@@ -1,6 +1,6 @@
 <section class="max-w-3xl mx-auto px-5 md:px-8">
   <!-- Hero -->
-  <div class="pt-16 md:pt-24 pb-12 text-center animate-fade-in-up">
+  <div class="pt-16 md:pt-24 pb-12 text-center">
     {{ partialCached "home/avatar.html" . }}
     <div class="mt-6">
       {{ partialCached "home/author.html" . }}
@@ -14,14 +14,14 @@
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
   {{ if $posts }}
   <div class="border-t border-ink-ghost pt-12 pb-20">
-    <h2 class="font-note text-sm uppercase tracking-widest text-ink-faint mb-8">Writing</h2>
+    <h2 class="font-note text-sm uppercase tracking-widest text-ink-subdued mb-8">Writing</h2>
     <ul class="space-y-8" data-ga-loc="home-list">
       {{ range $posts | first 10 }}
       <li class="group">
         <a href="{{ .Params.externalLink | default .RelPermalink }}" class="block">
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="text-xl text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h3>
-            <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-faint">{{ .Date | time.Format "Jan 2006" }}</time>
+            <h3 class="text-[1.375rem] md:text-2xl leading-snug text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h3>
+            <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-subdued tabular-nums">{{ .Date | time.Format "Jan 2006" }}</time>
           </div>
           {{ with .Description }}
           <p class="mt-1 text-ink-subdued leading-relaxed">{{ . }}</p>

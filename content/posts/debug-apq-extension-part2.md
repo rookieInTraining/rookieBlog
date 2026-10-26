@@ -15,7 +15,6 @@ featuredImage: "/images/debug-apq-1/apqd-banner-resized.png"
   }
 </style>
 
-<div style="text-align: justify">
 
 As discussed in [part-1](/posts/debug-apq-extension-part1) of this blog, when using apollo client one can boost the performance of the graphql queries by using __"Automatic persisted queries" or APQ__. By using APQ, the server caches each requests initiated from the browser against a hash which if not found, forces the web browser to re-send the request with the complete graphql query.
 
@@ -94,4 +93,3 @@ The plugin is available in the chrome web store as well as the microsoft edge we
   </video>
 </div>
 
-</div>

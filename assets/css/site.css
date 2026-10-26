@@ -14,7 +14,7 @@
 
 :root {
   /* ---- Type: the four chalk hands ---- */
-  --font-display: 'Cabin Sketch', 'Comic Sans MS', cursive;   /* headings, wordmark */
+  --font-display: 'SC Display', 'Comic Sans MS', cursive;     /* headings, wordmark (Cabin Sketch subset) */
   --font-body: 'Patrick Hand', 'Comic Sans MS', cursive;      /* body & UI copy */
   --font-note: 'Schoolbell', 'Patrick Hand', cursive;         /* labels, annotations */
   --font-mono: 'Cutive Mono', 'Courier New', monospace;       /* code, values */
@@ -28,8 +28,8 @@
   /* ---- Ink: charcoal chalk pressure steps (pick pressure, not grays) ---- */
   --ink-full: rgba(42, 45, 43, 0.92);    /* pressed hard */
   --ink-strong: rgba(42, 45, 43, 0.78);  /* normal stroke */
-  --ink-subdued: rgba(42, 45, 43, 0.55); /* light stroke */
-  --ink-faint: rgba(42, 45, 43, 0.32);   /* half-erased */
+  --ink-subdued: rgba(42, 45, 43, 0.66); /* light stroke: the lightest text step (4.8:1 on white) */
+  --ink-faint: rgba(42, 45, 43, 0.32);   /* half-erased: lines and borders only, never text (1.9:1) */
   --ink-ghost: rgba(42, 45, 43, 0.14);   /* eraser smudge */
   --ink-dust: rgba(42, 45, 43, 0.06);    /* chalk dust film */
 
@@ -106,26 +106,112 @@ body {
   min-height: calc(100vh - 16rem);
 }
 
-/* Tag/category pills: a hand-chalked lozenge, never a perfect capsule */
-.chalk-pill { border-radius: var(--sc-radius-pill); }
+/* Tag/category pills: a hand-chalked lozenge, never a perfect capsule. Categories are
+   filled with chalk dust; tags are outline-only, annotated with the note hand. */
+.chalk-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.15rem 0.8rem;
+  border: var(--line-thin) solid var(--ink-ghost);
+  border-radius: var(--sc-radius-pill);
+  font-family: var(--font-note);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+.chalk-pill--filled { font-family: var(--font-body); background: var(--ink-dust); }
+.chalk-pill:hover { color: var(--chalk-pink); border-color: rgba(176, 86, 110, 0.45); }
 
-/* Nav links: hover draws the rough chalk stroke under the word */
-.nav-link:hover {
-  background-image: var(--sc-underline-img);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 5px;
+/* Touch: every standalone control gets a 44px target (WCAG 2.5.5); fine pointers keep the
+   compact desktop sizing. Links inside sentences are exempt and stay inline. */
+@media (pointer: coarse) {
+  .chalk-pill { min-height: 2.75rem; padding-inline: 1rem; }
+  .tap-target { min-height: 2.75rem; display: flex; align-items: center; }
 }
 
-/* Subtle, reusable entrance animation */
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* --------------------------------------------------------------- Motion --- */
+/* One material: the rough chalk stroke being drawn left to right. It marks hover/focus
+   (feedback), the current nav item and Contents entry (state), and reading progress.
+   A clip-path reveal, not a stretch, so the hand-drawn wobble keeps its shape.
+   Exits are quicker than entrances. Content never waits on motion. */
+
+.chalk-draw,
+#TableOfContents a { position: relative; }
+
+.chalk-draw::after,
+#TableOfContents a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 6px;
+  background: var(--sc-underline-img) no-repeat 0 100% / 100% 6px;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.18s ease-in;
+  pointer-events: none;
 }
-.animate-fade-in-up { animation: fade-in-up 0.5s ease-out both; }
-.delay-200 { animation-delay: 0.08s; }
-.delay-300 { animation-delay: 0.12s; }
-.delay-400 { animation-delay: 0.16s; }
+.chalk-draw:hover::after,
+.chalk-draw:focus-visible::after,
+.chalk-draw[aria-current]::after,
+#TableOfContents a:hover::after,
+#TableOfContents a:focus-visible::after,
+#TableOfContents a[aria-current]::after {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* In the open phone menu the links are padded tap rows: draw under the word, not the row */
+.nav-link.chalk-draw::after { bottom: 0.3rem; }
+@media (min-width: 768px) { .nav-link.chalk-draw::after { bottom: -4px; } }
+@media (pointer: coarse) { .tap-target.chalk-draw::after { bottom: 0.35rem; } }
+
+/* Reading progress: pink chalk along the bottom of the sticky header, drawn by scrolling.
+   Scroll-driven animations only; without support the element stays hidden (no JS). */
+.read-progress { display: none; }
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 5px;
+    background-color: var(--chalk-pink);
+    -webkit-mask: var(--sc-underline-img) repeat-x 0 50% / 200px 5px;
+    mask: var(--sc-underline-img) repeat-x 0 50% / 200px 5px;
+    clip-path: inset(0 100% 0 0);
+    animation: chalk-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes chalk-progress { to { clip-path: inset(0 0 0 0); } }
+}
+
+/* Contents rail: on wide screens the Contents box leaves the article flow and stays in the
+   right margin while reading; chalk.js underlines the section in view. */
+@media (min-width: 1280px) {
+  .toc-rail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(100% + 2rem);
+    width: 13rem;
+  }
+  .toc-rail .toc {
+    position: sticky;
+    top: 6rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    margin: 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    background: none;
+    border: 0;
+    border-left: 1px solid var(--ink-ghost);
+    border-radius: 0;
+  }
+  .toc-rail #TableOfContents { font-size: 0.95rem; }
+}
+@media (min-width: 1440px) { .toc-rail { width: 15rem; left: calc(100% + 3rem); } }
 
 /* --------------------------------------------------------------- Avatar --- */
 
@@ -178,8 +264,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   color: var(--text-muted);
   transition: color 0.2s ease, transform 0.2s ease;
 }
@@ -201,9 +287,37 @@ body {
 
 /* ============================================================ Prose ====== */
 
-.prose { color: var(--text-body); max-width: 100%; }
+/* Article body: one step larger on wider screens (Patrick Hand's x-height is small), and a
+   66ch measure for text (≈70 Patrick Hand characters). Code boards, tables and images are
+   not capped, so they keep the full column. */
+.prose {
+  color: var(--text-body);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+}
+@media (min-width: 768px) {
+  .prose { font-size: 1.25rem; }
+}
+.prose > :is(p, ul, ol, blockquote, h2, h3, h4, h5, h6, dl) { max-inline-size: 66ch; }
+
+/* Long unbroken words (URLs, identifiers) wrap instead of widening the page on phones */
+h1, h2, h3 { overflow-wrap: break-word; }
+h1, h2, h3, h4 { text-wrap: balance; }
+.prose p, .prose li, .prose blockquote { text-wrap: pretty; }
 
 .prose > * + * { margin-top: 1.5em; }
+
+/* Long reads: skip layout/paint of article blocks until they near the viewport, so a phone
+   paints the banner and opening paragraphs first (measured: banner paint waited ~1s behind
+   rendering the whole post). The first blocks render normally; `auto` remembers real sizes. */
+.prose > :nth-child(n + 8) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 12rem;
+}
+/* chalk.js lifts the skip before any in-page jump and once the page is idle: placeholder
+   heights would otherwise send #anchor jumps (Contents, shared links) to the wrong place. */
+.prose.is-rendered > * { content-visibility: visible; }
 
 .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
   color: var(--text);
@@ -211,21 +325,20 @@ body {
   line-height: 1.25;
 }
 
-/* Big headings: chalk display lettering with grain + dust halo */
+/* Big headings: chalk display lettering with a dust halo. The grain mask stays on the page
+   title only: inside a long read it made H2s visibly paler than the text they introduce. */
 .prose h1, .prose h2 {
   font-family: var(--font-display);
   letter-spacing: 0.01em;
   text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide);
-  -webkit-mask-image: var(--sc-grain-img);
-  mask-image: var(--sc-grain-img);
-  -webkit-mask-size: 200px 200px;
-  mask-size: 200px 200px;
 }
+/* In-page jumps (Contents) land below the sticky header, not under it */
+.prose :is(h2, h3, h4)[id] { scroll-margin-top: 5.5rem; }
 .prose h1 { font-size: 2.25rem; margin: 0 0 0.5em; }
-.prose h2 { font-size: 1.75rem; margin: 2.25em 0 0.75em; }
+.prose h2 { font-size: 1.6em; margin: 2.25em 0 0.75em; }
 /* Smaller headings: body hand pressed hard (display face muddies when small) */
-.prose h3 { font-size: 1.375rem; margin: 2em 0 0.5em; }
-.prose h4 { font-size: 1.125rem; margin: 1.75em 0 0.5em; }
+.prose h3 { font-size: 1.2em; margin: 2em 0 0.5em; }
+.prose h4 { font-size: 1.1em; margin: 1.75em 0 0.5em; }
 
 .prose p { margin: 1.25em 0; }
 .prose p:first-child { margin-top: 0; }
@@ -272,8 +385,6 @@ body {
   overflow-x: auto;
   margin: 1.75em 0;
 }
-/* Chroma emits inline monokai styles (near-slate bg) — pin it to the board */
-.prose .highlight pre { background-color: var(--board-slate) !important; }
 .prose .highlight { margin: 1.75em 0; }
 .prose .highlight pre { margin: 0; }
 .prose pre code {
@@ -286,7 +397,7 @@ body {
 }
 
 /* Language label: chalk annotation in the board's corner
-   (data-lang set by scroll-animations.js) */
+   (data-lang set by chalk.js) */
 .prose pre[data-lang]::before {
   content: attr(data-lang);
   position: absolute;
@@ -297,6 +408,53 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--chalk-on-slate-subdued);
+}
+
+/* Copy control in the board's corner (chalk.js): a chalk annotation, not a UI chip.
+   On the wrapper (.board), not the <pre>, so it stays put while wide code scrolls. */
+.prose .board { position: relative; }
+.prose .board pre[data-lang]::before { right: 7.25rem; } /* clears the wider "✓ Copied" state */
+.board-copy {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.6rem;
+  font-family: var(--font-note);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--chalk-on-slate-subdued);
+  background: transparent;
+  border: 1px solid rgba(242, 240, 233, 0.22);
+  border-radius: var(--sc-radius-wobble);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.board-copy:hover { color: var(--chalk-on-slate); border-color: rgba(242, 240, 233, 0.5); }
+.board-copy:focus-visible { outline: 2px solid var(--chalk-on-slate); outline-offset: 2px; }
+.board-copy.is-copied { color: var(--chalk-on-slate); }
+.board-copy__tick { display: none; }
+.board-copy.is-copied .board-copy__tick { display: inline-flex; }
+.board-copy__tick path {
+  stroke-dasharray: 1;
+  animation: chalk-tick 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes chalk-tick { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (pointer: coarse) {
+  .board-copy { top: 0.2rem; right: 0.2rem; min-height: 2.75rem; padding-inline: 0.9rem; }
+  .prose .board pre { padding-top: 3rem; }
+}
+
+/* End of a post: the tick is chalked once the reader arrives (chalk.js arms it). */
+.read-done__tick { flex: none; color: var(--chalk-green); }
+.read-done__tick path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.read-done.is-armed .read-done__tick path { stroke-dashoffset: 1; }
+.read-done.is-armed.is-done .read-done__tick path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
 
 /* Blockquote: a margin note in the annotation hand, pink chalk rule */
@@ -333,12 +491,26 @@ body {
   opacity: 0.6;
 }
 
+/* Wide tables scroll inside their own strip (render-table.html), never the page.
+   The right-edge chalk dust fades only while there is more table to scroll to. */
+.prose .table-scroll {
+  margin: 1.75em 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  background:
+    linear-gradient(to left, var(--bg) 30%, transparent) right / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--ink-ghost), transparent) right / 1.25rem 100% no-repeat scroll;
+}
+.prose .table-scroll:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+.prose .table-scroll table { margin: 0; }
 .prose table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.75em 0;
   font-size: 0.95em;
 }
+.prose th { white-space: nowrap; }
+.prose td { min-width: 7rem; }
 .prose th, .prose td {
   text-align: left;
   padding: 0.6em 0.8em;
@@ -374,13 +546,20 @@ body {
 #TableOfContents ul { list-style: none; margin: 0; padding-left: 1rem; }
 #TableOfContents > ul { padding-left: 0; }
 #TableOfContents li { margin: 0.35em 0; }
-#TableOfContents a { color: var(--text-muted); text-decoration: none; }
-#TableOfContents a:hover {
-  color: var(--text);
-  background-image: var(--sc-underline-img);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 100% 5px;
+/* inline-block keeps a wrapped entry in one box, so its drawn stroke sits under the entry */
+#TableOfContents a {
+  display: inline-block;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+#TableOfContents a:hover,
+#TableOfContents a[aria-current] { color: var(--text); }
+/* Touch: 44px rows (after the base rule above, which they override) */
+@media (pointer: coarse) {
+  #TableOfContents a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+  #TableOfContents a::after { bottom: 0.35rem; }
+  #TableOfContents li { margin: 0; }
 }
 
 /* ------------------------------------------------------ Comments / math --- */
@@ -392,23 +571,45 @@ body {
 
 /* --------------------------------------------------------- Accessibility -- */
 
+/* Skip link: a chalk note pinned to the board's top-left corner once focused */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-note);
+  color: var(--text);
+  background: var(--bg);
+  border: var(--line-thin) solid var(--border-strong);
+  border-radius: var(--sc-radius-wobble);
+  box-shadow: var(--lift-s);
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; }
+#main:focus { outline: none; }
+
 a:focus-visible, button:focus-visible, input:focus-visible,
 textarea:focus-visible, select:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
+/* Reduced motion: strokes appear at once instead of being drawn (the state still shows),
+   nothing lifts or tilts, and in-page jumps don't glide. Reading progress stays: it moves
+   only when the reader scrolls. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
+  .chalk-draw::after,
+  .chalk-draw:is(:hover, :focus-visible, [aria-current])::after,
+  #TableOfContents a::after,
+  #TableOfContents a:is(:hover, :focus-visible, [aria-current])::after { transition: none; }
+  .social-link:hover .social-icon-wrapper { transform: none; }
+  .board-copy__tick path { animation: none; }
 }
 
 @media print {
-  nav, footer, .social-links { display: none; }
+  nav, footer, .social-links, .board-copy, .read-progress { display: none; }
   body { color: #000; }
   .prose a { color: #000; text-decoration: underline; background-image: none; }
 }
