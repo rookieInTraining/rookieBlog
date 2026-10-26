@@ -1,10 +1,12 @@
 ---
 title: " QA Metrics: Leading and Lagging Indicators Every Tester Should Know"
+linkTitle: "QA metrics"
 description: "You're a QA leader? Planning on being one? You've been asked for your north-star metric?"
 date: 2024-08-26T19:53:00+05:30
 draft: false
 tags: ["testing","testing practices","test methodologies"]
 categories: ["testing"]
+topics: ["Leading quality"]
 featuredImage: "/images/qa-best-practices/qa-leading-lagging-indicators.webp"
 ---
 

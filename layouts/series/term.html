@@ -1,0 +1,36 @@
+{{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+
+{{ define "content" }}
+{{- /* A series page: an optional intro (content/series/<name>/_index.md), then the parts in
+       reading order with their numbers, and the total reading time. */ -}}
+{{- $parts := .Pages.ByDate -}}
+{{- $minutes := 0 -}}{{- range $parts }}{{ $minutes = add $minutes .ReadingTime }}{{ end -}}
+<div class="page-wrap">
+  <div class="with-author">
+    <div class="with-author__main">
+      <header class="mb-10">
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">{{ .Title }}</h1>
+        <p class="mt-3 font-note text-lg text-ink-subdued">{{ i18n "series_parts" (len $parts) }} · {{ i18n "min_total" $minutes }}</p>
+        {{ with .Description }}<p class="mt-3 text-xl text-ink-subdued max-w-[60ch]">{{ . }}</p>{{ end }}
+      </header>
+
+      {{ if .Content }}
+      <div class="prose mb-12">{{ .Content }}</div>
+      {{ end }}
+
+      <ol class="series-list">
+        {{ range $i, $p := $parts }}
+        <li>
+          <span class="series-list__no" aria-hidden="true">{{ add $i 1 }}</span>
+          <ul class="feed">{{ partial "posts/entry.html" (dict "page" $p "level" "h2") }}</ul>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+
+    <aside class="with-author__side" aria-label="{{ site.Params.author }}">
+      {{ partial "author/column.html" (dict "variant" "full") }}
+    </aside>
+  </div>
+</div>
+{{ end }}

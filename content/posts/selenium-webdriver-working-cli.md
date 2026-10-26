@@ -6,6 +6,7 @@ description: "Discover how Selenium works behind the scenes. While many test aut
 slug: "understanding-selenium-webdriver"
 tags: ["selenium","webdriver","testautomation","webdriver protocol"]
 categories: ["test automation"]
+topics: ["Automation deep-dives"]
 series: ["Selenium"]
 featuredImage: "/images/selenium-webdriver/Selenium-Banner.png"
 ---

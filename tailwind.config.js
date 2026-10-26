@@ -19,7 +19,7 @@ module.exports = {
         ink: {
           full: 'rgba(42, 45, 43, 0.92)',    // pressed hard
           strong: 'rgba(42, 45, 43, 0.78)',  // normal stroke
-          subdued: 'rgba(42, 45, 43, 0.66)', // light stroke: lightest text step (4.8:1)
+          subdued: 'rgba(42, 45, 43, 0.66)', // light stroke: lightest text step (~4.7:1)
           faint: 'rgba(42, 45, 43, 0.32)',   // half-erased: lines/borders only, never text
           ghost: 'rgba(42, 45, 43, 0.14)',   // eraser smudge
           dust: 'rgba(42, 45, 43, 0.06)',    // chalk dust film

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  :root { --full: rgba(42,45,43,.92); --strong: rgba(42,45,43,.78); --sub: rgba(42,45,43,.66); --ghost: rgba(42,45,43,.14); --pink: #b0566e; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--strong); font-family: 'Patrick Hand', cursive; }
+  header { height: 64px; border-bottom: 1px solid var(--ghost); display: flex; align-items: center; justify-content: space-between; padding: 0 160px; }
+  .mark { font-family: 'Cabin Sketch'; font-size: 26px; color: var(--full); }
+  nav { display: flex; gap: 36px; font-size: 18px; color: var(--sub); }
+  .cols { display: grid; grid-template-columns: 560px 1fr; gap: 80px; padding: 44px 160px 0; }
+  .who { font-family: 'Schoolbell'; font-size: 18px; color: var(--sub); }
+  h1 { font-family: 'Cabin Sketch'; font-size: 48px; line-height: 1.05; color: var(--full); margin-top: 6px; }
+  /* vertical path: one chalk spine, numbered stops, a "why read it" line per stop */
+  .plan { position: relative; margin-top: 30px; padding-left: 74px; }
+  .plan svg { position: absolute; left: 22px; top: 18px; width: 6px; height: calc(100% - 60px); }
+  .stop { position: relative; padding-bottom: 30px; }
+  .n { position: absolute; left: -74px; top: -2px; width: 46px; height: 46px; display: grid; place-items: center; background: #fff; border: 2.5px solid rgba(42,45,43,.55); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; font-family: 'Cabin Sketch'; font-size: 22px; color: var(--full); }
+  .stop:first-child .n { border-color: var(--pink); color: var(--pink); }
+  .stop b { display: block; font-weight: 400; font-size: 25px; line-height: 1.2; color: var(--full); }
+  .why { margin-top: 6px; font-size: 18px; line-height: 1.45; color: var(--sub); }
+  .why i { font-style: normal; font-family: 'Schoolbell'; color: var(--pink); }
+  .t { margin-top: 6px; font-family: 'Schoolbell'; font-size: 15px; color: var(--sub); }
+  .feed h2 { font-family: 'Schoolbell'; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding-bottom: 10px; border-bottom: 2.5px solid rgba(42,45,43,.42); }
+  .e { padding: 15px 0; border-bottom: 1px solid var(--ghost); }
+  .e .m { font-family: 'Schoolbell'; font-size: 15px; color: var(--sub); }
+  .e b { display: block; margin-top: 2px; font-weight: 400; font-size: 22px; line-height: 1.2; color: var(--full); }
+  .doors { margin-top: 18px; display: flex; gap: 12px; font-size: 16px; }
+  .pill { padding: 4px 14px; border: 1.5px solid var(--ghost); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; }
+</style></head>
+<body>
+<header><div class="mark">Ish's Blog</div><nav><span>Blog</span><span>About</span><span>Contact me</span></nav></header>
+<div class="cols">
+  <section>
+    <div class="who">Ish Abbi · Director of QA &amp; Automation</div>
+    <h1>A lesson plan for QA leaders</h1>
+    <div class="plan">
+      <svg viewBox="0 0 6 400" preserveAspectRatio="none" fill="none" stroke="rgba(42,45,43,.4)" stroke-width="2.5" stroke-linecap="round"><path d="M3 0 C 5 90, 1 200, 3.5 290 S 2.5 360, 3 400"/></svg>
+      <div class="stop"><div class="n">1</div><b>QA Metrics: Leading and Lagging Indicators</b><div class="why"><i>Read it for</i> the answer to "what's your north-star metric?"</div><div class="t">13 min</div></div>
+      <div class="stop"><div class="n">2</div><b>Scoring your accessibility observations</b><div class="why"><i>Read it for</i> a score stakeholders can track release to release.</div><div class="t">5 min</div></div>
+      <div class="stop"><div class="n">3</div><b>The problem with my username</b><div class="why"><i>Read it for</i> who is writing, and why "rookie in training".</div><div class="t">2 min</div></div>
+    </div>
+  </section>
+  <section class="feed">
+    <h2>Latest writing</h2>
+    <div class="e"><div class="m">Journal · Jun 2026</div><b>The problem with my username and the thought I had behind it</b></div>
+    <div class="e"><div class="m">Leading quality · Apr 2025</div><b>Scoring your accessibility observations</b></div>
+    <div class="e"><div class="m">Leading quality · Aug 2024</div><b>QA Metrics: Leading and Lagging Indicators Every Tester Should Know</b></div>
+    <div class="e"><div class="m">Automation · Aug 2024</div><b>Fetch GraphQL query from an Apollo client using APQ, Part 2</b></div>
+    <div class="doors"><span class="pill">Leading quality · 2</span><span class="pill">Automation · 4</span><span class="pill">Journal · 1</span></div>
+  </section>
+</div>
+</body></html>

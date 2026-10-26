@@ -1,10 +1,12 @@
 ---
 title: "Scoring your accessibility observations"
+linkTitle: "scoring accessibility"
 description: "Learn ways of how one can quantify the results of your accessibility tests into a score"
 date: 2025-04-20T12:45:00+05:30
 draft: false
 tags: ["a11y","accessbility","non-functional","testing","compliance"]
 categories: ["Non-Functional Testing", "Compliance Testing"]
+topics: ["Leading quality"]
 series: ["a11y"]
 featuredImage: "/images/a11y/a11y-scoring.png"
 math: true

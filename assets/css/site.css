@@ -28,7 +28,7 @@
   /* ---- Ink: charcoal chalk pressure steps (pick pressure, not grays) ---- */
   --ink-full: rgba(42, 45, 43, 0.92);    /* pressed hard */
   --ink-strong: rgba(42, 45, 43, 0.78);  /* normal stroke */
-  --ink-subdued: rgba(42, 45, 43, 0.66); /* light stroke: the lightest text step (4.8:1 on white) */
+  --ink-subdued: rgba(42, 45, 43, 0.66); /* light stroke: the lightest text step (~4.7:1 on white) */
   --ink-faint: rgba(42, 45, 43, 0.32);   /* half-erased: lines and borders only, never text (1.9:1) */
   --ink-ghost: rgba(42, 45, 43, 0.14);   /* eraser smudge */
   --ink-dust: rgba(42, 45, 43, 0.06);    /* chalk dust film */
@@ -80,6 +80,8 @@
 /* ----------------------------------------------------------------- Base --- */
 
 html {
+  /* Scrollbars in chalk ink, thin, never browser-default chrome */
+  scrollbar-color: rgba(42, 45, 43, 0.32) transparent;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   color-scheme: light;
@@ -120,7 +122,7 @@ body {
   text-decoration: none;
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
-.chalk-pill--filled { font-family: var(--font-body); background: var(--ink-dust); }
+.chalk-pill--filled { font-family: var(--font-body); background: var(--ink-dust); color: var(--text-body); } /* subdued ink on dust is 4.46:1 */
 .chalk-pill:hover { color: var(--chalk-pink); border-color: rgba(176, 86, 110, 0.45); }
 
 /* Touch: every standalone control gets a 44px target (WCAG 2.5.5); fine pointers keep the
@@ -187,103 +189,269 @@ body {
   @keyframes chalk-progress { to { clip-path: inset(0 0 0 0); } }
 }
 
-/* Contents rail: on wide screens the Contents box leaves the article flow and stays in the
-   right margin while reading; chalk.js underlines the section in view. */
-@media (min-width: 1280px) {
-  .toc-rail {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: calc(100% + 2rem);
-    width: 13rem;
-  }
-  .toc-rail .toc {
-    position: sticky;
-    top: 6rem;
-    max-height: calc(100vh - 8rem);
-    overflow-y: auto;
-    margin: 0;
-    padding: 0.25rem 0 0.25rem 1.25rem;
-    background: none;
-    border: 0;
-    border-left: 1px solid var(--ink-ghost);
-    border-radius: 0;
-  }
-  .toc-rail #TableOfContents { font-size: 0.95rem; }
+/* --------------------------------------------------------------- Layout --- */
+/* A blog visibly written by one person: the writing leads in the main column and Ish stays
+   present in a column beside it (from 1024px). Below that, everything is one column. */
+
+.page-wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
 }
-@media (min-width: 1440px) { .toc-rail { width: 15rem; left: calc(100% + 3rem); } }
+@media (min-width: 768px) { .page-wrap { padding: 2.75rem 2rem 4rem; } }
 
-/* --------------------------------------------------------------- Avatar --- */
-
-.avatar-wrapper { display: flex; justify-content: center; }
-
-/* A chalked circle: uneven pill radius, thick hand-drawn stroke */
-.avatar-container {
-  width: 96px;
-  height: 96px;
-  border-radius: var(--sc-radius-pill);
-  overflow: hidden;
-  border: var(--line-thick) solid var(--border-strong);
-  background: var(--bg-subtle);
-  transform: rotate(-1deg);
+.with-author { display: grid; gap: 2.5rem; }
+@media (min-width: 1024px) {
+  .with-author { grid-template-columns: minmax(0, 1fr) 16.5rem; column-gap: 3.5rem; align-items: start; }
+  .with-author__side { padding-left: 2rem; border-left: 1px solid var(--ink-ghost); }
+}
+/* Ish stays in view for the whole read, but only where the column fits the screen (~670px tall);
+   on shorter screens it scrolls with the page instead of growing a scrollbar over its text. */
+@media (min-width: 1024px) and (min-height: 800px) {
+  .with-author__side { position: sticky; top: 6rem; }
+}
+/* On phones the column follows the writing, ruled off like the next section of the board */
+@media (max-width: 1023.98px) {
+  .with-author__side { border-top: 1px solid var(--ink-ghost); padding-top: 2.5rem; }
 }
 
-.avatar-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+/* Small uppercase annotation that names a block ("Latest writing", "Contents", …) */
+.col-label,
+.author-label {
+  font-family: var(--font-note);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
 }
+/* A section header chalked on the board: ruled underneath, so it heads a block rather than
+   floating over a title as a kicker */
+.col-label--ruled { padding-bottom: 0.6rem; margin-bottom: 1.5rem; border-bottom: var(--line-thick) solid var(--border-strong); }
+.col-label a { color: inherit; text-decoration: none; }
+.col-label a:hover { color: var(--text); }
 
-/* --------------------------------------------------------------- Author --- */
+/* ---------------------------------------------------------------- Feeds --- */
 
-.author-section { text-align: center; }
+.feed { list-style: none; margin: 0; padding: 0; }
+.feed-entry { padding: 1rem 0 1.1rem; border-top: 1px solid var(--ink-ghost); }
+.feed > .feed-entry:first-child { border-top: 0; padding-top: 0.25rem; }
+.feed-meta { font-family: var(--font-note); font-size: 0.95rem; color: var(--text-muted); }
+.feed-title { margin-top: 0.15rem; font-size: 1.375rem; line-height: 1.25; font-weight: 400; color: var(--text); }
+@media (min-width: 768px) { .feed-title { font-size: 1.5rem; } }
+.feed-title a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+.feed-title a:hover { color: var(--chalk-pink); }
+.feed-desc { margin-top: 0.25rem; color: var(--text-muted); text-wrap: pretty; }
+/* Journal entries read as notes, not essays */
+.feed-entry--journal .feed-title { font-family: var(--font-note); }
 
-.author-name {
+/* The newest post opens the home page on the white board: chalk display lettering that presses
+   in from faint to full on load (never invisible, so it still paints first), then a chalk rule
+   and an arrow into "Keep reading" are drawn in. */
+.feed-entry--lead { padding: 0.25rem 0 1.75rem; }
+.feed-lead .feed-title {
+  margin-top: 0.4rem;
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 6vw, 3rem);
   font-weight: 700;
-  color: var(--text);
-  line-height: 1.1;
+  font-size: clamp(2.1rem, 1.3rem + 2.4vw, 3rem);
+  line-height: 1.06;
   text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide);
 }
+.feed-lead__rule { width: min(24rem, 70%); height: 10px; margin: 0.6rem 0 0.9rem; color: var(--border-strong); --mark-delay: 0.55s; }
+.feed-lead .feed-opening { max-width: 62ch; font-size: 1.1875rem; line-height: 1.6; color: var(--text-body); }
+.feed-lead__more { display: flex; align-items: flex-end; gap: 0.35rem; margin-top: 0.4rem; }
+.feed-lead__arrow { flex: none; width: 54px; height: 30px; color: var(--chalk-pink); --mark-delay: 0.95s; }
+.feed-lead .feed-more { font-family: var(--font-note); font-size: 1.3rem; color: var(--chalk-pink); text-decoration: none; border-bottom: 2px solid rgba(176, 86, 110, 0.35); transition: border-color 0.2s ease; }
+.feed-lead .feed-more:hover { border-color: var(--chalk-pink); }
 
-.author-info {
-  font-family: var(--font-note);
-  font-size: 1.125rem;
-  font-weight: 400;
-  color: var(--text-muted);
+@media (prefers-reduced-motion: no-preference) {
+  .feed-lead .feed-title { animation: chalk-press 0.75s cubic-bezier(0.16, 1, 0.3, 1) both; }
 }
-.author-info a { color: var(--text); }
-
-/* ----------------------------------------------------------- Social row --- */
-
-.social-links ul { list-style: none; padding: 0; margin: 0; }
-
-.social-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--text-muted);
-  transition: color 0.2s ease, transform 0.2s ease;
+@keyframes chalk-press {
+  from { opacity: 0.35; filter: blur(0.6px); }
+  to { opacity: 1; filter: none; }
 }
-.social-link:hover .social-icon-wrapper {
+
+/* Hand-drawn chalk marks (arrows, swashes): one stroke each, drawn in once on load */
+.chalk-mark { display: block; overflow: visible; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.chalk-mark path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .chalk-mark path { animation: chalk-mark-draw 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--mark-delay, 0.4s) both; }
+}
+@keyframes chalk-mark-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+.feed-all { margin-top: 2rem; }
+.feed-all a { color: var(--text); text-decoration: none; }
+
+/* Blog index: the year chalked large above its posts */
+.feed-year + .feed-year { margin-top: 2.75rem; }
+.feed-year__label {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* -------------------------------------------------------- Author column --- */
+
+.author-col { display: flex; flex-direction: column; gap: 1.6rem; }
+.author-photo {
+  display: block;
+  width: var(--photo, 120px);
+  height: var(--photo, 120px);
+  object-fit: cover;
+  /* A chalked frame, visibly hand-drawn (the pill radius reads as a plain circle at this size) */
+  border-radius: 43% 57% 51% 49% / 58% 45% 55% 42%;
+  border: 3px solid var(--border-heavy);
+  background: var(--bg-subtle);
+  transform: rotate(-2deg);
+}
+.author-name {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
   color: var(--text);
-  transform: translateY(-2px) rotate(-4deg);
+  text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide);
+  transform: rotate(-2deg);
+  transform-origin: left center;
 }
+.author-col--post .author-name { font-size: 1.625rem; }
+.author-role { margin-top: 0.6rem; font-size: 1.0625rem; line-height: 1.45; color: var(--text-muted); }
 
-/* Inline SVG brand icons: calm, uniform size */
-.social-icon-wrapper svg { width: 1.25rem; height: 1.25rem; }
+.author-now {
+  padding: 0.9rem 1.1rem 1rem;
+  background: var(--ink-dust);
+  border-radius: var(--sc-radius-wobble-2);
+  color: var(--text-body);
+}
+.author-now .author-label { margin-bottom: 0.35rem; }
+.author-now time { text-transform: none; letter-spacing: 0; }
 
-.social-link-text {
-  color: var(--text-muted);
+.author-topics ul,
+.author-links { list-style: none; margin: 0; padding: 0; }
+.author-topics a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--ink-ghost);
+  font-size: 1.125rem;
+  color: var(--text);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
 }
-.social-link-text:hover { color: var(--text); }
+.author-count { font-family: var(--font-note); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.author-new { color: var(--text-muted); text-wrap: balance; }
+.author-new b { font-weight: 400; color: var(--text); }
+.author-new a { color: var(--text); text-decoration: none; }
+.author-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-family: var(--font-note); font-size: 1.0625rem; }
+.author-links a { color: var(--text); text-decoration: none; }
+
+/* Phones/tablets: identity as one strip above the writing (home). Display is set only below
+   lg here: this file loads after Tailwind, so a bare `display` would override `lg:hidden`. */
+.author-strip { display: none; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+@media (max-width: 1023.98px) { .author-strip { display: flex; } }
+.author-strip .author-name { margin-top: 0; font-size: 1.625rem; }
+.author-strip .author-role { margin-top: 0.4rem; font-size: 1rem; }
+.author-strip + .author-now { margin: -1.25rem 0 2.5rem; }
+
+/* Post byline (phones/tablets; from lg the column carries the author) */
+.post-byline { display: none; align-items: center; gap: 0.5rem; }
+@media (max-width: 1023.98px) { .post-byline { display: inline-flex; } }
+.post-byline .author-photo { border-width: var(--line-thin); }
+
+/* About: the photo leads, larger */
+.about-head { display: flex; flex-wrap: wrap; align-items: center; gap: 1.75rem; margin-bottom: 2.5rem; }
+.about-now { max-width: 38rem; margin-bottom: 2.5rem; }
+
+@media (pointer: coarse) {
+  .author-topics a { min-height: 2.75rem; align-items: center; }
+  .author-links a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+}
+
+/* ------------------------------------------------------------ Post page --- */
+/* One grid. Phones: header, banner, Contents, article. From lg the side column holds the
+   author card with the Contents beneath it, sticky while reading (chalk.js scroll-spies it). */
+
+.post-grid { display: flex; flex-direction: column; }
+.post-grid__head,
+.post-grid__figure { margin-bottom: 2.5rem; }
+.post-grid__side { order: 1; }
+.post-grid__body { order: 2; }
+.post-grid .toc {
+  margin-bottom: 3rem;
+  padding: 1.25rem;
+  border: 1px solid var(--ink-faint);
+  border-radius: var(--sc-radius-wobble);
+}
+
+@media (min-width: 1024px) {
+  .post-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16.5rem;
+    column-gap: 3.5rem;
+    align-items: start;
+  }
+  .post-grid > * { grid-column: 1; }
+  .post-grid__side { grid-column: 2; grid-row: 1 / span 3; align-self: stretch; padding-left: 2rem; border-left: 1px solid var(--ink-ghost); }
+  /* The author card scrolls away with the page; only the Contents stays in view. */
+  .post-grid__sticky { height: 100%; display: flex; flex-direction: column; gap: 2.25rem; }
+  .post-grid .toc {
+    position: sticky;
+    top: 6rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* A long Contents scrolls without a visible bar (chalk.js keeps the current entry in view);
+       its foot fades out like chalk to say there is more below. */
+    scrollbar-width: none;
+    padding: 0 0 2rem;
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 3rem), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 3rem), transparent);
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+  .post-grid .toc #TableOfContents { font-size: 0.95rem; }
+}
+
+/* --------------------------------------------------------------- Series --- */
+
+.series-line { font-family: var(--font-note); font-size: 1rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+.series-line a { color: var(--text); text-decoration: none; }
+.series-parts ol { list-style: none; margin: 0; padding: 0; }
+.series-parts li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--ink-ghost);
+  color: var(--text-muted);
+}
+.series-parts li a { color: var(--text); text-decoration: none; }
+.series-parts li a:hover { color: var(--chalk-pink); }
+.series-parts li[aria-current] { color: var(--text); }
+.series-no { flex: none; width: 1.5rem; font-family: var(--font-display); font-weight: 700; color: var(--text-muted); }
+.series-parts li[aria-current] .series-no { color: var(--chalk-pink); }
+.series-next { margin-top: 1.25rem; }
+.series-next a { color: var(--text); text-decoration: none; }
+
+.series-list { list-style: none; margin: 0; padding: 0; }
+.series-list > li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); border-top: 1px solid var(--ink-ghost); }
+.series-list > li:first-child { border-top: 0; }
+.series-list .feed-entry { border-top: 0; padding-top: 1.25rem; }
+.series-list__no {
+  padding-top: 1.35rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text-muted);
+}
 
 /* ============================================================ Prose ====== */
 
@@ -604,12 +772,57 @@ textarea:focus-visible, select:focus-visible {
   .chalk-draw:is(:hover, :focus-visible, [aria-current])::after,
   #TableOfContents a::after,
   #TableOfContents a:is(:hover, :focus-visible, [aria-current])::after { transition: none; }
-  .social-link:hover .social-icon-wrapper { transform: none; }
   .board-copy__tick path { animation: none; }
 }
 
 @media print {
-  nav, footer, .social-links, .board-copy, .read-progress { display: none; }
+  nav, footer, .with-author__side, .post-grid__side, .author-strip, .board-copy, .read-progress { display: none; }
   body { color: #000; }
   .prose a { color: #000; text-decoration: underline; background-image: none; }
 }
+
+/* Concept glossaries inside posts (e.g. the APQ part 1 "GraphQL 101" list): a ruled list in the
+   body hand at reading measure, not a grid of same-size cards. */
+.prose .concepts-grid { margin: 1.75em 0; max-inline-size: 66ch; } /* often wrapped in a div, so not a direct child */
+.prose .concept { padding: 0.9rem 0 1rem; border-top: 1px solid var(--ink-ghost); }
+.prose .concept:first-child { border-top: 0; }
+.prose .concept-title { margin: 0; font-size: 1.1em; }
+.prose .concept-description { margin: 0.3rem 0 0; }
+.prose .concept-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.05em 0.4em;
+  background: var(--ink-dust);
+  border: 1px solid var(--border);
+  border-radius: 6px 3px 7px 4px / 4px 7px 3px 6px;
+}
+
+/* Author column chalk marks: a pink swash under the name, an arrow into "New here?" */
+.author-swash { width: 9.5rem; height: 12px; margin-top: 0.3rem; color: var(--chalk-pink); stroke-width: 3.2; --mark-delay: 0.6s; }
+.author-new__arrow { display: inline-block; width: 26px; height: 20px; margin-right: 0.3rem; vertical-align: -3px; color: var(--chalk-pink); --mark-delay: 1s; }
+
+/* Moving between pages wipes the board like an eraser: the old page is erased left to right
+   while the header stays put. Cross-document View Transitions, no JS; browsers without
+   them, and readers who prefer reduced motion, navigate normally. */
+.site-header { view-transition-name: site-header; }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) {
+    z-index: 1;
+    -webkit-mask-image: linear-gradient(100deg, transparent 0 34%, #000 56%);
+    mask-image: linear-gradient(100deg, transparent 0 34%, #000 56%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    animation: chalk-erase 0.5s cubic-bezier(0.55, 0, 0.35, 1) both;
+  }
+  ::view-transition-new(root) { animation: none; }
+}
+@keyframes chalk-erase {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+
+/* Inner scrollers (tables, Contents) take the thin chalk-ink bar; code boards a chalk-on-slate one */
+.table-scroll { scrollbar-width: thin; scrollbar-color: rgba(42, 45, 43, 0.32) transparent; }
+.post-grid .toc::-webkit-scrollbar { display: none; }
+.prose pre { scrollbar-width: thin; scrollbar-color: rgba(242, 240, 233, 0.3) transparent; }

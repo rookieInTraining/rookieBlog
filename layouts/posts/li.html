@@ -1,13 +1,1 @@
-<li class="group">
-  <a href="{{ .Params.externalLink | default .RelPermalink }}" class="block">
-    <div class="flex items-baseline justify-between gap-4">
-      <h2 class="text-[1.375rem] md:text-2xl leading-snug text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h2>
-      <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-subdued tabular-nums">{{ .Date | time.Format "Jan 2006" }}</time>
-    </div>
-    {{ with .Description }}
-    <p class="mt-1 text-ink-subdued leading-relaxed">{{ . }}</p>
-    {{ else }}{{ with .Summary }}
-    <p class="mt-1 text-ink-subdued leading-relaxed">{{ . | truncate 160 }}</p>
-    {{ end }}{{ end }}
-  </a>
-</li>
+{{- partial "posts/entry.html" (dict "page" .) -}}

@@ -52,3 +52,57 @@ other = "Copied"
 
 [copy_failed]
 other = "Selected, press Ctrl+C"
+
+# Author column, feeds and series
+[latest_writing]
+other = "Latest writing"
+
+[keep_reading]
+other = "Keep reading"
+
+[all_posts]
+other = "All posts"
+
+[what_i_write_about]
+other = "What I write about"
+
+[new_here]
+other = "New here?"
+
+[start_with]
+other = "Start with"
+
+[then]
+other = "then"
+
+[follow_and_contact]
+other = "Follow and contact"
+
+[contact]
+other = "Contact"
+
+[now]
+other = "Now"
+
+[by]
+other = "by"
+
+[part_of]
+other = "Part {{ .Part }} of {{ .Total }} in"
+
+[series_parts]
+one = "{{ .Count }} part"
+other = "{{ .Count }} parts"
+
+[min_total]
+other = "{{ .Count }} min in total"
+
+[next_part]
+other = "Next part"
+
+[follow_line]
+other = "Follow new posts:"
+
+[topics]
+one = "Topic"
+other = "Topics"

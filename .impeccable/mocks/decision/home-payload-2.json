@@ -1,0 +1,46 @@
+{
+  "title": "Shape the home page: start-here variants",
+  "question": "Three ways to open the home page with a start-here path for QA leaders, each followed by the chronological feed. Lock one, steer it, or re-roll.",
+  "options": [
+    {
+      "id": "note",
+      "kind": "assigned",
+      "label": "A note from Ish",
+      "kicker": "THE ROLL",
+      "lineage": "a handwritten note left on the board",
+      "thesis": "The path is three inline links inside a short first-person note; the feed follows.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e"],
+      "materials": ["first-person note", "numbered inline links", "pink chalk highlight"],
+      "viewport": "\"Hi, I'm Ish.\" with avatar, a three-sentence note whose links are steps 1-3, RSS/LinkedIn and topic chips, then the newest posts.",
+      "risk": "The note's wording is my draft; it must be rewritten in your voice and kept current.",
+      "html": ".impeccable/mocks/decision/note.html"
+    },
+    {
+      "id": "lesson-plan",
+      "kind": "dealt",
+      "label": "Vertical lesson plan",
+      "lineage": "a lesson plan chalked down the side of the board",
+      "thesis": "The path runs down one chalk spine beside the feed, each stop saying why a leader should read it.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e"],
+      "materials": ["vertical chalk spine", "numbered stops", "\"read it for\" notes"],
+      "viewport": "Left column: \"A lesson plan for QA leaders\" with three numbered stops on a chalk line; right column: the dated feed and topic chips.",
+      "risk": "Two columns stack on phones, so the path pushes the feed below the first screen.",
+      "html": ".impeccable/mocks/decision/lesson-plan.html"
+    },
+    {
+      "id": "remembered",
+      "kind": "dealt",
+      "label": "Path that remembers you",
+      "lineage": "a teacher ticking off a student's progress",
+      "thesis": "Returning readers see their progress: read steps ticked in chalk, the next one marked, new posts flagged.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e", "#3f7a50"],
+      "materials": ["chalk ticks", "wobbly step frames", "\"new since your last visit\" note"],
+      "viewport": "\"If you lead QA, start here.\" with three framed steps (two ticked, one 'up next') and \"Welcome back: 2 of 3 read\", then the feed with new posts flagged.",
+      "risk": "Needs ~1KB of JS and browser storage; first-time visitors see the plain path.",
+      "html": ".impeccable/mocks/decision/remembered.html"
+    }
+  ],
+  "reroll": true,
+  "steer": true,
+  "buildPath": { "value": "code" }
+}

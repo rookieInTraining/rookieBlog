@@ -5,7 +5,7 @@
        Args: page, class, sizes (optional). */ -}}
 {{- $page := .page -}}
 {{- $fi := $page.Params.featuredImage -}}
-{{- $sizes := .sizes | default "(min-width: 768px) 704px, calc(100vw - 2.5rem)" -}}
+{{- $sizes := .sizes | default "(min-width: 1152px) 768px, (min-width: 1024px) calc(100vw - 24rem), (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2.5rem)" -}}
 {{- $img := "" -}}
 {{- if strings.HasPrefix $fi "/" -}}
   {{- with resources.Get (strings.TrimPrefix "/" $fi) -}}
@@ -13,7 +13,7 @@
   {{- end -}}
 {{- end -}}
 {{- with $img -}}
-  {{- /* 1536 = 2x the 704px content column; never upscale past the source width. */ -}}
+  {{- /* 1536 = 2x the ~768px main column; never upscale past the source width. */ -}}
   {{- $widths := slice -}}
   {{- range slice 480 768 1152 1536 -}}
     {{- if lt . $img.Width }}{{ $widths = $widths | append . }}{{ end -}}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  :root { --full: rgba(42,45,43,.92); --strong: rgba(42,45,43,.78); --sub: rgba(42,45,43,.66); --ghost: rgba(42,45,43,.14); --dust: rgba(42,45,43,.05); --pink: #b0566e; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--strong); font-family: 'Patrick Hand', cursive; }
+  header { height: 64px; border-bottom: 1px solid var(--ghost); display: flex; align-items: center; justify-content: space-between; padding: 0 200px; }
+  .mark { font-family: 'Cabin Sketch'; font-size: 26px; color: var(--full); }
+  nav { display: flex; gap: 36px; font-size: 18px; color: var(--sub); }
+  main { padding: 48px 200px 0; }
+  .who { font-family: 'Schoolbell'; font-size: 18px; color: var(--sub); }
+  h1 { font-family: 'Cabin Sketch'; font-size: 60px; line-height: 1.05; color: var(--full); margin-top: 6px; max-width: 900px; }
+  /* the path: three numbered posts joined by one drawn chalk line */
+  .path { position: relative; margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+  .path svg.line { position: absolute; left: 30px; right: 30px; top: 22px; width: calc(100% - 60px); height: 20px; overflow: visible; }
+  .step { position: relative; }
+  .n { width: 46px; height: 46px; display: grid; place-items: center; background: #fff; border: 2.5px solid rgba(42,45,43,.55); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; font-family: 'Cabin Sketch'; font-size: 22px; color: var(--full); position: relative; }
+  .step:first-child .n { border-color: var(--pink); color: var(--pink); }
+  .step b { display: block; margin-top: 18px; font-weight: 400; font-size: 25px; line-height: 1.2; color: var(--full); }
+  .step p { margin-top: 8px; font-size: 18px; line-height: 1.45; color: var(--sub); }
+  .step em { display: block; margin-top: 10px; font-style: normal; font-family: 'Schoolbell'; font-size: 15px; color: var(--sub); }
+  .doors { margin-top: 44px; display: flex; gap: 14px; align-items: center; font-size: 17px; }
+  .doors > span:first-child { font-family: 'Schoolbell'; color: var(--sub); margin-right: 6px; }
+  .pill { padding: 5px 16px; border: 1.5px solid var(--ghost); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; color: var(--strong); }
+  .latest { margin-top: 40px; border-top: 1px solid var(--ghost); padding-top: 22px; }
+  .latest h2 { font-family: 'Schoolbell'; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); }
+  .item { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; }
+  .item b { font-weight: 400; font-size: 23px; color: var(--full); }
+  .item span { font-family: 'Schoolbell'; font-size: 16px; color: var(--sub); }
+</style></head>
+<body>
+<header><div class="mark">Ish's Blog</div><nav><span>Blog</span><span>About</span><span>Contact me</span></nav></header>
+<main>
+  <div class="who">Ish Abbi · Director of QA &amp; Automation · learning in public</div>
+  <h1>If you lead QA, start here.</h1>
+
+  <div class="path">
+    <svg class="line" viewBox="0 0 1000 20" preserveAspectRatio="none" fill="none" stroke="rgba(42,45,43,.4)" stroke-width="2.5" stroke-linecap="round"><path d="M0 10 C 120 6, 240 14, 360 9 S 620 12, 760 8 S 920 13, 1000 10"/></svg>
+    <div class="step"><div class="n">1</div><b>QA Metrics: Leading and Lagging Indicators</b><p>The north-star question every quality leader gets asked, and the two kinds of answer.</p><em>Leading quality · 13 min</em></div>
+    <div class="step"><div class="n">2</div><b>Scoring your accessibility observations</b><p>Turn an accessibility audit into a score stakeholders can track over time.</p><em>Leading quality · 5 min</em></div>
+    <div class="step"><div class="n">3</div><b>The problem with my username</b><p>Why a Director of QA still calls himself a rookie in training.</p><em>Journal · 2 min</em></div>
+  </div>
+
+  <div class="doors"><span>Or browse by topic:</span><span class="pill">Leading quality · 2</span><span class="pill">Automation deep-dives · 4</span><span class="pill">Journal · 1</span></div>
+
+  <div class="latest"><h2>Latest writing</h2>
+    <div class="item"><b>The problem with my username and the thought I had behind it</b><span>Jun 2026</span></div>
+    <div class="item"><b>Scoring your accessibility observations</b><span>Apr 2025</span></div>
+  </div>
+</main>
+</body></html>

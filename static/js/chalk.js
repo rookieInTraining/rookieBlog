@@ -36,6 +36,13 @@
       if (current) current.removeAttribute('aria-current');
       if (link) link.setAttribute('aria-current', 'true');
       current = link;
+      // A Contents taller than the screen scrolls on its own: keep the marked entry in view
+      // by moving the list (never the page).
+      var box = link && link.closest('.toc');
+      if (box && box.scrollHeight > box.clientHeight) {
+        var lr = link.getBoundingClientRect(), br = box.getBoundingClientRect();
+        if (lr.top < br.top + 24 || lr.bottom > br.bottom - 24) box.scrollTop += lr.top - br.top - box.clientHeight / 3;
+      }
     }
 
     // The observed band is the top third of the viewport, so a callback fires each time a

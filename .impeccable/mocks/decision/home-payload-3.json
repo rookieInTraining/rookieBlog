@@ -1,0 +1,46 @@
+{
+  "title": "Shape the home page: a blog that is visibly yours",
+  "question": "Three ways to put you, visibly, at the centre of the home page. Your photo, your name and your notes are present in each; the chronological feed stays; 'new here?' is a small aside. Lock one, steer it, or re-roll.",
+  "options": [
+    {
+      "id": "letterhead",
+      "kind": "assigned",
+      "label": "Letterhead",
+      "kicker": "THE ROLL",
+      "lineage": "a personal letterhead and a letter",
+      "thesis": "Your signature is the wordmark and the home page reads as a letter from you: greeting, your writing, then a P.S.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e"],
+      "materials": ["signature wordmark", "your photo in a chalk frame", "dated entries", "P.S. aside"],
+      "viewport": "Signature 'Ish' as the masthead over a ruled letterhead line, your photo and a two-line greeting, the dated feed, and a P.S. pointing new QA leads to two posts.",
+      "risk": "Wants your real signature scanned in; the greeting is draft copy you would rewrite.",
+      "html": ".impeccable/mocks/decision/letterhead.html"
+    },
+    {
+      "id": "byline",
+      "kind": "dealt",
+      "label": "Margin notes from Ish",
+      "lineage": "an author annotating their own notebook",
+      "thesis": "Every post in the feed carries your own handwritten margin note on why you wrote it.",
+      "palette": ["#ffffff", "#2a2d2b", "#3e6c9e", "#b0566e"],
+      "materials": ["blue chalk margin notes", "photo + name header", "'new here?' aside"],
+      "viewport": "Your photo, name and roles across the top with a small 'new here?' aside; each feed entry pairs the post with a one-line note in your hand.",
+      "risk": "Only feels personal if you write the notes; posts without one fall back to plain entries.",
+      "html": ".impeccable/mocks/decision/byline.html"
+    },
+    {
+      "id": "sidebar",
+      "kind": "dealt",
+      "label": "Author column",
+      "lineage": "the classic personal blog, author always in view",
+      "thesis": "The writing leads in the main column while you stay present in a column beside it on every page.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e"],
+      "materials": ["photo + signature", "'Now' note", "latest post opens large", "links"],
+      "viewport": "Main column opens with your newest post large (title + first lines), then older posts; the side column holds your photo, signature, roles, a 'Now' note, links and 'new here?'.",
+      "risk": "The 'Now' note goes stale unless you update it; the column moves below the feed on phones.",
+      "html": ".impeccable/mocks/decision/sidebar.html"
+    }
+  ],
+  "reroll": true,
+  "steer": true,
+  "buildPath": { "value": "code" }
+}

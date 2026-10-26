@@ -1,0 +1,9 @@
+{{- /* Phones and tablets: the author column's identity as one strip above the writing. */ -}}
+<div class="author-strip lg:hidden">
+  {{ partial "author/photo.html" (dict "size" 64) }}
+  <div>
+    <p class="author-name">{{ site.Params.author }}</p>
+    <p class="author-role">{{ site.Params.role }}. {{ site.Params.roles }}.</p>
+  </div>
+</div>
+{{ partial "author/now.html" (dict "class" "lg:hidden") }}

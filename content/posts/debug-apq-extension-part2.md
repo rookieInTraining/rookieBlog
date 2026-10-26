@@ -6,6 +6,7 @@ draft: false
 keywords: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
 tags: ["graphql","apollo-graphql","apq","chrome-extensions","debugging","graphql-queries"]
 categories: ["tools for automation"]
+topics: ["Automation deep-dives"]
 series: ["graphl-automation"]
 featuredImage: "/images/debug-apq-1/apqd-banner-resized.png"
 ---

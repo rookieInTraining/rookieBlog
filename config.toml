@@ -76,6 +76,8 @@ inline                                          = [["\\(", "\\)"]]
   series                                        = "series"
   tag                                           = "tags"
   author                                        = "authors"
+  # The three "What I write about" doors in the author column (content/topics/*/_index.md).
+  topic                                         = "topics"
 
 [params]
     author                                      = "Ish Abbi"
@@ -88,6 +90,11 @@ inline                                          = [["\\(", "\\)"]]
     description                                 = "Welcome to Ish's blog. Find interesting articles and snippets about testing, software engineering and many more."
     keywords                                    = "blog,developer,personal,testing,automation"
     info                                        = "Full Stack Tester, Blogger and Musician"
+    # Author column (layouts/partials/author/column.html)
+    role                                        = "Director of Quality Assurance & Automation"
+    roles                                       = "Tester, blogger, musician"
+    # "New here?" line: posts a first-time QA leader should read, in order.
+    startHere                                   = ["/posts/qa-best-practices-underdogs", "/posts/a11y-score-cards"]
     avatarurl                                   = "images/820535.png"
 
     featuredImage                               = "/images/blog-image-of-universe.jpg"
@@ -133,6 +140,12 @@ inline                                          = [["\\(", "\\)"]]
 
     # Custom JS
     custom_js                                   = []
+
+# "Now" note in the author column, in Ish's words. Shown only while `text` is set and `date`
+# (YYYY-MM-DD) is less than 90 days old at build time, so it never goes stale in public.
+[params.now]
+    text                                        = ""
+    date                                        = ""
 
 [[params.social]]
     name                                        = "Github"

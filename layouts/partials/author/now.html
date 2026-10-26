@@ -1,0 +1,15 @@
+{{- /* "Now" note in Ish's own words (config params.now). Shown only while set and under 90 days
+       old at build time; every deploy rebuilds, so a stale note drops off on its own.
+       Args: class (visibility classes, matching the identity block it sits with). */ -}}
+{{- $class := .class -}}
+{{- with site.Params.now -}}
+  {{- if and .text .date -}}
+    {{- $written := time.AsTime .date -}}
+    {{- if lt (now.Sub $written).Hours (mul 90 24) -}}
+<div class="author-now {{ $class }}">
+  <p class="author-label">{{ i18n "now" }} <time datetime="{{ $written.Format "2006-01-02" }}">· {{ $written.Format "Jan 2006" }}</time></p>
+  <p>{{ .text | markdownify }}</p>
+</div>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
