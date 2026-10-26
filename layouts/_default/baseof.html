@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" class="scroll-smooth">
+<html lang="{{ .Site.Language.Lang }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +9,25 @@
   {{ $tailwind := resources.Get "css/tailwind.css" | css.PostCSS | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $tailwind.RelPermalink }}" integrity="{{ $tailwind.Data.Integrity }}">
 
-  <!-- SchoolChalk hands: Cabin Sketch (display, 700 only — nothing renders it at 400) /
-       Patrick Hand (body) / Schoolbell (notes) / Cutive Mono (code) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&family=Cutive+Mono&display=swap">
+  <!-- SchoolChalk hands, self-hosted (static/fonts, faces in assets/css/fonts.css). Only the
+       9KB body face is preloaded; the heavy display face must not compete with the banner (LCP). -->
+  <link rel="preload" href="{{ "fonts/PatrickHand-core.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 
-  <!-- Site styles (chalk textures + design tokens + prose), loaded after Tailwind so they win the cascade -->
-  {{ $site := slice (resources.Get "css/chalk.css") (resources.Get "css/site.css") | resources.Concat "css/bundle.css" | minify | fingerprint }}
+  <!-- Site styles (fonts + chalk textures + design tokens + prose), loaded after Tailwind so they win the cascade -->
+  {{- /* Code colors: Chroma's monokai as classes (markup.highlight.noClasses = false), with the two
+       tokens that fail AA on the slate board lifted (comments 3.3→5.5:1, pink 4.3→5.2:1) and the
+       board itself set to SchoolChalk slate. */}}
+  {{ $chroma := css.ChromaStyles (dict "targetPath" "css/chroma.css" "style" "monokai") }}
+  {{ $chroma = $chroma.Content | replaceRE "#75715e" "#9a9680" | replaceRE "#f92672" "#ff4f8b" | replaceRE "#272822" "#1d211f" | resources.FromString "css/chroma-chalk.css" }}
+  {{ $site := slice (resources.Get "css/fonts.css") (resources.Get "css/chalk.css") $chroma (resources.Get "css/site.css") | resources.Concat "css/bundle.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $site.RelPermalink }}" integrity="{{ $site.Data.Integrity }}">
 
-  <!-- KaTeX for Math Rendering -->
+  <!-- KaTeX styles only: math is typeset at build time (render-passthrough.html). Keep the
+       version in step with the KaTeX embedded in Hugo (0.18.4 as of Hugo 0.166+). -->
   {{ if or .Params.math .Site.Params.math }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
+  {{- /* Non-blocking: formulas sit below the fold, so they must not hold up first paint. */}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.4/dist/katex.min.css" integrity="sha384-u1zONI5gPXUx0UKI62c75/zww972y0v2rSK5ZYlVdS6xEuWDeZWUI66v6t1gvlXJ" crossorigin="anonymous"></noscript>
   {{ end }}
 
   <!-- Meta Tags -->
@@ -32,70 +35,43 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased text-ink-strong">
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <!-- Main Content -->
   <div class="relative z-10">
     {{ partial "header.html" . }}
 
-    <main class="content-wrapper">
+    <main id="main" tabindex="-1" class="content-wrapper">
       {{ block "content" . }}{{ end }}
     </main>
 
     {{ partial "footer.html" . }}
   </div>
 
-  <!-- Code-language labels + smooth anchor scrolling -->
-  <script src="{{ "/js/scroll-animations.js" | relURL }}" defer></script>
+  <!-- Code-board labels + Contents scroll-spy (SchoolChalk enhancements) -->
+  <script src="{{ "/js/chalk.js" | relURL }}" defer></script>
 
-  <!-- Existing Scripts -->
-  {{ if .HasShortcode "mermaid" }}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"
-    integrity="sha256-QdTG1YTLLTwD3b95jLqFxpQX9uYuJMNAtVZgwKX4oYU=" crossorigin="anonymous"></script>
+  <!-- Third-party tags wait until the page is idle after load (or the first scroll/tap/key):
+       GA + Clarity were ~80% of every page's bytes and competed with the banner for bandwidth.
+       Their stubs queue calls immediately, so the page view and early events are still sent. -->
   <script>
-    mermaid.initialize({ startOnLoad: true });
+    (function () {
+      var done = false, queue = [];
+      window.whenIdle = function (fn) { done ? fn() : queue.push(fn); };
+      window.loadScript = function (src) { var s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
+      function go() { if (done) return; done = true; queue.forEach(function (fn) { fn(); }); }
+      addEventListener('load', function () {
+        window.requestIdleCallback ? requestIdleCallback(go, { timeout: 2500 }) : setTimeout(go, 1500);
+      });
+      ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (e) { addEventListener(e, go, { once: true, passive: true }); });
+    })();
   </script>
-  {{ end }}
-
-  {{ if not .Site.Params.disableDefaultJsScripts }}
-  {{ $script := resources.Get "js/coder.js" }}
-  {{ if $script }}
-  {{ if hugo.IsServer }}
-  <script src="{{ $script.RelPermalink }}"></script>
-  {{ else }}
-  {{ $scriptMinified := $script | minify | fingerprint }}
-  <script src="{{ $scriptMinified.RelPermalink }}" integrity="{{ $scriptMinified.Data.Integrity }}"></script>
-  {{ end }}
-  {{ end }}
-  {{ end }}
-
-  {{ range .Site.Params.customJS }}
-  {{ $script := resources.Get . }}
-  {{ if $script }}
-  {{ if hugo.IsServer }}
-  <script src="{{ $script.RelPermalink }}"></script>
-  {{ else }}
-  {{ $scriptMinified := $script | minify | fingerprint }}
-  <script src="{{ $scriptMinified.RelPermalink }}" integrity="{{ $scriptMinified.Data.Integrity }}"></script>
-  {{ end }}
-  {{ end }}
-  {{ end }}
-
-  {{ range .Site.Params.customRemoteJS }}
-  {{ $script := resources.GetRemote . }}
-  {{ if $script }}
-  {{ if hugo.IsServer }}
-  <script src="{{ $script.RelPermalink }}"></script>
-  {{ else }}
-  {{ $scriptMinified := $script | minify | fingerprint }}
-  <script src="{{ $scriptMinified.RelPermalink }}" integrity="{{ $scriptMinified.Data.Integrity }}"></script>
-  {{ end }}
-  {{ end }}
-  {{ end }}
 
   <!-- Google Analytics 4 (manual gtag so we can attach content_group) -->
   {{ $gaID := .Site.Params.googleAnalytics | default .Site.Config.Services.GoogleAnalytics.ID }}
   {{ with $gaID }}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
   <script>
+    whenIdle(function () { loadScript('https://www.googletagmanager.com/gtag/js?id={{ . }}'); });
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());

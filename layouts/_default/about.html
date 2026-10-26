@@ -1,0 +1,21 @@
+{{ define "content" }}
+{{- /* About: the long version of the author column, so the column itself is not repeated.
+       Ish's photo leads at a larger size instead of a stock banner. */ -}}
+<div class="page-wrap">
+  <article class="max-w-3xl">
+    <header class="about-head">
+      {{ partial "author/photo.html" (dict "size" 160) }}
+      <div>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-ink-full sc-chalk sc-fuzz">{{ .Title }}</h1>
+        <p class="mt-2 font-note text-lg text-ink-subdued">{{ site.Params.role }}. {{ site.Params.roles }}.</p>
+      </div>
+    </header>
+
+    {{ partial "author/now.html" (dict "class" "about-now") }}
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+</div>
+{{ end }}

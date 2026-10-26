@@ -1,0 +1,36 @@
+{{- /* Series wayfinding for a post. Args: page, at ("top": "· Part n of N in <series>" for the meta line under the title;
+       "end": the parts in order with the current one marked and a next-part link).
+       Silent for posts outside a series or in a one-part series. */ -}}
+{{- $page := .page -}}
+{{- range $page.GetTerms "series" -}}
+  {{- $parts := .Pages.ByDate -}}
+  {{- $total := len $parts -}}
+  {{- if gt $total 1 -}}
+    {{- $series := . -}}
+    {{- $n := 0 -}}{{- $next := false -}}
+    {{- range $i, $p := $parts -}}
+      {{- if eq $p.RelPermalink $page.RelPermalink }}{{ $n = add $i 1 }}{{ end -}}
+    {{- end -}}
+    {{- if lt $n $total }}{{ $next = index $parts $n }}{{ end -}}
+
+    {{- if eq $.at "top" }}
+<span aria-hidden="true">·</span>
+<span>{{ i18n "part_of" (dict "Part" $n "Total" $total) }} <a class="sc-underline" href="{{ $series.RelPermalink }}">{{ $series.Title }}</a></span>
+    {{- else }}
+<section class="series-parts" aria-labelledby="series-parts-label" data-ga-loc="series">
+  <h2 id="series-parts-label" class="col-label"><a href="{{ $series.RelPermalink }}">{{ $series.Title }}</a> · {{ i18n "series_parts" $total }}</h2>
+  <ol>
+    {{- range $i, $p := $parts }}
+    <li{{ if eq $p.RelPermalink $page.RelPermalink }} aria-current="page"{{ end }}>
+      <span class="series-no" aria-hidden="true">{{ add $i 1 }}</span>
+      {{ if eq $p.RelPermalink $page.RelPermalink }}<span>{{ trim $p.Title " " }}</span>{{ else }}<a class="tap-target" href="{{ $p.RelPermalink }}">{{ trim $p.Title " " }}</a>{{ end }}
+    </li>
+    {{- end }}
+  </ol>
+  {{- with $next }}
+  <p class="series-next"><a class="chalk-draw" href="{{ .RelPermalink }}">{{ i18n "next_part" }}: {{ trim .Title " " }} →</a></p>
+  {{- end }}
+</section>
+    {{- end }}
+  {{- end -}}
+{{- end -}}

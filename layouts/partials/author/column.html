@@ -1,0 +1,45 @@
+{{- /* The author column: Ish stays present beside the writing on every page.
+       Args: page, variant ("full" on home and lists, "post" on articles), identity (extra classes
+       for the photo/name block, e.g. hide it on phones where author/strip.html shows instead). */ -}}
+{{- $variant := .variant | default "full" -}}
+<div class="author-col author-col--{{ $variant }}">
+  <div class="author-id {{ .identity }}">
+    {{ partial "author/photo.html" (dict "size" (cond (eq $variant "post") 72 120)) }}
+    <p class="author-name">{{ site.Params.author }}</p>
+    <svg class="chalk-mark author-swash" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 9.5 C 30 4.2, 58 12.8, 88 8.1 S 140 3.9, 168 7.4 C 178 8.6, 188 10.9, 196 13.2"/></svg>
+    <p class="author-role">{{ site.Params.role }}.<br>{{ site.Params.roles }}.</p>
+  </div>
+
+  {{ partial "author/now.html" (dict "class" .identity) }}
+
+  {{- if eq $variant "full" }}
+  {{ with site.GetPage "/topics" }}
+  <nav class="author-topics" aria-labelledby="author-topics-label">
+    <h2 id="author-topics-label" class="author-label">{{ i18n "what_i_write_about" }}</h2>
+    <ul>
+      {{- range .Pages.ByWeight }}
+      <li><a class="chalk-draw" href="{{ .RelPermalink }}"><span>{{ .Title }}</span><span class="author-count">{{ len .Pages }}</span></a></li>
+      {{- end }}
+    </ul>
+  </nav>
+  {{ end }}
+
+  {{- with site.Params.startHere }}
+  <p class="author-new">
+    <svg class="chalk-mark author-new__arrow" viewBox="0 0 40 30" aria-hidden="true"><path pathLength="1" d="M3 3.5 C 5 14, 13 22.5, 31 23.6 M 24.4 16.4 C 27.6 19.2, 30 21.6, 31.6 23.8 C 28.6 25.4, 25.4 26.8, 21.8 28.1"/></svg>
+    <b>{{ i18n "new_here" }}</b> {{ i18n "start_with" }}
+    {{- range $i, $path := . }}{{ with site.GetPage $path }}{{ if $i }}, {{ i18n "then" }}{{ end }} <a class="sc-underline" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}.
+  </p>
+  {{- end }}
+  {{- end }}
+
+  <ul class="author-links" aria-label="{{ i18n "follow_and_contact" }}">
+    <li><a class="chalk-draw" href="{{ "index.xml" | relURL }}">RSS</a></li>
+    {{- range sort site.Params.social "weight" }}
+    {{- if in (slice "LinkedIn" "Github") .name }}
+    <li><a class="chalk-draw" href="{{ .url | safeURL }}" rel="me">{{ cond (eq .name "Github") "GitHub" .name }}</a></li>
+    {{- end }}
+    {{- end }}
+    {{- with site.GetPage "/contactme" }}<li><a class="chalk-draw" href="{{ .RelPermalink }}">{{ i18n "contact" }}</a></li>{{ end }}
+  </ul>
+</div>

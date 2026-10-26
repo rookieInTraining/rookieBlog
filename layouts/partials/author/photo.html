@@ -1,0 +1,7 @@
+{{- /* Ish's photo in a chalk frame. Args: size (CSS px; rendered at 2x as WebP), class. */ -}}
+{{- $size := .size | default 120 -}}
+{{- with resources.Get site.Params.avatarurl -}}
+  {{- $img := .Fill (printf "%dx%d webp q85" (mul $size 2) (mul $size 2)) -}}
+  <img class="author-photo {{ $.class }}" src="{{ $img.RelPermalink }}" width="{{ $size }}" height="{{ $size }}"
+       alt="{{ site.Params.author }}" decoding="async" style="--photo: {{ $size }}px">
+{{- end -}}

@@ -5,6 +5,7 @@ date: 2026-06-12T12:45:00+05:30
 draft: false
 tags: ["personal","journals"]
 categories: ["Journal Page"]
+topics: ["Journal"]
 featuredImage: "/images/mastery_in_motion/master_in_motion_banner.png"
 math: false
 ---

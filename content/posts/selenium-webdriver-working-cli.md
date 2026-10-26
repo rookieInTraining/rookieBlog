@@ -6,10 +6,10 @@ description: "Discover how Selenium works behind the scenes. While many test aut
 slug: "understanding-selenium-webdriver"
 tags: ["selenium","webdriver","testautomation","webdriver protocol"]
 categories: ["test automation"]
+topics: ["Automation deep-dives"]
 series: ["Selenium"]
 featuredImage: "/images/selenium-webdriver/Selenium-Banner.png"
 ---
-<div style="text-align: justify">
 
 Over the course of time, my pursuit for understanding the internals of Selenium compelled me to crawl the corners of the internet
 in search for answers. I was searching for something that can help me connect the dots between the the browser and selenium.
@@ -18,7 +18,6 @@ With countless blogs and documentation fuelling my experiments, here is what I'v
 
 ## What is a WebDriver?
 
-<div style="text-align: justify">
 
 According to the selenium documentation :
 
@@ -123,5 +122,4 @@ The response of which is again null as per the specification.
 ```
 
 The above example give better insights of the working of selenium. The session that it creates and how that is used w.r.t the automation of user actions. Hope this article finds its way for the curious soul searching for answers.
-</div>
 ---

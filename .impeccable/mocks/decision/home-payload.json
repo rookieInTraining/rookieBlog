@@ -1,0 +1,46 @@
+{
+  "title": "Shape the home page",
+  "question": "Three structures for the home page, all in SchoolChalk on white, all keeping the chronological blog feed. Lock the one that should become the home page, steer it, or re-roll.",
+  "options": [
+    {
+      "id": "register",
+      "kind": "assigned",
+      "label": "The register",
+      "kicker": "THE ROLL",
+      "lineage": "a teacher's class register",
+      "thesis": "The feed is a numbered register; the three topics are its columns, ticked in chalk.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e", "#3e6c9e", "#3f7a50"],
+      "materials": ["ruled register lines", "chalk ticks", "hand-lettered numerals"],
+      "viewport": "Slim author line, then the register: topic columns as its key, every post a numbered row (No. 07 down to 01) ticked under its topic.",
+      "risk": "Reads as a table if the row rhythm and ticks are timid.",
+      "html": ".impeccable/mocks/decision/register.html"
+    },
+    {
+      "id": "start-here",
+      "kind": "dealt",
+      "label": "Start-here path",
+      "lineage": "a lesson plan on the board",
+      "thesis": "A leader's first visit opens on a three-post path, chalk-connected, before the full feed.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e", "#1d211f"],
+      "materials": ["drawn chalk arrows", "numbered steps", "ruled feed"],
+      "viewport": "\"If you lead QA, start here\" with three numbered posts joined by a chalk line, topic doors as a quiet row, the newest posts below.",
+      "risk": "The path needs re-curating as better posts arrive.",
+      "html": ".impeccable/mocks/decision/start-here.html"
+    },
+    {
+      "id": "spread",
+      "kind": "dealt",
+      "label": "Two-page spread",
+      "lineage": "an open exercise book",
+      "thesis": "Desktop reads like an open notebook: who and what on the left page, the writing on the right.",
+      "palette": ["#ffffff", "#2a2d2b", "#b0566e", "#3e6c9e"],
+      "materials": ["chalk gutter line", "margin contents", "dated entries"],
+      "viewport": "Left page stays put with Ish, the three topics as a contents list and RSS/LinkedIn; right page scrolls the dated feed.",
+      "risk": "On phones the spread stacks and becomes today's layout.",
+      "html": ".impeccable/mocks/decision/spread.html"
+    }
+  ],
+  "reroll": true,
+  "steer": true,
+  "buildPath": { "value": "code" }
+}

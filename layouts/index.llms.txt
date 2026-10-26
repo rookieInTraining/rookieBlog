@@ -1,0 +1,40 @@
+{{- $all := where site.RegularPages "Section" "posts" -}}
+{{- $journal := where $all "Params.categories" "intersect" (slice "Journal Page") -}}
+{{- $posts := $all | complement $journal -}}
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+
+{{ site.Params.author }} writes about software testing, QA leadership, test automation, accessibility and the occasional personal journal entry. Links below point to clean Markdown copies of each page (drop the trailing `index.md` for the HTML version). The full text of every page is also available in one file at {{ "llms-full.txt" | absURL }}.
+
+## Posts
+{{ range $posts.ByDate.Reverse }}
+- [{{ trim .Title " " }}]({{ partial "llms/md-url.txt" . }}): {{ .Description }} ({{ .Date.Format "January 2, 2006" }})
+{{- end }}
+{{ with $journal }}
+## Journal
+{{ range .ByDate.Reverse }}
+- [{{ trim .Title " " }}]({{ partial "llms/md-url.txt" . }}): {{ .Description }} ({{ .Date.Format "January 2, 2006" }})
+{{- end }}
+{{ end }}
+## About
+{{ with site.GetPage "/aboutme" }}
+- [About {{ site.Params.author }}]({{ partial "llms/md-url.txt" . }}): {{ .Description }}
+{{- end }}
+{{- with site.GetPage "/contactme" }}
+- [Contact]({{ partial "llms/md-url.txt" . }}): How to get in touch by email or book a session on Topmate.
+{{- end }}
+
+## Optional
+- [Full text]({{ "llms-full.txt" | absURL }}): Every page above in a single Markdown file.
+{{- with site.GetPage "/posts" }}
+- [All posts]({{ .Permalink }}): Full list of blog posts.
+{{- end }}
+{{- with site.GetPage "/tags" }}
+- [Tags]({{ .Permalink }}): Posts grouped by tag.
+{{- end }}
+- [RSS feed]({{ "index.xml" | absURL }}): Feed of recent posts.
+- [Sitemap]({{ "sitemap.xml" | absURL }}): Every page on the site.
+{{- range site.Params.social }}
+- [{{ .name }}]({{ .url }})
+{{- end }}

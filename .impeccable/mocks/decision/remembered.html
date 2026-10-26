@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  :root { --full: rgba(42,45,43,.92); --strong: rgba(42,45,43,.78); --sub: rgba(42,45,43,.66); --ghost: rgba(42,45,43,.14); --dust: rgba(42,45,43,.05); --pink: #b0566e; --green: #3f7a50; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--strong); font-family: 'Patrick Hand', cursive; }
+  header { height: 64px; border-bottom: 1px solid var(--ghost); display: flex; align-items: center; justify-content: space-between; padding: 0 200px; }
+  .mark { font-family: 'Cabin Sketch'; font-size: 26px; color: var(--full); }
+  nav { display: flex; gap: 36px; font-size: 18px; color: var(--sub); }
+  main { padding: 44px 200px 0; }
+  .top { display: flex; justify-content: space-between; align-items: flex-end; }
+  .who { font-family: 'Schoolbell'; font-size: 18px; color: var(--sub); }
+  h1 { font-family: 'Cabin Sketch'; font-size: 52px; color: var(--full); margin-top: 4px; }
+  .back { font-family: 'Schoolbell'; font-size: 19px; color: var(--pink); }
+  /* a returning reader: two steps ticked, the next one marked "up next" */
+  .steps { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .s { padding: 22px 24px 24px; border: 1.5px solid var(--ghost); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; position: relative; }
+  .s .n { font-family: 'Cabin Sketch'; font-size: 22px; color: var(--sub); display: flex; align-items: center; gap: 10px; }
+  .s b { display: block; margin-top: 10px; font-weight: 400; font-size: 24px; line-height: 1.2; color: var(--full); }
+  .s p { margin-top: 8px; font-size: 17px; color: var(--sub); }
+  .s .st { margin-top: 14px; font-family: 'Schoolbell'; font-size: 16px; color: var(--sub); }
+  .done b { color: var(--sub); } .done .st { color: var(--green); }
+  .next { border: 2.5px solid rgba(176,86,110,.6); box-shadow: 3px 3px 0 rgba(42,45,43,.16); }
+  .next .st { color: var(--pink); }
+  .tick { width: 26px; height: 22px; }
+  .feed { margin-top: 40px; border-top: 1px solid var(--ghost); padding-top: 22px; }
+  .feed h2 { font-family: 'Schoolbell'; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); }
+  .item { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; }
+  .item b { font-weight: 400; font-size: 23px; color: var(--full); }
+  .item span { font-family: 'Schoolbell'; font-size: 16px; color: var(--sub); }
+  .new { font-family: 'Schoolbell'; font-size: 14px; color: var(--pink); margin-left: 10px; }
+</style></head>
+<body>
+<header><div class="mark">Ish's Blog</div><nav><span>Blog</span><span>About</span><span>Contact me</span></nav></header>
+<main>
+  <div class="top"><div><div class="who">Ish Abbi · Director of QA &amp; Automation</div><h1>If you lead QA, start here.</h1></div><div class="back">Welcome back: 2 of 3 read</div></div>
+  <div class="steps">
+    <div class="s done"><div class="n">1 <svg class="tick" viewBox="0 0 32 28" fill="none" stroke="#3f7a50" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><b>QA Metrics: Leading and Lagging Indicators</b><p>Your answer to "what's the north-star metric?"</p><div class="st">Read · 13 min</div></div>
+    <div class="s done"><div class="n">2 <svg class="tick" viewBox="0 0 32 28" fill="none" stroke="#3f7a50" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><b>Scoring your accessibility observations</b><p>A score stakeholders can track.</p><div class="st">Read · 5 min</div></div>
+    <div class="s next"><div class="n">3</div><b>The problem with my username</b><p>Who's writing, and why "rookie in training".</p><div class="st">Up next · 2 min</div></div>
+  </div>
+  <div class="feed"><h2>Latest writing</h2>
+    <div class="item"><b>The problem with my username and the thought I had behind it<span class="new">new since your last visit</span></b><span>Jun 2026</span></div>
+    <div class="item"><b>Scoring your accessibility observations</b><span>Apr 2025</span></div>
+  </div>
+</main>
+</body></html>

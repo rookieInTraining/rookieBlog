@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-26T00:00:00Z",
+  "title": "Design System: Ish's Blog",
+  "extensions": {
+    "colorMeta": {
+      "whiteboard": { "role": "neutral", "displayName": "Whiteboard", "canonical": "#ffffff", "cssVar": "--bg", "tonalRamp": ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"], "note": "Binding owner constraint: always pure white." },
+      "ink-full": { "role": "neutral", "displayName": "Pressed-hard Ink", "canonical": "rgba(42, 45, 43, 0.92)", "cssVar": "--ink-full", "compositeOnWhite": "#3b3e3c", "contrastOnWhite": 10.8, "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "text" },
+      "ink-strong": { "role": "neutral", "displayName": "Normal-stroke Ink", "canonical": "rgba(42, 45, 43, 0.78)", "cssVar": "--ink-strong", "compositeOnWhite": "#595b5a", "contrastOnWhite": 6.8, "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "text" },
+      "ink-subdued": { "role": "neutral", "displayName": "Light-stroke Ink", "canonical": "rgba(42, 45, 43, 0.66)", "cssVar": "--ink-subdued", "compositeOnWhite": "#727473", "contrastOnWhite": 4.7, "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "text (lightest allowed text step)" },
+      "ink-faint": { "role": "neutral", "displayName": "Half-erased Ink", "canonical": "rgba(42, 45, 43, 0.32)", "cssVar": "--ink-faint", "compositeOnWhite": "#bbbcbb", "contrastOnWhite": 1.9, "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "lines and borders only, never text" },
+      "ink-ghost": { "role": "neutral", "displayName": "Eraser Smudge", "canonical": "rgba(42, 45, 43, 0.14)", "cssVar": "--ink-ghost", "compositeOnWhite": "#e1e2e1", "contrastOnWhite": 1.3, "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "hairlines and dividers only, never text" },
+      "ink-dust": { "role": "neutral", "displayName": "Chalk Dust Film", "canonical": "rgba(42, 45, 43, 0.06)", "cssVar": "--ink-dust", "compositeOnWhite": "#f2f2f2", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "fills only" },
+      "line-strong": { "role": "neutral", "displayName": "Strong Line", "canonical": "rgba(42, 45, 43, 0.42)", "cssVar": "--border-strong", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "ruled labels, table header rule, image frames" },
+      "line-heavy": { "role": "neutral", "displayName": "Heavy Line", "canonical": "rgba(42, 45, 43, 0.7)", "cssVar": "--border-heavy", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "author photo frame" },
+      "focus-ring": { "role": "neutral", "displayName": "Focus Ring", "canonical": "rgba(42, 45, 43, 0.5)", "cssVar": "--focus-ring", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7b7e7c", "#9c9f9d", "#c1c5c3", "#ecf0ed"], "usage": "2px outline, 2px offset" },
+      "chalk-pink": { "role": "primary", "displayName": "Rose Chalk", "canonical": "#b0566e", "oklch": "oklch(56.9% 0.119 4.7)", "cssVar": "--chalk-pink", "contrastOnWhite": 4.77, "tonalRamp": ["#1f0008", "#48021e", "#6f1b37", "#933c55", "#b75c74", "#dc7d95", "#fca9bc", "#fee8ec"] },
+      "chalk-green": { "role": "tertiary", "displayName": "Leaf Chalk", "canonical": "#3f7a50", "oklch": "oklch(52.8% 0.091 151.5)", "cssVar": "--chalk-green", "contrastOnWhite": 5.11, "tonalRamp": ["#001003", "#002d11", "#0c4d26", "#316c43", "#528d62", "#73af82", "#98d5a7", "#c9fed5"], "usage": "end-of-post tick only" },
+      "board-slate": { "role": "secondary", "displayName": "Slate Blackboard", "canonical": "#1d211f", "oklch": "oklch(24.3% 0.007 164.4)", "cssVar": "--board-slate", "tonalRamp": ["#090c0a", "#212523", "#3c413f", "#5a5f5c", "#7a7f7c", "#9ba09d", "#c0c5c3", "#eaf0ed"] },
+      "board-deep": { "role": "secondary", "displayName": "Board Shadow", "canonical": "#141715", "oklch": "oklch(20.1% 0.006 156.6)", "cssVar": "--board-deep", "tonalRamp": ["#090c0a", "#222523", "#3d413e", "#5b5f5c", "#7a7e7c", "#9ba09d", "#c1c5c2", "#ebf0ed"] },
+      "chalk-on-slate": { "role": "secondary", "displayName": "Chalk on Slate", "canonical": "rgba(242, 240, 233, 0.92)", "cssVar": "--chalk-on-slate", "tonalRamp": ["#0c0b07", "#25241f", "#41403a", "#5f5e58", "#7f7d77", "#a09e98", "#c6c4bd", "#f0eee7"] },
+      "chalk-on-slate-subdued": { "role": "secondary", "displayName": "Faded Chalk on Slate", "canonical": "rgba(242, 240, 233, 0.55)", "cssVar": "--chalk-on-slate-subdued", "tonalRamp": ["#0c0b07", "#25241f", "#41403a", "#5f5e58", "#7f7d77", "#a09e98", "#c6c4bd", "#f0eee7"] },
+      "code-comment": { "role": "secondary", "displayName": "Worn Chalk Comment", "canonical": "#9a9680", "oklch": "oklch(67.0% 0.032 98.7)", "contrastOnSlate": 5.47, "source": "Chroma monokai #75715e lifted in layouts/_default/baseof.html", "tonalRamp": ["#0f0b00", "#282412", "#44402d", "#625e4a", "#827e68", "#a39f89", "#c9c5ae", "#f4efd7"] },
+      "code-pink": { "role": "secondary", "displayName": "Bright Board Pink", "canonical": "#ff4f8b", "oklch": "oklch(68.8% 0.215 4.1)", "contrastOnSlate": 5.23, "source": "Chroma monokai #f92672 lifted in layouts/_default/baseof.html", "tonalRamp": ["#1f0008", "#48021e", "#760937", "#a91451", "#db286e", "#fd5d90", "#fca8bc", "#fee8ec"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Page Title", "purpose": "Page titles on every page type; dust halo plus grain mask. Tailwind text-4xl (2.25rem)." },
+      "display-md": { "displayName": "Page Title (768px+)", "purpose": "Page titles from 768px. Tailwind md:text-5xl (3rem)." },
+      "lead-title": { "displayName": "Lead Title", "purpose": "Newest post opening the home feed; dust halo, no grain." },
+      "headline": { "displayName": "Article Heading", "purpose": "Article H1/H2 in display lettering; dust halo, no grain. Author name, years and series numbers share the face at 1.625-2rem." },
+      "author-name": { "displayName": "Author Name", "purpose": "Name in the author column (1.625rem on posts and in the phone strip), tilted -2deg." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "Site title in the header; halo plus grain." },
+      "title": { "displayName": "Feed Title", "purpose": "Feed entry titles; note hand for journal entries." },
+      "title-md": { "displayName": "Feed Title (768px+)", "purpose": "Feed entry titles from 768px." },
+      "subhead": { "displayName": "Article Subhead", "purpose": "Article H3 (1.2em) and H4 (1.1em) in the body hand pressed hard." },
+      "body": { "displayName": "Body", "purpose": "UI copy and prose below 768px (18px)." },
+      "body-prose": { "displayName": "Prose", "purpose": "Article prose from 768px (20px); text blocks capped at 66ch." },
+      "label": { "displayName": "Label", "purpose": "Uppercase block names (Latest writing, Contents); table headers and code-board annotations in the same voice." },
+      "meta": { "displayName": "Meta", "purpose": "Dates, topic, reading time, series line, captions, blockquotes, tag pills." },
+      "code": { "displayName": "Code", "purpose": "Code boards; inline code at 0.85em." }
+    },
+    "fonts": [
+      { "family": "SC Display", "source": "Renamed Cabin Sketch Bold subset (OFL Reserved Font Name), static/fonts/SCDisplay-core.woff2 + CabinSketch-latin.woff2", "preload": false },
+      { "family": "Patrick Hand", "source": "static/fonts/PatrickHand-core.woff2 + PatrickHand-latin.woff2", "preload": true },
+      { "family": "Schoolbell", "source": "static/fonts/Schoolbell-core.woff2 + Schoolbell-latin.woff2", "preload": false },
+      { "family": "Cutive Mono", "source": "static/fonts/CutiveMono-core.woff2 + CutiveMono-latin.woff2", "preload": false }
+    ],
+    "textures": [
+      { "name": "grain", "cssVar": "--sc-grain-img", "value": "Inlined alpha-only lossless WebP data URI (160px tile, about 11KB), used as mask-image at 200px", "purpose": "Chalk grain on page titles and the wordmark only (.sc-chalk)." },
+      { "name": "underline", "cssVar": "--sc-underline-img", "value": "Inlined 200x8 SVG data URI of a rough dark chalk stroke", "purpose": "Prose links, horizontal rules, the drawn hover/current stroke, and the reading-progress mask." }
+    ],
+    "shadows": [
+      { "name": "lift-s", "value": "2px 2px 0 rgba(42, 45, 43, 0.16)", "purpose": "Focused skip link pinned to the board." },
+      { "name": "lift-m", "value": "3px 3px 0 rgba(42, 45, 43, 0.2)", "purpose": "Code boards hung on the whiteboard." },
+      { "name": "dust-halo", "value": "0 0 1px rgba(42, 45, 43, 0.3), 0 0 6px rgba(42, 45, 43, 0.1)", "purpose": "text-shadow on display lettering; chalk dust, not elevation." }
+    ],
+    "motion": [
+      { "name": "stroke-draw-in", "value": "clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Chalk stroke drawn left to right on hover, focus and current state (nav, Contents, author links, keep reading)." },
+      { "name": "stroke-draw-out", "value": "clip-path 0.18s ease-in", "purpose": "Stroke withdrawn; exits are quicker than entrances." },
+      { "name": "colour-shift", "value": "color 0.2s ease", "purpose": "Title, pill and link hover to pink." },
+      { "name": "copy-tick", "value": "stroke-dashoffset 0.35s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Tick drawn on a successful code copy." },
+      { "name": "end-tick", "value": "stroke-dashoffset 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s", "purpose": "End-of-post tick drawn when the reader reaches it." },
+      { "name": "reading-progress", "value": "animation-timeline: scroll(root block), linear clip-path reveal", "purpose": "Pink chalk stroke along the header on posts; scroll-linked, kept under reduced motion." },
+      { "name": "reduced-motion", "value": "@media (prefers-reduced-motion: reduce)", "purpose": "Strokes and ticks appear instantly; scroll-behavior auto." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "coarse-pointer", "value": "(pointer: coarse)" }
+    ],
+    "budgets": [
+      { "name": "first-party-js", "value": "<= 3KB gzipped", "purpose": "chalk.js behaviour; no frameworks." },
+      { "name": "lcp", "value": "Throttled mobile LCP measured before and after every change", "purpose": "Fast before fancy." },
+      { "name": "long-posts", "value": ".prose > :nth-child(n + 8) { content-visibility: auto; contain-intrinsic-size: auto 12rem }", "purpose": "Phones paint the banner and opening first; chalk.js renders the article before any in-page jump." }
+    ],
+    "openItems": [
+      "Real signature asset (SVG or scan) not yet supplied; name set in the display face meanwhile.",
+      "Now note text and date (config params.now) empty, so the note is hidden; auto-hides 90 days after its date."
+    ]
+  },
+  "components": [
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header nav item; hover, focus and current page draw the chalk stroke under the word.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Blog</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 2rem; align-items: center; } .ds-nav-link { position: relative; font-family: var(--font-body); font-size: 1rem; color: var(--ink-subdued); text-decoration: none; transition: color 0.2s ease; } .ds-nav-link::after { content: \"\"; position: absolute; left: 0; right: 0; bottom: -4px; height: 6px; background: var(--sc-underline-img) no-repeat 0 100% / 100% 6px; clip-path: inset(0 100% 0 0); transition: clip-path 0.18s ease-in; pointer-events: none; } .ds-nav-link:hover, .ds-nav-link[aria-current] { color: var(--ink-full); } .ds-nav-link:hover::after, .ds-nav-link:focus-visible::after, .ds-nav-link[aria-current]::after { clip-path: inset(0 0 0 0); transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-nav-link::after, .ds-nav-link:hover::after { transition: none; } }"
+    },
+    {
+      "name": "Topic Pill (filled)",
+      "kind": "chip",
+      "refersTo": "chalk-pill-filled",
+      "description": "Post topic: dust-filled hand-chalked lozenge in the body hand.",
+      "html": "<a class=\"ds-pill ds-pill--filled\" href=\"#\">Quality leadership</a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; min-height: 2rem; padding: 0.15rem 0.8rem; border: 1.5px solid var(--ink-ghost); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; font-family: var(--font-note); color: var(--ink-subdued); text-decoration: none; transition: color 0.2s ease, border-color 0.2s ease; } .ds-pill--filled { font-family: var(--font-body); background: var(--ink-dust); color: var(--ink-strong); } .ds-pill:hover { color: var(--chalk-pink); border-color: rgba(176, 86, 110, 0.45); } .ds-pill:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; } @media (pointer: coarse) { .ds-pill { min-height: 2.75rem; padding-inline: 1rem; } }"
+    },
+    {
+      "name": "Tag Pill (outline)",
+      "kind": "chip",
+      "refersTo": "chalk-pill",
+      "description": "Post tag: outline-only lozenge annotated in the note hand.",
+      "html": "<a class=\"ds-pill\" href=\"#\">#accessibility</a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; min-height: 2rem; padding: 0.15rem 0.8rem; border: 1.5px solid var(--ink-ghost); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; font-family: var(--font-note); color: var(--ink-subdued); text-decoration: none; transition: color 0.2s ease, border-color 0.2s ease; } .ds-pill:hover { color: var(--chalk-pink); border-color: rgba(176, 86, 110, 0.45); } .ds-pill:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }"
+    },
+    {
+      "name": "Feed Entry",
+      "kind": "card",
+      "refersTo": "feed-title",
+      "description": "One post in a feed: note-hand meta, title that turns pink on hover, description at 62ch, ghost hairline above.",
+      "html": "<ul class=\"ds-feed\"><li class=\"ds-entry\"><p class=\"ds-meta\"><time>Oct 2026</time> · Accessibility</p><h3 class=\"ds-title\"><a href=\"#\">Scoring accessibility for stakeholders</a></h3><p class=\"ds-desc\">A score card a QA leader can take back to the organisation.</p></li><li class=\"ds-entry\"><p class=\"ds-meta\"><time>Sep 2026</time> · Automation</p><h3 class=\"ds-title\"><a href=\"#\">How Selenium WebDriver works from the CLI</a></h3></li></ul>",
+      "css": ".ds-feed { list-style: none; margin: 0; padding: 0; } .ds-entry { padding: 1.25rem 0 1.35rem; border-top: 1px solid var(--ink-ghost); } .ds-entry:first-child { border-top: 0; padding-top: 0.25rem; } .ds-meta { margin: 0; font-family: var(--font-note); font-size: 0.95rem; color: var(--ink-subdued); } .ds-title { margin: 0.15rem 0 0; font-family: var(--font-body); font-size: 1.5rem; line-height: 1.25; font-weight: 400; color: var(--ink-full); } .ds-title a { color: inherit; text-decoration: none; transition: color 0.2s ease; } .ds-title a:hover { color: var(--chalk-pink); } .ds-title a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; } .ds-desc { margin: 0.3rem 0 0; font-family: var(--font-body); font-size: 1.125rem; color: var(--ink-subdued); max-width: 62ch; }"
+    },
+    {
+      "name": "Code Board",
+      "kind": "custom",
+      "refersTo": "code-board",
+      "description": "Signature: a slate blackboard hung on the whiteboard, with a language annotation and a copy control in its corner.",
+      "html": "<div class=\"ds-board\"><pre class=\"ds-board__pre\" data-lang=\"JS\"><code><span class=\"ds-c\">// intercept the persisted query</span>\n<span class=\"ds-k\">const</span> hash = req.extensions.persistedQuery;</code></pre><button class=\"ds-board__copy\" type=\"button\">Copy</button></div>",
+      "css": ".ds-board { position: relative; } .ds-board__pre { position: relative; margin: 0; background: var(--board-slate); color: var(--chalk-on-slate); font-family: var(--font-mono); font-size: 0.875rem; line-height: 1.6; padding: 1.25rem 1.4rem; border: 1.5px solid var(--board-deep); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; box-shadow: 3px 3px 0 rgba(42, 45, 43, 0.2); overflow-x: auto; } .ds-board__pre::before { content: attr(data-lang); position: absolute; top: 0.55rem; right: 7.25rem; font-family: var(--font-note); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--chalk-on-slate-subdued); } .ds-c { color: #9a9680; } .ds-k { color: #ff4f8b; } .ds-board__copy { position: absolute; top: 0.45rem; right: 0.6rem; padding: 0.1rem 0.6rem; font-family: var(--font-note); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--chalk-on-slate-subdued); background: transparent; border: 1px solid rgba(242, 240, 233, 0.22); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; } .ds-board__copy:hover { color: var(--chalk-on-slate); border-color: rgba(242, 240, 233, 0.5); } .ds-board__copy:focus-visible { outline: 2px solid var(--chalk-on-slate); outline-offset: 2px; }"
+    },
+    {
+      "name": "Author Column",
+      "kind": "custom",
+      "refersTo": "author-photo",
+      "description": "Signature: photo in a tilted chalk frame, display-lettered name, roles, and the dated Now note on a dust panel.",
+      "html": "<div class=\"ds-author\"><div class=\"ds-author__photo\" role=\"img\" aria-label=\"Ish Abbi\"></div><p class=\"ds-author__name\">Ish Abbi</p><p class=\"ds-author__role\">Director of Quality Assurance &amp; Automation.<br>Tester, blogger, musician.</p><div class=\"ds-now\"><p class=\"ds-label\">Now · Oct 2026</p><p class=\"ds-now__text\">A short note in Ish's own words.</p></div></div>",
+      "css": ".ds-author { display: flex; flex-direction: column; gap: 0; max-width: 17.5rem; } .ds-author__photo { width: 120px; height: 120px; background: var(--ink-dust); border: 3px solid var(--border-heavy); border-radius: 43% 57% 51% 49% / 58% 45% 55% 42%; transform: rotate(-2deg); } .ds-author__name { margin: 1rem 0 0; font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1; color: var(--ink-full); text-shadow: 0 0 1px var(--sc-fuzz-tight), 0 0 6px var(--sc-fuzz-wide); transform: rotate(-2deg); transform-origin: left center; } .ds-author__role { margin: 0.6rem 0 0; font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.45; color: var(--ink-subdued); } .ds-now { margin-top: 2rem; padding: 0.9rem 1.1rem 1rem; background: var(--ink-dust); border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px; color: var(--ink-strong); font-family: var(--font-body); } .ds-label { margin: 0 0 0.35rem; font-family: var(--font-note); font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-subdued); } .ds-now__text { margin: 0; }"
+    },
+    {
+      "name": "Ruled Column Label",
+      "kind": "custom",
+      "refersTo": "col-label",
+      "description": "Uppercase note-hand block name ruled underneath so it heads a block (Latest writing, Contents).",
+      "html": "<h2 class=\"ds-col-label\">Latest writing</h2>",
+      "css": ".ds-col-label { margin: 0 0 1.5rem; padding-bottom: 0.6rem; border-bottom: 2.5px solid var(--border-strong); font-family: var(--font-note); font-size: 0.875rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-subdued); }"
+    },
+    {
+      "name": "Prose Link",
+      "kind": "custom",
+      "refersTo": "prose-link",
+      "description": "In-article link marked by the rough chalk underline, not a colour; pink on hover.",
+      "html": "<p class=\"ds-prose\">Read the <a class=\"ds-prose-link\" href=\"#\">APQ guide, part two</a> next.</p>",
+      "css": ".ds-prose { font-family: var(--font-body); font-size: 1.25rem; line-height: 1.6; color: var(--ink-strong); max-inline-size: 66ch; } .ds-prose-link { color: var(--ink-full); text-decoration: none; background-image: var(--sc-underline-img); background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 6px; padding-bottom: 2px; transition: color 0.2s ease; } .ds-prose-link:hover { color: var(--chalk-pink); } .ds-prose-link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Whiteboard Lesson",
+    "overview": "A single practitioner chalking a lesson on a clean whiteboard. The page is pure white (a binding owner constraint, not a preference), and everything on it is drawn in charcoal chalk whose darkness is chosen by *pressure*: a short ladder of one charcoal colour at fixed opacities, never a run of unrelated greys. One pigment stick, pink, carries every accent. Type is hand-lettered in four hands (display lettering, a print hand for reading, a schoolroom note hand for annotations, a typewriter for code). Code is the one dark surface: small slate blackboards hung on the white board.\n\nDensity is a reading density: one main column of writing at a 66-character measure, with the author's column beside it from 1024px so the writing always leads and the person who wrote it is always present. Ornament is limited to what chalk physically does: rough strokes, wobbly hand-drawn corners, a faint dust halo on big lettering, and a grain mask on page titles. Motion has exactly one material, the chalk stroke being drawn left to right.\n\nThe system is built under a hard performance budget. Fonts are self-hosted core subsets, textures are small inlined data URIs, and the only first-party behaviour script stays within about 3KB gzipped. No 3D, no dark mode, no blurred drop shadows.",
+    "keyCharacteristics": [
+      "Pure white board, charcoal ink at six pressure steps, pink as the one accent.",
+      "Four hand-lettered faces, self-hosted, each with a fixed job.",
+      "Wobble radii and rough chalk strokes in place of perfect geometry and ruled lines.",
+      "Slate code boards as the only dark surface.",
+      "One motion material: a chalk stroke drawn left to right via clip-path.",
+      "Writing leads in the main column; the author column sits beside it."
+    ],
+    "rules": [
+      { "name": "The Pressure Not Grey Rule", "body": "Every neutral is the same charcoal (42, 45, 43) at a pressure step. Pick a step; never introduce a new grey hex.", "section": "colors" },
+      { "name": "The Lightest Text Rule", "body": "ink-subdued (alpha 0.66) is the lightest text step. ink-faint and ink-ghost are for lines and borders only, never text, at any size.", "section": "colors" },
+      { "name": "The One Stick Rule", "body": "Pink is the only accent. Green appears only as the end-of-post tick. The other pigment sticks defined in the token files are unused; don't bring them in without a reason the system records.", "section": "colors" },
+      { "name": "The Pure White Rule", "body": "The board is #ffffff. No tinted page, no section bands, no dark mode.", "section": "colors" },
+      { "name": "The Grain On Titles Rule", "body": "The chalk grain mask goes on page titles (and the wordmark) only. Inside an article, H2s keep the dust halo but no grain, because grain made them paler than the text they introduce.", "section": "typography" },
+      { "name": "The Four Hands Rule", "body": "Each face has one job: display for big lettering, print hand for reading, note hand for annotations and meta, typewriter for code. No system or sans fallback is designed for.", "section": "typography" },
+      { "name": "The Writing Leads Rule", "body": "The feed or article is always the main column and comes first in source order; the author column supports it, never precedes it.", "section": "layout" },
+      { "name": "The 66ch Rule", "body": "Prose text never runs wider than 66ch.", "section": "layout" },
+      { "name": "The Hung Board Rule", "body": "Only an object hung on the board (a code board, a pinned note) gets a lift, and the lift is always a hard offset, never a blur.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** pick a neutral by pressure step (full, strong, subdued, faint, ghost, dust) of the one charcoal; never add a grey hex.",
+      "**Do** keep text at ink-subdued (alpha 0.66) or darker; use ink-faint and ink-ghost for lines and borders only.",
+      "**Do** use chalk-pink as the only accent, for hover, current and \"go here\" states.",
+      "**Do** set prose at 20px from 768px and 18px below, with text blocks capped at 66ch.",
+      "**Do** put the grain mask on page titles only; article H2s get the dust halo without grain.",
+      "**Do** express motion as the chalk stroke drawn left to right via clip-path, and show it instantly under reduced motion.",
+      "**Do** give every standalone control a 44px target on coarse pointers.",
+      "**Do** hang code on slate boards (#1d211f) with the lifted monokai (comments #9a9680, pink #ff4f8b).",
+      "**Do** keep the writing in the main column with the author column beside it.",
+      "**Do** keep first-party JS within about 3KB gzipped and measure throttled-mobile LCP before and after any change."
+    ],
+    "donts": [
+      "**Don't** set any text in ink-faint or ink-ghost.",
+      "**Don't** use blurred drop shadows, backdrop blur, glows or elevation on hover; depth is a hard offset lift only on hung objects.",
+      "**Don't** add a dark mode, a tinted page background or any 3D.",
+      "**Don't** use perfect radii or perfect circles for frames; use the wobble, pill or photo-frame radii.",
+      "**Don't** add a second motion material (fades, slides, scale or bounce), or make content wait on animation.",
+      "**Don't** put the grain mask on in-article headings.",
+      "**Don't** introduce a second accent colour; green is reserved for the end-of-post tick.",
+      "**Don't** change prose link colour at rest; links are marked by the chalk underline."
+    ]
+  }
+}

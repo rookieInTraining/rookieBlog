@@ -1,0 +1,45 @@
+{{- /* Featured banner as <picture>: AVIF + WebP srcsets with a WebP <img> fallback.
+       static/images is also mounted at assets/images (config.toml) so Hugo can process
+       the same files that og:image keeps serving untouched. Anything Hugo can't
+       process (remote URL, missing file) falls back to a plain <img>.
+       Args: page, class, sizes (optional). */ -}}
+{{- $page := .page -}}
+{{- $fi := $page.Params.featuredImage -}}
+{{- $sizes := .sizes | default "(min-width: 1152px) 768px, (min-width: 1024px) calc(100vw - 24rem), (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2.5rem)" -}}
+{{- $img := "" -}}
+{{- if strings.HasPrefix $fi "/" -}}
+  {{- with resources.Get (strings.TrimPrefix "/" $fi) -}}
+    {{- if reflect.IsImageResource . }}{{ $img = . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $img -}}
+  {{- /* 1536 = 2x the ~768px main column; never upscale past the source width. */ -}}
+  {{- $widths := slice -}}
+  {{- range slice 480 768 1152 1536 -}}
+    {{- if lt . $img.Width }}{{ $widths = $widths | append . }}{{ end -}}
+  {{- end -}}
+  {{- $widths = $widths | append (math.Min $img.Width 1536 | int) -}}
+  {{- $avif := slice -}}
+  {{- $webp := slice -}}
+  {{- $fallback := "" -}}
+  {{- range $widths -}}
+    {{- /* "drawing" keeps 4:4:4 chroma: these banners are flat illustrations with text. */ -}}
+    {{- $a := $img.Resize (printf "%dx avif drawing" .) -}}
+    {{- $w := $img.Resize (printf "%dx webp drawing" .) -}}
+    {{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink .) -}}
+    {{- $webp = $webp | append (printf "%s %dw" $w.RelPermalink .) -}}
+    {{- if or (not $fallback) (le . 768) }}{{ $fallback = $w }}{{ end -}}
+  {{- end }}
+<picture>
+  <source type="image/avif" srcset="{{ delimit $avif ", " }}" sizes="{{ $sizes }}">
+  <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+  <img src="{{ $fallback.RelPermalink }}" alt="{{ $page.Title }}" class="{{ $.class }}"
+       width="{{ $img.Width }}" height="{{ $img.Height }}"
+       loading="eager" fetchpriority="high" decoding="async">
+</picture>
+{{- else -}}
+  {{- $hasFile := and (strings.HasPrefix $fi "/") (fileExists (printf "static%s" $fi)) }}
+<img src="{{ $fi | relURL }}" alt="{{ $page.Title }}" class="{{ .class }}"
+     {{ if $hasFile }}{{ $cfg := imageConfig (printf "static%s" $fi) }}width="{{ $cfg.Width }}" height="{{ $cfg.Height }}"{{ end }}
+     loading="eager" fetchpriority="high" decoding="async">
+{{- end }}

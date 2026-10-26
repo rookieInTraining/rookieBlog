@@ -1,0 +1,2 @@
+{{- /* Permalink of a page's Markdown copy (index.md), falling back to its HTML page. */ -}}
+{{- with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ .Permalink }}{{ end -}}

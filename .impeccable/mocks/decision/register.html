@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  :root { --full: rgba(42,45,43,.92); --strong: rgba(42,45,43,.78); --sub: rgba(42,45,43,.66); --ghost: rgba(42,45,43,.14); --dust: rgba(42,45,43,.05);
+          --pink: #b0566e; --blue: #3e6c9e; --green: #3f7a50; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--strong); font-family: 'Patrick Hand', cursive; }
+  header { height: 64px; border-bottom: 1px solid var(--ghost); display: flex; align-items: center; justify-content: space-between; padding: 0 160px; }
+  .mark { font-family: 'Cabin Sketch'; font-size: 26px; color: var(--full); }
+  nav { display: flex; gap: 36px; font-size: 18px; color: var(--sub); } nav b { font-weight: 400; color: var(--full); border-bottom: 2px solid var(--full); }
+  main { padding: 40px 160px 0; }
+  .intro { display: flex; align-items: baseline; justify-content: space-between; }
+  .intro h1 { font-family: 'Cabin Sketch'; font-size: 52px; color: var(--full); }
+  .intro p { font-size: 20px; color: var(--sub); margin-top: 4px; }
+  .follow { font-family: 'Schoolbell'; font-size: 17px; color: var(--strong); display: flex; gap: 22px; }
+  .follow span { border-bottom: 2px solid var(--ghost); }
+  /* the register: number | entry | three topic columns | date */
+  .reg { margin-top: 30px; display: grid; grid-template-columns: 70px 1fr 120px 120px 120px 110px; column-gap: 0; }
+  .key { display: contents; }
+  .key > div { padding: 10px 0 12px; border-bottom: 2.5px solid rgba(42,45,43,.42); font-family: 'Schoolbell'; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--sub); }
+  .key .col { text-align: center; border-left: 1px solid var(--ghost); color: var(--full); }
+  .key .col i { display: block; font-style: normal; font-family: 'Patrick Hand'; text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--sub); }
+  .key .on { background: var(--dust); box-shadow: inset 0 -3px 0 var(--pink); }
+  .row { display: contents; }
+  .row > div { padding: 16px 0 15px; border-bottom: 1px solid var(--ghost); }
+  .no { font-family: 'Cabin Sketch'; font-size: 22px; color: var(--sub); }
+  .t { padding-right: 32px !important; }
+  .t b { display: block; font-weight: 400; font-size: 23px; line-height: 1.2; color: var(--full); }
+  .t span { font-size: 17px; color: var(--sub); }
+  .c { border-left: 1px solid var(--ghost); display: flex; align-items: center; justify-content: center; }
+  .c svg { width: 30px; height: 26px; }
+  .d { font-family: 'Schoolbell'; font-size: 16px; color: var(--sub); text-align: right; display: flex; align-items: center; justify-content: flex-end; }
+  .jour .t b { font-family: 'Schoolbell'; }
+</style></head>
+<body>
+<header><div class="mark">Ish's Blog</div><nav><b>Blog</b><span>About</span><span>Contact me</span></nav></header>
+<main>
+  <div class="intro">
+    <div><h1>Ish Abbi</h1><p>Director of QA &amp; Automation. Learning in public since 2020.</p></div>
+    <div class="follow"><span>RSS</span><span>Follow on LinkedIn</span></div>
+  </div>
+
+  <div class="reg">
+    <div class="key"><div>No.</div><div>Entry</div>
+      <div class="col on">Leading quality<i>2 posts</i></div>
+      <div class="col">Automation<i>4 posts</i></div>
+      <div class="col">Journal<i>1 entry</i></div>
+      <div style="text-align:right">Dated</div></div>
+
+    <div class="row jour"><div class="no">07</div><div class="t"><b>The problem with my username and the thought I had behind it</b><span>For years I've been using a username because I felt it would keep me humble</span></div>
+      <div class="c"></div><div class="c"></div><div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#3f7a50" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="d">Jun 2026</div></div>
+
+    <div class="row"><div class="no">06</div><div class="t"><b>Scoring your accessibility observations</b><span>Quantify the results of your accessibility tests into a score</span></div>
+      <div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#b0566e" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="c"></div><div class="c"></div><div class="d">Apr 2025</div></div>
+
+    <div class="row"><div class="no">05</div><div class="t"><b>QA Metrics: Leading and Lagging Indicators Every Tester Should Know</b><span>You've been asked for your north-star metric?</span></div>
+      <div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#b0566e" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="c"></div><div class="c"></div><div class="d">Aug 2024</div></div>
+
+    <div class="row"><div class="no">04</div><div class="t"><b>Fetch GraphQL query from an Apollo client using APQ, Part 2</b><span>Series: GraphQL automation, part 2 of 2</span></div>
+      <div class="c"></div><div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#3e6c9e" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="c"></div><div class="d">Aug 2024</div></div>
+
+    <div class="row"><div class="no">03</div><div class="t"><b>Fetch GraphQL query from an Apollo client using APQ, Part 1</b><span>Series: GraphQL automation, part 1 of 2</span></div>
+      <div class="c"></div><div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#3e6c9e" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="c"></div><div class="d">Jul 2024</div></div>
+
+    <div class="row"><div class="no">02</div><div class="t"><b>Understanding the Selenium Webdriver</b><span>How Selenium works behind the scenes</span></div>
+      <div class="c"></div><div class="c"><svg viewBox="0 0 32 28" fill="none" stroke="#3e6c9e" stroke-width="3" stroke-linecap="round"><path d="M3.5 15.2C6.4 17.4 9.1 20.6 11.2 24.1C15.3 15.6 21.4 8.2 28.6 3.4"/></svg></div><div class="c"></div><div class="d">Feb 2020</div></div>
+  </div>
+</main>
+</body></html>

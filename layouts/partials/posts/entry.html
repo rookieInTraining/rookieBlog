@@ -1,0 +1,40 @@
+{{- /* One post in a feed: meta (date · topic · reading time), title, description.
+       Journal entries set their title in the annotation hand, so personal notes read differently
+       from essays at a glance. Args: page, level (heading tag, default h2), lead (newest post on
+       the home page: display chalk title, its opening lines and a keep-reading link). */ -}}
+{{- $p := .page -}}
+{{- $h := .level | default "h2" -}}
+{{- $topic := index ($p.GetTerms "topics") 0 -}}
+{{- $journal := and $topic (eq $topic.Data.Term "journal") -}}
+{{- $href := $p.Params.externalLink | default $p.RelPermalink -}}
+{{- $title := trim $p.Title " " -}}
+{{- if .lead }}
+<li class="feed-entry feed-entry--lead">
+  <div class="feed-lead">
+    <p class="feed-meta">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format "January 2, 2006" }}</time>
+      {{- with $topic }}<span aria-hidden="true"> · </span>{{ .LinkTitle }}{{ end }}
+      <span aria-hidden="true"> · </span>{{ i18n "reading_time" $p.ReadingTime }}
+    </p>
+    {{ printf "<%s class=\"feed-title sc-chalk\">" $h | safeHTML }}<a href="{{ $href }}">{{ $title }}</a>{{ printf "</%s>" $h | safeHTML }}
+    <svg class="chalk-mark feed-lead__rule" viewBox="0 0 400 10" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M3 6.2 C 60 3.4, 130 7.6, 205 5.1 S 330 3.6, 397 5.8"/></svg>
+    <p class="feed-opening">{{ $p.Summary | plainify | htmlUnescape | truncate 260 }}</p>
+    <p class="feed-lead__more">
+      <svg class="chalk-mark feed-lead__arrow" viewBox="0 0 64 34" aria-hidden="true"><path pathLength="1" d="M3 4.5 C 9 20, 24 27.5, 52 24.5 M 44 16.2 C 48.5 19.6, 51.4 22.2, 53.2 24.6 C 50.1 26.8, 46.6 28.6, 42.4 30.4"/></svg>
+      <a class="feed-more" href="{{ $href }}" aria-label="{{ i18n "keep_reading" }}: {{ $title }}">{{ i18n "keep_reading" }}</a>
+    </p>
+  </div>
+</li>
+{{- else }}
+<li class="feed-entry{{ if $journal }} feed-entry--journal{{ end }}">
+  <p class="feed-meta">
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format "Jan 2006" }}</time>
+    {{- with $topic }}<span aria-hidden="true"> · </span>{{ .LinkTitle }}{{ end }}
+    <span aria-hidden="true"> · </span>{{ i18n "reading_time" $p.ReadingTime }}
+  </p>
+  {{ printf "<%s class=\"feed-title\">" $h | safeHTML }}<a href="{{ $href }}">{{ $title }}</a>{{ printf "</%s>" $h | safeHTML }}
+  {{- with $p.Description | default ($p.Summary | plainify | htmlUnescape | truncate 160) }}
+  <p class="feed-desc">{{ . }}</p>
+  {{- end }}
+</li>
+{{- end }}

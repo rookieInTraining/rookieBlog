@@ -1,42 +1,30 @@
-<section class="max-w-3xl mx-auto px-5 md:px-8">
-  <!-- Hero -->
-  <div class="pt-16 md:pt-24 pb-12 text-center animate-fade-in-up">
-    {{ partialCached "home/avatar.html" . }}
-    <div class="mt-6">
-      {{ partialCached "home/author.html" . }}
-    </div>
-    <div class="mt-6 flex justify-center">
-      {{ partialCached "home/social.html" . }}
-    </div>
-  </div>
+{{- /* Home: the writing leads, Ish stays beside it (author column). Newest post opens large;
+       the rest follow as dated entries. On phones the identity sits in a strip above the
+       writing and the column's topics and links follow the feed. */ -}}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+<div class="page-wrap">
+  <h1 class="sr-only">{{ site.Title }}: {{ i18n "latest_writing" }}</h1>
+  {{ partial "author/strip.html" . }}
 
-  <!-- Writing -->
-  {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ if $posts }}
-  <div class="border-t border-ink-ghost pt-12 pb-20">
-    <h2 class="font-note text-sm uppercase tracking-widest text-ink-faint mb-8">Writing</h2>
-    <ul class="space-y-8" data-ga-loc="home-list">
-      {{ range $posts | first 10 }}
-      <li class="group">
-        <a href="{{ .Params.externalLink | default .RelPermalink }}" class="block">
-          <div class="flex items-baseline justify-between gap-4">
-            <h3 class="text-xl text-ink-full group-hover:text-chalk-pink transition-colors">{{ .Title }}</h3>
-            <time datetime="{{ .Date.Format "2006-01-02" }}" class="shrink-0 font-note text-sm text-ink-faint">{{ .Date | time.Format "Jan 2006" }}</time>
-          </div>
-          {{ with .Description }}
-          <p class="mt-1 text-ink-subdued leading-relaxed">{{ . }}</p>
+  <div class="with-author">
+    <div class="with-author__main">
+      {{ with $posts }}
+      <section aria-labelledby="latest-label" data-ga-loc="home-list">
+        <h2 id="latest-label" class="col-label col-label--ruled">{{ i18n "latest_writing" }}</h2>
+        <ul class="feed">
+          {{ range $i, $p := first 10 . }}
+          {{ partial "posts/entry.html" (dict "page" $p "level" "h3" "lead" (eq $i 0)) }}
           {{ end }}
-        </a>
-      </li>
+        </ul>
+        {{ if gt (len .) 10 }}
+        <p class="feed-all"><a class="chalk-draw" href="{{ "posts/" | relURL }}">{{ i18n "all_posts" }} →</a></p>
+        {{ end }}
+      </section>
       {{ end }}
-    </ul>
-    {{ if gt (len $posts) 10 }}
-    <div class="mt-10">
-      <a href="{{ "posts/" | relURL }}" class="sc-underline text-base text-ink-full hover:text-chalk-pink transition">
-        View all posts →
-      </a>
     </div>
-    {{ end }}
+
+    <aside class="with-author__side" aria-label="{{ site.Params.author }}">
+      {{ partial "author/column.html" (dict "variant" "full" "identity" "hidden lg:block") }}
+    </aside>
   </div>
-  {{ end }}
-</section>
+</div>

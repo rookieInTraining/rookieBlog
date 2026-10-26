@@ -1,0 +1,6 @@
+# Development only (`hugo server`); merged over the root config.toml.
+# Hugo >= 0.161 runs PostCSS/Tailwind under Node's permission model. On Windows, Tailwind 3
+# lowercases the drive letter of tailwind.config.js ("c:\") and Node's case-sensitive
+# allow-list rejects the read. Production builds (`hugo`, CI on Linux) keep the sandbox on.
+[node.permissions]
+  disable = true

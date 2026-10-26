@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&family=Patrick+Hand&family=Schoolbell&display=swap" rel="stylesheet">
+<style>
+  :root { --full: rgba(42,45,43,.92); --strong: rgba(42,45,43,.78); --sub: rgba(42,45,43,.66); --ghost: rgba(42,45,43,.14); --dust: rgba(42,45,43,.05); --pink: #b0566e; --blue: #3e6c9e; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; background: #fff; color: var(--strong); font-family: 'Patrick Hand', cursive; }
+  .book { display: grid; grid-template-columns: 520px 1fr; height: 900px; }
+  /* left page: stays put */
+  .left { padding: 44px 56px 0 120px; position: relative; }
+  .gutter { position: absolute; right: 0; top: 40px; bottom: 40px; width: 8px; }
+  .mark { font-family: 'Cabin Sketch'; font-size: 26px; color: var(--full); }
+  .avatar { margin-top: 44px; width: 92px; height: 92px; border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; border: 2.5px solid rgba(42,45,43,.42); background: radial-gradient(circle at 50% 38%, #c9a58d 0 22%, transparent 23%), radial-gradient(circle at 50% 100%, #d98c95 0 42%, #8aa27e 43%); transform: rotate(-1deg); }
+  h1 { font-family: 'Cabin Sketch'; font-size: 50px; color: var(--full); margin-top: 18px; }
+  .role { font-family: 'Schoolbell'; font-size: 19px; color: var(--sub); margin-top: 2px; }
+  .contents { margin-top: 38px; }
+  .contents h2 { font-family: 'Schoolbell'; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding-bottom: 8px; border-bottom: 2.5px solid rgba(42,45,43,.42); }
+  .ct { display: flex; justify-content: space-between; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--ghost); font-size: 22px; color: var(--full); }
+  .ct span { font-family: 'Schoolbell'; font-size: 16px; color: var(--sub); }
+  .ct.on { color: var(--pink); }
+  .follow { margin-top: 28px; display: flex; gap: 22px; font-family: 'Schoolbell'; font-size: 17px; }
+  .follow span { border-bottom: 2px solid var(--ghost); }
+  /* right page: the feed */
+  .right { padding: 44px 160px 0 72px; }
+  nav { display: flex; justify-content: flex-end; gap: 36px; font-size: 18px; color: var(--sub); }
+  .feed { margin-top: 52px; }
+  .yr { font-family: 'Cabin Sketch'; font-size: 30px; color: var(--sub); margin: 0 0 6px; }
+  .e { padding: 16px 0 18px; border-bottom: 1px solid var(--ghost); }
+  .e .meta { font-family: 'Schoolbell'; font-size: 15px; color: var(--sub); }
+  .e b { display: block; margin-top: 3px; font-weight: 400; font-size: 26px; line-height: 1.2; color: var(--full); }
+  .e p { margin-top: 5px; font-size: 18px; color: var(--sub); max-width: 640px; }
+  .yr + .e { padding-top: 6px; }
+  .gap { height: 22px; }
+</style></head>
+<body>
+<div class="book">
+  <aside class="left">
+    <svg class="gutter" viewBox="0 0 8 800" preserveAspectRatio="none" fill="none" stroke="rgba(42,45,43,.3)" stroke-width="2" stroke-linecap="round"><path d="M4 0 C 6 120, 2 260, 4.5 400 S 3 640, 4 800"/></svg>
+    <div class="mark">Ish's Blog</div>
+    <div class="avatar"></div>
+    <h1>Ish Abbi</h1>
+    <div class="role">Director of QA &amp; Automation. Learning in public.</div>
+    <div class="contents"><h2>Contents</h2>
+      <div class="ct on">Leading quality <span>2</span></div>
+      <div class="ct">Automation deep-dives <span>4</span></div>
+      <div class="ct">Journal <span>1</span></div>
+    </div>
+    <div class="follow"><span>RSS</span><span>Follow on LinkedIn</span></div>
+  </aside>
+  <section class="right">
+    <nav><span>Blog</span><span>About</span><span>Contact me</span></nav>
+    <div class="feed">
+      <div class="yr">2026</div>
+      <div class="e"><div class="meta">Journal · Jun 12</div><b>The problem with my username and the thought I had behind it</b><p>For years I've been using a username because I felt it would keep me humble.</p></div>
+      <div class="gap"></div>
+      <div class="yr">2025</div>
+      <div class="e"><div class="meta">Leading quality · Apr 20</div><b>Scoring your accessibility observations</b><p>Quantify the results of your accessibility tests into a score.</p></div>
+      <div class="gap"></div>
+      <div class="yr">2024</div>
+      <div class="e"><div class="meta">Leading quality · Aug 26</div><b>QA Metrics: Leading and Lagging Indicators Every Tester Should Know</b><p>You're a QA leader? You've been asked for your north-star metric?</p></div>
+    </div>
+  </section>
+</div>
+</body></html>

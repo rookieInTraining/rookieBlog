@@ -1,0 +1,2 @@
+{{- /* Same as render-passthrough.markdown.md, for llms-full.txt (its own output format). */ -}}
+{{- if eq .Type "block" }}$${{ .Inner }}$${{ else }}\({{ .Inner }}\){{ end -}}

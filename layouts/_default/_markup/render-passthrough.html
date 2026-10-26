@@ -1,0 +1,10 @@
+{{- /* Math typeset at build time (Hugo's embedded KaTeX): no KaTeX JS ships to the browser,
+       only katex.min.css (baseof.html, pages with `math: true`). */ -}}
+{{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq .Type "block") "throwOnError" true -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}
+    {{- errorf "Unable to render math %q in %s: %s" $.Inner $.Page.File.Path . -}}
+  {{- else -}}
+    {{- .Value -}}
+  {{- end -}}
+{{- end -}}
